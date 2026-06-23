@@ -37,13 +37,10 @@ public final class PageViewService implements AriakeHttpService {
     }
 
     private long count() {
-        final EntityManager entityManager = entityManagerProvider.createEntityManager();
-        try {
+        try (var entityManager = entityManagerProvider.createEntityManager()) {
             return entityManager
                     .createQuery("select count(pageView) from PageView pageView", Long.class)
                     .getSingleResult();
-        } finally {
-            entityManager.close();
         }
     }
 }
