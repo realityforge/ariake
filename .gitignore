@@ -4,3 +4,6 @@
 /.ijwb/
 *.swp
 *.tmp
+
+# Ignore local temp directory
+/tmp
