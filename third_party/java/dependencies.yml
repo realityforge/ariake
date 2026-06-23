@@ -1,0 +1,60 @@
+# DO NOT EDIT GENERATED BUILD CONTENT: run tools/update_java_deps.sh after editing this file.
+
+repositories:
+  - name: central
+    url: https://repo.maven.apache.org/maven2
+options:
+  workspaceDirectory: ../..
+  nameStrategy: ArtifactId
+  repositoryNameStrategy: ArtifactId
+  repositoryRuleGenerationStrategy: module
+  targetGenerationStrategy: build
+  failOnMissingPom: false
+
+artifacts:
+  - coord: io.helidon.webserver:helidon-webserver:4.5.0
+    includeSource: false
+  - coord: io.helidon.webserver:helidon-webserver-http2:4.5.0
+    includeSource: false
+  - coord: io.helidon.webserver:helidon-webserver-websocket:4.5.0
+    includeSource: false
+  - coord: io.helidon.service:helidon-service-metadata:4.5.0
+    includeSource: false
+  - coord: io.prometheus:prometheus-metrics-core:1.8.0
+    includeSource: false
+  - coord: io.prometheus:prometheus-metrics-exposition-formats:1.8.0
+    includeSource: false
+  - coord: jakarta.persistence:jakarta.persistence-api:3.2.0
+    includeSource: false
+  - coord: jakarta.transaction:jakarta.transaction-api:2.0.1
+    includeSource: false
+  - coord: junit:junit:4.13.2
+    includeSource: false
+  - coord: org.hamcrest:hamcrest:3.0
+    includeSource: false
+  - coord: com.tngtech.archunit:archunit-junit4:1.4.2
+    includeSource: false
+  - coord: com.palantir.javaformat:palantir-java-format:2.93.0
+    includeSource: false
+    excludes:
+      - com.palantir.javaformat:palantir-java-format-parent
+  - coord: com.uber.nullaway:nullaway:0.13.7
+    includeSource: false
+  - coord: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+    includeSource: false
+    excludes:
+      - '*:*'
+  - coord: org.jspecify:jspecify:1.0.0
+    includeSource: false
+    excludes:
+      - '*:*'
+  - coord: org.eclipse.persistence:org.eclipse.persistence.jpa:5.0.0
+    includeSource: false
+  - coord: org.jboss.narayana.jta:narayana-jta:7.3.4.Final
+    includeSource: false
+  - coord: org.realityforge.sting:sting-core:0.39
+    includeSource: false
+  - coord: org.realityforge.sting:sting-processor:0.39
+    includeSource: false
+  - coord: org.realityforge.sting:sting-server:0.39
+    includeSource: false

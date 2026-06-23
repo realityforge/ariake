@@ -1,0 +1,1800 @@
+load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_library = "java_library", _java_plugin = "java_plugin", _java_test = "java_test")
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "sting",
+    exports = [
+        ":sting_core",
+        ":sting_processor",
+    ],
+)
+
+alias(
+    name = "sting_processor_plugin",
+    actual = ":sting_processor__sting_processor_stingprocessor__plugin",
+)
+
+alias(
+    name = "prometheus_metrics_exposition_textformats_api",
+    actual = ":prometheus_metrics_exposition_textformats",
+)
+
+alias(
+    name = "prometheus_metrics_model_api",
+    actual = ":prometheus_metrics_model",
+)
+
+alias(
+    name = "helidon_http_api",
+    actual = ":helidon_http",
+)
+
+alias(
+    name = "helidon_websocket_api",
+    actual = ":helidon_websocket",
+)
+
+alias(
+    name = "javax_annotation_api",
+    actual = ":javax_annotation",
+)
+
+alias(
+    name = "archunit_api",
+    actual = ":archunit",
+)
+
+alias(
+    name = "jboss_logging_api",
+    actual = ":jboss_logging",
+)
+
+_java_plugin(
+    name = "nullaway_plugin",
+    deps = [":nullaway"],
+)
+
+# --- depgen-generated targets start ---
+
+# DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.24
+
+load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_library = "java_library", _java_plugin = "java_plugin", _java_test = "java_test")
+
+# SHA256 of the configuration content that generated this content
+_CONFIG_SHA256 = "3756B837D8987E6339A3E16B79E309734B70D4836B40A226E5F33DD9BF4A00E3"
+
+exports_files(["dependencies.yml"])
+
+# Dependency Graph Generated from the input data
+# +- io.helidon.webserver:helidon-webserver:jar:4.5.0 [compile]
+# |  +- io.helidon:helidon:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  \- io.helidon.logging:helidon-logging-common:jar:4.5.0 [compile]
+# |  +- io.helidon.http:helidon-http:jar:4.5.0 [compile]
+# |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-types:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-configurable:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common-context:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  |  |  \- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-mapper:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.service:helidon-service-registry:jar:4.5.0 [compile]
+# |  |  |  \- io.helidon.common:helidon-common-types:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-media-type:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  |  \- io.helidon.metadata:helidon-metadata:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-uri:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common-mapper:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common-parameters:jar:4.5.0 [compile]
+# |  |  |  \- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  +- io.helidon.service:helidon-service-registry:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-parameters:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  |  \- io.helidon.common:helidon-common-mapper:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common-mapper:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.service:helidon-service-registry:jar:4.5.0 [compile]
+# |  |  |  \- io.helidon.common:helidon-common-types:jar:4.5.0 [compile]
+# |  |  \- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  +- io.helidon.http:helidon-http-http1:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-uri:jar:4.5.0 [compile]
+# |  |  +- io.helidon.http:helidon-http:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-socket:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
+# |  +- io.helidon.common:helidon-common-socket:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  |  \- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  +- io.helidon.common:helidon-common-context:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  +- io.helidon.common:helidon-common-key-util:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-configurable:jar:4.5.0 [compile]
+# |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  \- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.common:helidon-common-security:jar:4.5.0 [compile]
+# |  +- io.helidon.common:helidon-common-task:jar:4.5.0 [compile]
+# |  +- io.helidon.common:helidon-common-tls:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-key-util:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  \- io.helidon.service:helidon-service-registry:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.common:helidon-common-resumable:jar:4.5.0 [compile]
+# |  +- io.helidon.logging:helidon-logging-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common:helidon-common-context:jar:4.5.0 [compile]
+# |  +- io.helidon.http.media:helidon-http-media:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-media-type:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-parameters:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  |  +- io.helidon.common:helidon-common-uri:jar:4.5.0 [compile]
+# |  |  +- io.helidon.http:helidon-http:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile, optional]
+# |  |  \- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  +- io.helidon.http.encoding:helidon-http-encoding:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  |  +- io.helidon.http:helidon-http:jar:4.5.0 [compile]
+# |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.common.features:helidon-common-features:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.metadata:helidon-metadata:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common.features:helidon-common-features-metadata:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.metadata:helidon-metadata-hson:jar:4.5.0 [compile]
+# |  |  |  \- io.helidon.metadata:helidon-metadata:jar:4.5.0 [compile]
+# |  |  \- io.helidon.metadata:helidon-metadata-hson:jar:4.5.0 [compile]
+# |  +- io.helidon.common.concurrency:helidon-common-concurrency-limits:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  |  +- io.helidon.metrics:helidon-metrics-api:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.http:helidon-http:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  |  +- io.helidon.service:helidon-service-registry:jar:4.5.0 [compile]
+# |  |  |  \- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  |  \- io.helidon.service:helidon-service-registry:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-config:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-media-type:jar:4.5.0 [compile]
+# |  |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  +- io.helidon.service:helidon-service-registry:jar:4.5.0 [compile, optional]
+# |  |  \- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile, optional]
+# |  \- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile]
+# +- io.helidon.webserver:helidon-webserver-http2:jar:4.5.0 [compile]
+# |  +- io.helidon.webserver:helidon-webserver:jar:4.5.0 [compile]
+# |  +- io.helidon.http:helidon-http-http2:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
+# |  |  +- io.helidon.http:helidon-http:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common:helidon-common-socket:jar:4.5.0 [compile]
+# |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.common.concurrency:helidon-common-concurrency-limits:jar:4.5.0 [compile]
+# |  \- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile]
+# +- io.helidon.webserver:helidon-webserver-websocket:jar:4.5.0 [compile]
+# |  +- io.helidon.websocket:helidon-websocket:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-socket:jar:4.5.0 [compile]
+# |  |  +- io.helidon.http:helidon-http:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.webserver:helidon-webserver:jar:4.5.0 [compile]
+# |  +- io.helidon.common.concurrency:helidon-common-concurrency-limits:jar:4.5.0 [compile]
+# |  +- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  \- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile]
+# +- io.helidon.service:helidon-service-metadata:jar:4.5.0 [compile]
+# |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  \- io.helidon.metadata:helidon-metadata:jar:4.5.0 [compile]
+# |  +- io.helidon.common:helidon-common-types:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  |  \- io.helidon.builder:helidon-builder-api:jar:4.5.0 [compile]
+# |  +- io.helidon.metadata:helidon-metadata-hson:jar:4.5.0 [compile]
+# |  |  +- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
+# |  |  \- io.helidon.common:helidon-common:jar:4.5.0 [compile]
+# |  \- io.helidon.metadata:helidon-metadata:jar:4.5.0 [compile]
+# +- io.prometheus:prometheus-metrics-core:jar:1.8.0 [compile]
+# |  +- io.prometheus:prometheus-metrics-annotations:jar:1.8.0 [compile, optional]
+# |  +- io.prometheus:prometheus-metrics-model:jar:1.8.0 [compile]
+# |  |  +- io.prometheus:prometheus-metrics-annotations:jar:1.8.0 [compile, optional]
+# |  |  \- io.prometheus:prometheus-metrics-config:jar:1.8.0 [compile]
+# |  +- io.prometheus:prometheus-metrics-config:jar:1.8.0 [compile]
+# |  |  \- io.prometheus:prometheus-metrics-annotations:jar:1.8.0 [compile, optional]
+# |  \- io.prometheus:prometheus-metrics-tracer-initializer:jar:1.8.0 [compile]
+# |     +- io.prometheus:prometheus-metrics-tracer-common:jar:1.8.0 [compile]
+# |     |  \- io.prometheus:prometheus-metrics-annotations:jar:1.8.0 [compile, optional]
+# |     +- io.prometheus:prometheus-metrics-tracer-otel:jar:1.8.0 [compile]
+# |     |  \- io.prometheus:prometheus-metrics-tracer-common:jar:1.8.0 [compile]
+# |     \- io.prometheus:prometheus-metrics-tracer-otel-agent:jar:1.8.0 [compile]
+# |        \- io.prometheus:prometheus-metrics-tracer-common:jar:1.8.0 [compile]
+# +- io.prometheus:prometheus-metrics-exposition-formats:jar:1.8.0 [compile]
+# |  \- io.prometheus:prometheus-metrics-exposition-textformats:jar:1.8.0 [compile]
+# |     +- io.prometheus:prometheus-metrics-annotations:jar:1.8.0 [compile, optional]
+# |     +- io.prometheus:prometheus-metrics-model:jar:1.8.0 [compile]
+# |     \- io.prometheus:prometheus-metrics-config:jar:1.8.0 [compile]
+# +- jakarta.persistence:jakarta.persistence-api:jar:3.2.0 [compile]
+# +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
+# +- junit:junit:jar:4.13.2 [compile]
+# |  \- org.hamcrest:hamcrest-core:jar:1.3 [compile]
+# +- org.hamcrest:hamcrest:jar:3.0 [compile]
+# +- com.tngtech.archunit:archunit-junit4:jar:1.4.2 [compile]
+# |  +- com.tngtech.archunit:archunit:jar:1.4.2 [compile]
+# |  |  \- org.slf4j:slf4j-api:jar:2.0.17 [compile]
+# |  \- junit:junit:jar:4.13.2 [compile]
+# +- com.palantir.javaformat:palantir-java-format:jar:2.93.0 [compile]
+# |  +- com.palantir.javaformat:palantir-java-format-spi:jar:2.93.0 [compile]
+# |  |  +- com.google.guava:guava:jar:33.6.0-jre [compile]
+# |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.21 [compile]
+# |  |  \- com.fasterxml.jackson.datatype:jackson-datatype-guava:jar:2.21.4 [compile]
+# |  |     +- com.google.guava:guava:jar:25.1-jre [compile] (conflicts with 33.6.0-jre)
+# |  |     +- com.fasterxml.jackson.core:jackson-annotations:jar:2.21 [compile]
+# |  |     +- com.fasterxml.jackson.core:jackson-core:jar:2.21.4 [compile]
+# |  |     \- com.fasterxml.jackson.core:jackson-databind:jar:2.21.4 [compile]
+# |  +- com.google.guava:guava:jar:33.6.0-jre [compile]
+# |  |  +- com.google.guava:failureaccess:jar:1.0.3 [compile]
+# |  |  +- com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava [compile]
+# |  |  +- org.jspecify:jspecify:jar:1.0.0 [compile]
+# |  |  +- com.google.errorprone:error_prone_annotations:jar:2.47.0 [compile]
+# |  |  \- com.google.j2objc:j2objc-annotations:jar:3.1 [compile]
+# |  +- org.functionaljava:functionaljava:jar:5.0 [runtime]
+# |  +- com.fasterxml.jackson.core:jackson-core:jar:2.21.4 [compile]
+# |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.21.4 [compile]
+# |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.21 [compile]
+# |  |  \- com.fasterxml.jackson.core:jackson-core:jar:2.21.4 [compile]
+# |  +- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.21.4 [runtime]
+# |  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.21.4 [runtime]
+# |  |  \- com.fasterxml.jackson.core:jackson-databind:jar:2.21.4 [runtime]
+# |  +- com.fasterxml.jackson.module:jackson-module-parameter-names:jar:2.21.4 [runtime]
+# |  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.21.4 [runtime]
+# |  |  \- com.fasterxml.jackson.core:jackson-databind:jar:2.21.4 [runtime]
+# |  \- com.google.code.findbugs:jsr305:jar:3.0.2 [runtime]
+# +- com.uber.nullaway:nullaway:jar:0.13.7 [compile]
+# |  +- org.jspecify:jspecify:jar:1.0.0 [compile]
+# |  +- org.checkerframework:dataflow-nullaway:jar:4.0.0 [runtime]
+# |  |  \- org.checkerframework:checker-qual:jar:4.0.0 [runtime]
+# |  \- com.google.guava:guava:jar:31.1-jre [runtime] (conflicts with 33.6.0-jre)
+# +- com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava [compile]
+# +- org.jspecify:jspecify:jar:1.0.0 [compile]
+# +- org.eclipse.persistence:org.eclipse.persistence.jpa:jar:5.0.0 [compile]
+# |  +- org.eclipse.persistence:org.eclipse.persistence.core:jar:5.0.0 [compile]
+# |  |  +- org.ow2.asm:asm:jar:9.9.1 [compile]
+# |  |  +- org.ow2.asm:asm-commons:jar:9.9.1 [compile]
+# |  |  |  +- org.ow2.asm:asm:jar:9.9.1 [compile]
+# |  |  |  \- org.ow2.asm:asm-tree:jar:9.9.1 [compile]
+# |  |  \- org.ow2.asm:asm-tree:jar:9.9.1 [compile]
+# |  |     \- org.ow2.asm:asm:jar:9.9.1 [compile]
+# |  +- org.eclipse.persistence:org.eclipse.persistence.moxy:jar:5.0.0 [runtime, optional]
+# |  +- org.eclipse.persistence:org.eclipse.persistence.json:jar:5.0.0 [runtime, optional]
+# |  +- org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:jar:5.0.0 [compile]
+# |  +- jakarta.persistence:jakarta.persistence-api:jar:3.2.0 [compile]
+# |  +- jakarta.json:jakarta.json-api:jar:2.1.3 [compile, optional]
+# |  +- jakarta.enterprise:jakarta.enterprise.cdi-api:jar:4.1.0 [compile]
+# |  +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile, optional]
+# |  +- jakarta.validation:jakarta.validation-api:jar:3.1.1 [compile, optional]
+# |  \- org.apache.ant:ant:jar:1.10.15 [compile, optional]
+# +- org.jboss.narayana.jta:narayana-jta:jar:7.3.4.Final [compile]
+# |  +- jakarta.enterprise:jakarta.enterprise.cdi-api:jar:4.1.0 [compile]
+# |  +- jakarta.enterprise:jakarta.enterprise.lang-model:jar:4.1.0 [compile]
+# |  +- jakarta.el:jakarta.el-api:jar:6.0.0 [compile]
+# |  +- jakarta.interceptor:jakarta.interceptor-api:jar:2.2.0 [compile]
+# |  +- jakarta.inject:jakarta.inject-api:jar:2.0.1.MR [compile]
+# |  +- org.jboss:jboss-transaction-spi:jar:8.0.0.Final [compile]
+# |  |  +- jakarta.resource:jakarta.resource-api:jar:2.0.0 [compile] (conflicts with 2.1.0)
+# |  |  \- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
+# |  +- jakarta.resource:jakarta.resource-api:jar:2.1.0 [compile]
+# |  |  \- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
+# |  +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
+# |  +- org.reactivestreams:reactive-streams:jar:1.0.4 [compile]
+# |  +- org.infinispan:infinispan-core:jar:16.1.4 [compile]
+# |  |  +- org.infinispan:infinispan-commons:jar:16.1.4 [compile]
+# |  |  +- org.infinispan:infinispan-counter-api:jar:16.1.4 [compile]
+# |  |  +- org.infinispan.protostream:protostream:jar:6.0.7 [compile]
+# |  |  +- org.infinispan.protostream:protostream-types:jar:6.0.7 [compile]
+# |  |  +- io.micrometer:micrometer-core:jar:1.16.2 [compile, optional]
+# |  |  +- io.micrometer:micrometer-registry-prometheus:jar:1.16.2 [compile, optional]
+# |  |  +- io.micrometer:micrometer-registry-prometheus-simpleclient:jar:1.16.2 [compile, optional]
+# |  |  +- org.jgroups:jgroups:jar:5.5.2.Final [compile]
+# |  |  +- org.jgroups:jgroups-raft:jar:1.1.4.Final [compile, optional]
+# |  |  +- com.github.ben-manes.caffeine:caffeine:jar:3.2.3 [compile]
+# |  |  +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
+# |  |  +- org.jboss.threads:jboss-threads:jar:3.9.2 [compile]
+# |  |  +- io.mashona:mashona-logwriting:jar:1.1.0 [compile, optional]
+# |  |  \- com.google.errorprone:error_prone_annotations:jar:2.46.0 [compile, optional] (conflicts with 2.47.0)
+# |  +- org.infinispan:infinispan-commons:jar:16.1.4 [compile]
+# |  |  +- org.infinispan.protostream:protostream:jar:6.0.7 [compile]
+# |  |  +- org.infinispan.protostream:protostream-types:jar:6.0.7 [compile]
+# |  |  +- com.github.ben-manes.caffeine:caffeine:jar:3.2.3 [compile]
+# |  |  +- io.reactivex.rxjava3:rxjava:jar:3.1.12 [compile]
+# |  |  +- io.micrometer:micrometer-core:jar:1.16.2 [compile, optional]
+# |  |  +- org.jboss.marshalling:jboss-marshalling:jar:2.2.3.Final [compile, optional]
+# |  |  \- com.google.errorprone:error_prone_annotations:jar:2.46.0 [compile, optional] (conflicts with 2.47.0)
+# |  +- io.reactivex.rxjava3:rxjava:jar:3.1.12 [compile]
+# |  |  \- org.reactivestreams:reactive-streams:jar:1.0.4 [compile]
+# |  +- org.infinispan:infinispan-counter-api:jar:16.1.4 [compile]
+# |  |  +- org.infinispan:infinispan-commons:jar:16.1.4 [compile]
+# |  |  \- com.google.errorprone:error_prone_annotations:jar:2.46.0 [compile, optional] (conflicts with 2.47.0)
+# |  +- org.infinispan.protostream:protostream:jar:6.0.7 [compile]
+# |  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.21.3 [compile] (conflicts with 2.21.4)
+# |  |  \- com.fasterxml.jackson.core:jackson-databind:jar:2.21.3 [compile, optional] (conflicts with 2.21.4)
+# |  +- com.fasterxml.jackson.core:jackson-core:jar:2.21.3 [compile] (conflicts with 2.21.4)
+# |  +- org.infinispan.protostream:protostream-types:jar:6.0.7 [compile]
+# |  |  \- org.infinispan.protostream:protostream:jar:6.0.7 [compile]
+# |  +- org.jgroups:jgroups:jar:5.5.2.Final [compile]
+# |  +- com.github.ben-manes.caffeine:caffeine:jar:3.2.3 [compile]
+# |  |  \- org.jspecify:jspecify:jar:1.0.0 [compile]
+# |  +- org.jspecify:jspecify:jar:1.0.0 [compile]
+# |  +- org.jboss.threads:jboss-threads:jar:3.9.2 [compile]
+# |  |  +- org.wildfly.common:wildfly-common:jar:2.0.1 [compile]
+# |  |  +- io.smallrye.common:smallrye-common-annotation:jar:2.14.0 [compile]
+# |  |  +- io.smallrye.common:smallrye-common-constraint:jar:2.14.0 [compile]
+# |  |  +- io.smallrye.common:smallrye-common-cpu:jar:2.14.0 [compile]
+# |  |  \- io.smallrye.common:smallrye-common-function:jar:2.14.0 [compile]
+# |  +- org.wildfly.common:wildfly-common:jar:2.0.1 [compile]
+# |  |  +- org.jboss.logging:jboss-logging:jar:3.6.0.Final [compile, optional]
+# |  |  +- io.smallrye.common:smallrye-common-cpu:jar:2.4.0 [compile] (conflicts with 2.14.0)
+# |  |  +- io.smallrye.common:smallrye-common-expression:jar:2.4.0 [compile]
+# |  |  +- io.smallrye.common:smallrye-common-net:jar:2.4.0 [compile]
+# |  |  +- io.smallrye.common:smallrye-common-os:jar:2.4.0 [compile]
+# |  |  \- io.smallrye.common:smallrye-common-ref:jar:2.4.0 [compile]
+# |  +- io.smallrye.common:smallrye-common-expression:jar:2.4.0 [compile]
+# |  |  \- io.smallrye.common:smallrye-common-function:jar:2.4.0 [compile] (conflicts with 2.14.0)
+# |  +- io.smallrye.common:smallrye-common-net:jar:2.4.0 [compile]
+# |  |  \- io.smallrye.common:smallrye-common-constraint:jar:2.4.0 [compile] (conflicts with 2.14.0)
+# |  +- io.smallrye.common:smallrye-common-os:jar:2.4.0 [compile]
+# |  +- io.smallrye.common:smallrye-common-ref:jar:2.4.0 [compile]
+# |  |  \- io.smallrye.common:smallrye-common-constraint:jar:2.4.0 [compile] (conflicts with 2.14.0)
+# |  +- io.smallrye.common:smallrye-common-annotation:jar:2.14.0 [compile]
+# |  +- io.smallrye.common:smallrye-common-constraint:jar:2.14.0 [compile]
+# |  +- io.smallrye.common:smallrye-common-cpu:jar:2.14.0 [compile]
+# |  +- io.smallrye.common:smallrye-common-function:jar:2.14.0 [compile]
+# |  |  \- io.smallrye.common:smallrye-common-constraint:jar:2.14.0 [compile]
+# |  +- org.jboss.invocation:jboss-invocation:jar:2.0.1.Final [compile]
+# |  \- org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api:jar:3.0.1 [compile]
+# |     \- org.reactivestreams:reactive-streams:jar:1.0.3 [compile] (conflicts with 1.0.4)
+# +- org.realityforge.sting:sting-core:jar:0.39 [compile]
+# |  \- org.realityforge.javax.annotation:javax.annotation:jar:1.1.1 [compile]
+# +- org.realityforge.sting:sting-processor:jar:0.39 [compile]
+# \- org.realityforge.sting:sting-server:jar:0.39 [compile]
+#    +- org.realityforge.sting:sting-core:jar:0.39 [compile]
+#    \- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
+
+_java_test(
+    name = "verify_config_sha256",
+    size = "small",
+    runtime_deps = [":bazel_depgen"],
+    main_class = "org.realityforge.bazel.depgen.Main",
+    use_testrunner = False,
+    args = [
+        "--config-file",
+        "$(rootpath //third_party/java:dependencies.yml)",
+        "--verbose",
+        "hash",
+        "--verify-sha256",
+        _CONFIG_SHA256,
+    ],
+    data = ["//third_party/java:dependencies.yml"],
+    visibility = ["//visibility:private"],
+)
+
+_java_binary(
+    name = "update_depgen_generated_outputs",
+    runtime_deps = [":bazel_depgen"],
+    main_class = "org.realityforge.bazel.depgen.Main",
+    args = [
+        "--config-file",
+        "$(rootpath //third_party/java:dependencies.yml)",
+        "--verbose",
+        "generate",
+    ],
+    tags = [
+        "local",
+        "manual",
+        "no-cache",
+        "no-remote",
+        "no-sandbox",
+    ],
+    data = ["//third_party/java:dependencies.yml"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jackson_annotations",
+    jars = ["@jackson_annotations//file"],
+    srcjar = "@jackson_annotations__sources//file",
+    tags = ["maven_coordinates=com.fasterxml.jackson.core:jackson-annotations:2.21"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jackson_core",
+    jars = ["@jackson_core//file"],
+    srcjar = "@jackson_core__sources//file",
+    tags = ["maven_coordinates=com.fasterxml.jackson.core:jackson-core:2.21.4"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jackson_databind",
+    jars = ["@jackson_databind//file"],
+    srcjar = "@jackson_databind__sources//file",
+    tags = ["maven_coordinates=com.fasterxml.jackson.core:jackson-databind:2.21.4"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":jackson_annotations",
+        ":jackson_core",
+    ],
+)
+
+_java_import(
+    name = "jackson_datatype_guava",
+    jars = ["@jackson_datatype_guava//file"],
+    srcjar = "@jackson_datatype_guava__sources//file",
+    tags = ["maven_coordinates=com.fasterxml.jackson.datatype:jackson-datatype-guava:2.21.4"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":guava",
+        ":jackson_annotations",
+        ":jackson_core",
+        ":jackson_databind",
+    ],
+)
+
+_java_import(
+    name = "jackson_datatype_jdk8",
+    jars = ["@jackson_datatype_jdk8//file"],
+    srcjar = "@jackson_datatype_jdk8__sources//file",
+    tags = ["maven_coordinates=com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.21.4"],
+    visibility = ["//visibility:private"],
+    runtime_deps = [
+        ":jackson_core",
+        ":jackson_databind",
+    ],
+)
+
+_java_import(
+    name = "jackson_module_parameter_names",
+    jars = ["@jackson_module_parameter_names//file"],
+    srcjar = "@jackson_module_parameter_names__sources//file",
+    tags = ["maven_coordinates=com.fasterxml.jackson.module:jackson-module-parameter-names:2.21.4"],
+    visibility = ["//visibility:private"],
+    runtime_deps = [
+        ":jackson_core",
+        ":jackson_databind",
+    ],
+)
+
+_java_import(
+    name = "caffeine",
+    jars = ["@caffeine//file"],
+    srcjar = "@caffeine__sources//file",
+    tags = ["maven_coordinates=com.github.ben-manes.caffeine:caffeine:3.2.3"],
+    visibility = ["//visibility:private"],
+    deps = [":jspecify"],
+)
+
+_java_import(
+    name = "jsr305",
+    jars = ["@jsr305//file"],
+    srcjar = "@jsr305__sources//file",
+    tags = ["maven_coordinates=com.google.code.findbugs:jsr305:3.0.2"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "error_prone_annotations",
+    jars = ["@error_prone_annotations//file"],
+    srcjar = "@error_prone_annotations__sources//file",
+    tags = ["maven_coordinates=com.google.errorprone:error_prone_annotations:2.47.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "failureaccess",
+    jars = ["@failureaccess//file"],
+    srcjar = "@failureaccess__sources//file",
+    tags = ["maven_coordinates=com.google.guava:failureaccess:1.0.3"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "guava",
+    jars = ["@guava//file"],
+    srcjar = "@guava__sources//file",
+    tags = ["maven_coordinates=com.google.guava:guava:33.6.0-jre"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":error_prone_annotations",
+        ":failureaccess",
+        ":j2objc_annotations",
+        ":jspecify",
+        ":listenablefuture",
+    ],
+)
+
+_java_import(
+    name = "listenablefuture",
+    jars = ["@listenablefuture//file"],
+    tags = ["maven_coordinates=com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"],
+)
+
+_java_import(
+    name = "j2objc_annotations",
+    jars = ["@j2objc_annotations//file"],
+    srcjar = "@j2objc_annotations__sources//file",
+    tags = ["maven_coordinates=com.google.j2objc:j2objc-annotations:3.1"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "palantir_java_format",
+    jars = ["@palantir_java_format//file"],
+    tags = ["maven_coordinates=com.palantir.javaformat:palantir-java-format:2.93.0"],
+    deps = [
+        ":guava",
+        ":jackson_core",
+        ":jackson_databind",
+        ":palantir_java_format_spi",
+    ],
+    runtime_deps = [
+        ":functionaljava",
+        ":jackson_datatype_jdk8",
+        ":jackson_module_parameter_names",
+        ":jsr305",
+    ],
+)
+
+_java_import(
+    name = "palantir_java_format_spi",
+    jars = ["@palantir_java_format_spi//file"],
+    srcjar = "@palantir_java_format_spi__sources//file",
+    tags = ["maven_coordinates=com.palantir.javaformat:palantir-java-format-spi:2.93.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":guava",
+        ":jackson_annotations",
+        ":jackson_datatype_guava",
+    ],
+)
+
+_java_import(
+    name = "archunit",
+    jars = ["@archunit//file"],
+    srcjar = "@archunit__sources//file",
+    tags = ["maven_coordinates=com.tngtech.archunit:archunit:1.4.2"],
+    visibility = ["//visibility:private"],
+    deps = [":slf4j_api"],
+)
+
+_java_import(
+    name = "archunit_junit4",
+    jars = ["@archunit_junit4//file"],
+    tags = ["maven_coordinates=com.tngtech.archunit:archunit-junit4:1.4.2"],
+    deps = [
+        ":archunit",
+        ":junit",
+    ],
+)
+
+_java_import(
+    name = "nullaway",
+    jars = ["@nullaway//file"],
+    tags = ["maven_coordinates=com.uber.nullaway:nullaway:0.13.7"],
+    deps = [":jspecify"],
+    runtime_deps = [
+        ":dataflow_nullaway",
+        ":guava",
+    ],
+)
+
+_java_import(
+    name = "helidon_builder_api",
+    jars = ["@helidon_builder_api//file"],
+    srcjar = "@helidon_builder_api__sources//file",
+    tags = ["maven_coordinates=io.helidon.builder:helidon-builder-api:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [":helidon_common"],
+)
+
+_java_import(
+    name = "helidon_common_concurrency_limits",
+    jars = ["@helidon_common_concurrency_limits//file"],
+    srcjar = "@helidon_common_concurrency_limits__sources//file",
+    tags = ["maven_coordinates=io.helidon.common.concurrency:helidon-common-concurrency-limits:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_config",
+        ":helidon_config",
+        ":helidon_metrics_api",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_features",
+    jars = ["@helidon_common_features//file"],
+    srcjar = "@helidon_common_features__sources//file",
+    tags = ["maven_coordinates=io.helidon.common.features:helidon-common-features:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_common_features_api",
+        ":helidon_common_features_metadata",
+        ":helidon_metadata",
+        ":helidon_metadata_hson",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_features_api",
+    jars = ["@helidon_common_features_api//file"],
+    srcjar = "@helidon_common_features_api__sources//file",
+    tags = ["maven_coordinates=io.helidon.common.features:helidon-common-features-api:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_common_features_metadata",
+    jars = ["@helidon_common_features_metadata//file"],
+    srcjar = "@helidon_common_features_metadata__sources//file",
+    tags = ["maven_coordinates=io.helidon.common.features:helidon-common-features-metadata:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_metadata",
+        ":helidon_metadata_hson",
+    ],
+)
+
+_java_import(
+    name = "helidon_common",
+    jars = ["@helidon_common//file"],
+    srcjar = "@helidon_common__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [":helidon_metadata"],
+)
+
+_java_import(
+    name = "helidon_common_buffers",
+    jars = ["@helidon_common_buffers//file"],
+    srcjar = "@helidon_common_buffers__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-buffers:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_common_config",
+    jars = ["@helidon_common_config//file"],
+    srcjar = "@helidon_common_config__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-config:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_mapper",
+        ":helidon_common_types",
+        ":helidon_service_registry",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_configurable",
+    jars = ["@helidon_common_configurable//file"],
+    srcjar = "@helidon_common_configurable__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-configurable:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_config",
+        ":helidon_common_context",
+        ":helidon_config",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_context",
+    jars = ["@helidon_common_context//file"],
+    srcjar = "@helidon_common_context__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-context:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [":helidon_common"],
+)
+
+_java_import(
+    name = "helidon_common_key_util",
+    jars = ["@helidon_common_key_util//file"],
+    srcjar = "@helidon_common_key_util__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-key-util:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_config",
+        ":helidon_common_configurable",
+        ":helidon_config",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_mapper",
+    jars = ["@helidon_common_mapper//file"],
+    srcjar = "@helidon_common_mapper__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-mapper:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_types",
+        ":helidon_service_registry",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_media_type",
+    jars = ["@helidon_common_media_type//file"],
+    srcjar = "@helidon_common_media_type__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-media-type:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_metadata",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_parameters",
+    jars = ["@helidon_common_parameters//file"],
+    srcjar = "@helidon_common_parameters__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-parameters:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_common_mapper",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_resumable",
+    jars = ["@helidon_common_resumable//file"],
+    srcjar = "@helidon_common_resumable__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-resumable:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_common_security",
+    jars = ["@helidon_common_security//file"],
+    srcjar = "@helidon_common_security__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-security:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_common_socket",
+    jars = ["@helidon_common_socket//file"],
+    srcjar = "@helidon_common_socket__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-socket:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_buffers",
+        ":helidon_common_config",
+        ":helidon_config",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_task",
+    jars = ["@helidon_common_task//file"],
+    srcjar = "@helidon_common_task__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-task:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_common_tls",
+    jars = ["@helidon_common_tls//file"],
+    srcjar = "@helidon_common_tls__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-tls:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_config",
+        ":helidon_common_key_util",
+        ":helidon_config",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_types",
+    jars = ["@helidon_common_types//file"],
+    srcjar = "@helidon_common_types__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-types:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+    ],
+)
+
+_java_import(
+    name = "helidon_common_uri",
+    jars = ["@helidon_common_uri//file"],
+    srcjar = "@helidon_common_uri__sources//file",
+    tags = ["maven_coordinates=io.helidon.common:helidon-common-uri:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_mapper",
+        ":helidon_common_parameters",
+    ],
+)
+
+_java_import(
+    name = "helidon_config_metadata",
+    jars = ["@helidon_config_metadata//file"],
+    srcjar = "@helidon_config_metadata__sources//file",
+    tags = ["maven_coordinates=io.helidon.config.metadata:helidon-config-metadata:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_config",
+    jars = ["@helidon_config//file"],
+    srcjar = "@helidon_config__sources//file",
+    tags = ["maven_coordinates=io.helidon.config:helidon-config:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_config",
+        ":helidon_common_media_type",
+    ],
+)
+
+_java_import(
+    name = "helidon_http_encoding",
+    jars = ["@helidon_http_encoding//file"],
+    srcjar = "@helidon_http_encoding__sources//file",
+    tags = ["maven_coordinates=io.helidon.http.encoding:helidon-http-encoding:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_config",
+        ":helidon_config",
+        ":helidon_http",
+    ],
+)
+
+_java_import(
+    name = "helidon_http_media",
+    jars = ["@helidon_http_media//file"],
+    srcjar = "@helidon_http_media__sources//file",
+    tags = ["maven_coordinates=io.helidon.http.media:helidon-http-media:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_buffers",
+        ":helidon_common_config",
+        ":helidon_common_media_type",
+        ":helidon_common_parameters",
+        ":helidon_common_uri",
+        ":helidon_config",
+        ":helidon_http",
+    ],
+)
+
+_java_import(
+    name = "helidon_http",
+    jars = ["@helidon_http//file"],
+    srcjar = "@helidon_http__sources//file",
+    tags = ["maven_coordinates=io.helidon.http:helidon-http:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common",
+        ":helidon_common_buffers",
+        ":helidon_common_config",
+        ":helidon_common_configurable",
+        ":helidon_common_mapper",
+        ":helidon_common_media_type",
+        ":helidon_common_parameters",
+        ":helidon_common_types",
+        ":helidon_common_uri",
+        ":helidon_config",
+        ":helidon_service_registry",
+    ],
+)
+
+_java_import(
+    name = "helidon_http_http1",
+    jars = ["@helidon_http_http1//file"],
+    srcjar = "@helidon_http_http1__sources//file",
+    tags = ["maven_coordinates=io.helidon.http:helidon-http-http1:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_common_buffers",
+        ":helidon_common_socket",
+        ":helidon_common_uri",
+        ":helidon_http",
+    ],
+)
+
+_java_import(
+    name = "helidon_http_http2",
+    jars = ["@helidon_http_http2//file"],
+    srcjar = "@helidon_http_http2__sources//file",
+    tags = ["maven_coordinates=io.helidon.http:helidon-http-http2:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_common_buffers",
+        ":helidon_common_socket",
+        ":helidon_http",
+    ],
+)
+
+_java_import(
+    name = "helidon_logging_common",
+    jars = ["@helidon_logging_common//file"],
+    srcjar = "@helidon_logging_common__sources//file",
+    tags = ["maven_coordinates=io.helidon.logging:helidon-logging-common:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_common_context",
+    ],
+)
+
+_java_import(
+    name = "helidon_metadata",
+    jars = ["@helidon_metadata//file"],
+    srcjar = "@helidon_metadata__sources//file",
+    tags = ["maven_coordinates=io.helidon.metadata:helidon-metadata:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_metadata_hson",
+    jars = ["@helidon_metadata_hson//file"],
+    srcjar = "@helidon_metadata_hson__sources//file",
+    tags = ["maven_coordinates=io.helidon.metadata:helidon-metadata-hson:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_common_buffers",
+    ],
+)
+
+_java_import(
+    name = "helidon_metrics_api",
+    jars = ["@helidon_metrics_api//file"],
+    srcjar = "@helidon_metrics_api__sources//file",
+    tags = ["maven_coordinates=io.helidon.metrics:helidon-metrics-api:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common_config",
+        ":helidon_config",
+        ":helidon_http",
+        ":helidon_service_registry",
+    ],
+)
+
+_java_import(
+    name = "helidon_service_metadata",
+    jars = ["@helidon_service_metadata//file"],
+    tags = ["maven_coordinates=io.helidon.service:helidon-service-metadata:4.5.0"],
+    deps = [
+        ":helidon_common",
+        ":helidon_common_types",
+        ":helidon_metadata",
+        ":helidon_metadata_hson",
+    ],
+)
+
+_java_import(
+    name = "helidon_service_registry",
+    jars = ["@helidon_service_registry//file"],
+    srcjar = "@helidon_service_registry__sources//file",
+    tags = ["maven_coordinates=io.helidon.service:helidon-service-registry:4.5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "helidon_webserver",
+    jars = ["@helidon_webserver//file"],
+    tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver:4.5.0"],
+    deps = [
+        ":helidon",
+        ":helidon_common_concurrency_limits",
+        ":helidon_common_context",
+        ":helidon_common_features",
+        ":helidon_common_key_util",
+        ":helidon_common_resumable",
+        ":helidon_common_security",
+        ":helidon_common_socket",
+        ":helidon_common_task",
+        ":helidon_common_tls",
+        ":helidon_config",
+        ":helidon_config_metadata",
+        ":helidon_http",
+        ":helidon_http_encoding",
+        ":helidon_http_http1",
+        ":helidon_http_media",
+        ":helidon_logging_common",
+    ],
+)
+
+_java_import(
+    name = "helidon_webserver_http2",
+    jars = ["@helidon_webserver_http2//file"],
+    tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver-http2:4.5.0"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common_concurrency_limits",
+        ":helidon_common_features_api",
+        ":helidon_config",
+        ":helidon_http_http2",
+        ":helidon_webserver",
+    ],
+)
+
+_java_import(
+    name = "helidon_webserver_websocket",
+    jars = ["@helidon_webserver_websocket//file"],
+    tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver-websocket:4.5.0"],
+    deps = [
+        ":helidon_builder_api",
+        ":helidon_common_concurrency_limits",
+        ":helidon_config",
+        ":helidon_config_metadata",
+        ":helidon_webserver",
+        ":helidon_websocket",
+    ],
+)
+
+_java_import(
+    name = "helidon_websocket",
+    jars = ["@helidon_websocket//file"],
+    srcjar = "@helidon_websocket__sources//file",
+    tags = ["maven_coordinates=io.helidon.websocket:helidon-websocket:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common_buffers",
+        ":helidon_common_socket",
+        ":helidon_http",
+    ],
+)
+
+_java_import(
+    name = "helidon",
+    jars = ["@helidon//file"],
+    srcjar = "@helidon__sources//file",
+    tags = ["maven_coordinates=io.helidon:helidon:4.5.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":helidon_common",
+        ":helidon_logging_common",
+    ],
+)
+
+_java_import(
+    name = "mashona_logwriting",
+    jars = ["@mashona_logwriting//file"],
+    srcjar = "@mashona_logwriting__sources//file",
+    tags = ["maven_coordinates=io.mashona:mashona-logwriting:1.1.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "micrometer_core",
+    jars = ["@micrometer_core//file"],
+    srcjar = "@micrometer_core__sources//file",
+    tags = ["maven_coordinates=io.micrometer:micrometer-core:1.16.2"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "micrometer_registry_prometheus",
+    jars = ["@micrometer_registry_prometheus//file"],
+    srcjar = "@micrometer_registry_prometheus__sources//file",
+    tags = ["maven_coordinates=io.micrometer:micrometer-registry-prometheus:1.16.2"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "micrometer_registry_prometheus_simpleclient",
+    jars = ["@micrometer_registry_prometheus_simpleclient//file"],
+    srcjar = "@micrometer_registry_prometheus_simpleclient__sources//file",
+    tags = ["maven_coordinates=io.micrometer:micrometer-registry-prometheus-simpleclient:1.16.2"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "prometheus_metrics_annotations",
+    jars = ["@prometheus_metrics_annotations//file"],
+    srcjar = "@prometheus_metrics_annotations__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-annotations:1.8.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "prometheus_metrics_config",
+    jars = ["@prometheus_metrics_config//file"],
+    srcjar = "@prometheus_metrics_config__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-config:1.8.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "prometheus_metrics_core",
+    jars = ["@prometheus_metrics_core//file"],
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-core:1.8.0"],
+    deps = [
+        ":prometheus_metrics_config",
+        ":prometheus_metrics_model",
+        ":prometheus_metrics_tracer_initializer",
+    ],
+)
+
+_java_import(
+    name = "prometheus_metrics_exposition_formats",
+    jars = ["@prometheus_metrics_exposition_formats//file"],
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-exposition-formats:1.8.0"],
+    deps = [":prometheus_metrics_exposition_textformats"],
+)
+
+_java_import(
+    name = "prometheus_metrics_exposition_textformats",
+    jars = ["@prometheus_metrics_exposition_textformats//file"],
+    srcjar = "@prometheus_metrics_exposition_textformats__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-exposition-textformats:1.8.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":prometheus_metrics_config",
+        ":prometheus_metrics_model",
+    ],
+)
+
+_java_import(
+    name = "prometheus_metrics_model",
+    jars = ["@prometheus_metrics_model//file"],
+    srcjar = "@prometheus_metrics_model__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-model:1.8.0"],
+    visibility = ["//visibility:private"],
+    deps = [":prometheus_metrics_config"],
+)
+
+_java_import(
+    name = "prometheus_metrics_tracer_common",
+    jars = ["@prometheus_metrics_tracer_common//file"],
+    srcjar = "@prometheus_metrics_tracer_common__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-tracer-common:1.8.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "prometheus_metrics_tracer_initializer",
+    jars = ["@prometheus_metrics_tracer_initializer//file"],
+    srcjar = "@prometheus_metrics_tracer_initializer__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-tracer-initializer:1.8.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":prometheus_metrics_tracer_common",
+        ":prometheus_metrics_tracer_otel",
+        ":prometheus_metrics_tracer_otel_agent",
+    ],
+)
+
+_java_import(
+    name = "prometheus_metrics_tracer_otel",
+    jars = ["@prometheus_metrics_tracer_otel//file"],
+    srcjar = "@prometheus_metrics_tracer_otel__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-tracer-otel:1.8.0"],
+    visibility = ["//visibility:private"],
+    deps = [":prometheus_metrics_tracer_common"],
+)
+
+_java_import(
+    name = "prometheus_metrics_tracer_otel_agent",
+    jars = ["@prometheus_metrics_tracer_otel_agent//file"],
+    srcjar = "@prometheus_metrics_tracer_otel_agent__sources//file",
+    tags = ["maven_coordinates=io.prometheus:prometheus-metrics-tracer-otel-agent:1.8.0"],
+    visibility = ["//visibility:private"],
+    deps = [":prometheus_metrics_tracer_common"],
+)
+
+_java_import(
+    name = "rxjava",
+    jars = ["@rxjava//file"],
+    srcjar = "@rxjava__sources//file",
+    tags = ["maven_coordinates=io.reactivex.rxjava3:rxjava:3.1.12"],
+    visibility = ["//visibility:private"],
+    deps = [":reactive_streams"],
+)
+
+_java_import(
+    name = "smallrye_common_annotation",
+    jars = ["@smallrye_common_annotation//file"],
+    srcjar = "@smallrye_common_annotation__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-annotation:2.14.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "smallrye_common_constraint",
+    jars = ["@smallrye_common_constraint//file"],
+    srcjar = "@smallrye_common_constraint__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-constraint:2.14.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "smallrye_common_cpu",
+    jars = ["@smallrye_common_cpu//file"],
+    srcjar = "@smallrye_common_cpu__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-cpu:2.14.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "smallrye_common_expression",
+    jars = ["@smallrye_common_expression//file"],
+    srcjar = "@smallrye_common_expression__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-expression:2.4.0"],
+    visibility = ["//visibility:private"],
+    deps = [":smallrye_common_function"],
+)
+
+_java_import(
+    name = "smallrye_common_function",
+    jars = ["@smallrye_common_function//file"],
+    srcjar = "@smallrye_common_function__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-function:2.14.0"],
+    visibility = ["//visibility:private"],
+    deps = [":smallrye_common_constraint"],
+)
+
+_java_import(
+    name = "smallrye_common_net",
+    jars = ["@smallrye_common_net//file"],
+    srcjar = "@smallrye_common_net__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-net:2.4.0"],
+    visibility = ["//visibility:private"],
+    deps = [":smallrye_common_constraint"],
+)
+
+_java_import(
+    name = "smallrye_common_os",
+    jars = ["@smallrye_common_os//file"],
+    srcjar = "@smallrye_common_os__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-os:2.4.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "smallrye_common_ref",
+    jars = ["@smallrye_common_ref//file"],
+    srcjar = "@smallrye_common_ref__sources//file",
+    tags = ["maven_coordinates=io.smallrye.common:smallrye-common-ref:2.4.0"],
+    visibility = ["//visibility:private"],
+    deps = [":smallrye_common_constraint"],
+)
+
+_java_import(
+    name = "jakarta_el_api",
+    jars = ["@jakarta_el_api//file"],
+    srcjar = "@jakarta_el_api__sources//file",
+    tags = ["maven_coordinates=jakarta.el:jakarta.el-api:6.0.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jakarta_enterprise_cdi_api",
+    jars = ["@jakarta_enterprise_cdi_api//file"],
+    srcjar = "@jakarta_enterprise_cdi_api__sources//file",
+    tags = ["maven_coordinates=jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jakarta_enterprise_lang_model",
+    jars = ["@jakarta_enterprise_lang_model//file"],
+    srcjar = "@jakarta_enterprise_lang_model__sources//file",
+    tags = ["maven_coordinates=jakarta.enterprise:jakarta.enterprise.lang-model:4.1.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jakarta_inject_api",
+    jars = ["@jakarta_inject_api//file"],
+    srcjar = "@jakarta_inject_api__sources//file",
+    tags = ["maven_coordinates=jakarta.inject:jakarta.inject-api:2.0.1.MR"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jakarta_interceptor_api",
+    jars = ["@jakarta_interceptor_api//file"],
+    srcjar = "@jakarta_interceptor_api__sources//file",
+    tags = ["maven_coordinates=jakarta.interceptor:jakarta.interceptor-api:2.2.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jakarta_json_api",
+    jars = ["@jakarta_json_api//file"],
+    srcjar = "@jakarta_json_api__sources//file",
+    tags = ["maven_coordinates=jakarta.json:jakarta.json-api:2.1.3"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jakarta_persistence_api",
+    jars = ["@jakarta_persistence_api//file"],
+    tags = ["maven_coordinates=jakarta.persistence:jakarta.persistence-api:3.2.0"],
+)
+
+_java_import(
+    name = "jakarta_resource_api",
+    jars = ["@jakarta_resource_api//file"],
+    srcjar = "@jakarta_resource_api__sources//file",
+    tags = ["maven_coordinates=jakarta.resource:jakarta.resource-api:2.1.0"],
+    visibility = ["//visibility:private"],
+    deps = [":jakarta_transaction_api"],
+)
+
+_java_import(
+    name = "jakarta_transaction_api",
+    jars = ["@jakarta_transaction_api//file"],
+    tags = ["maven_coordinates=jakarta.transaction:jakarta.transaction-api:2.0.1"],
+)
+
+_java_import(
+    name = "jakarta_validation_api",
+    jars = ["@jakarta_validation_api//file"],
+    srcjar = "@jakarta_validation_api__sources//file",
+    tags = ["maven_coordinates=jakarta.validation:jakarta.validation-api:3.1.1"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "junit",
+    jars = ["@junit//file"],
+    tags = ["maven_coordinates=junit:junit:4.13.2"],
+    deps = [":hamcrest_core"],
+)
+
+_java_import(
+    name = "ant",
+    jars = ["@ant//file"],
+    srcjar = "@ant__sources//file",
+    tags = ["maven_coordinates=org.apache.ant:ant:1.10.15"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "checker_qual",
+    jars = ["@checker_qual//file"],
+    srcjar = "@checker_qual__sources//file",
+    tags = ["maven_coordinates=org.checkerframework:checker-qual:4.0.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "dataflow_nullaway",
+    jars = ["@dataflow_nullaway//file"],
+    srcjar = "@dataflow_nullaway__sources//file",
+    tags = ["maven_coordinates=org.checkerframework:dataflow-nullaway:4.0.0"],
+    visibility = ["//visibility:private"],
+    runtime_deps = [":checker_qual"],
+)
+
+_java_import(
+    name = "microprofile_reactive_streams_operators_api",
+    jars = ["@microprofile_reactive_streams_operators_api//file"],
+    srcjar = "@microprofile_reactive_streams_operators_api__sources//file",
+    tags = ["maven_coordinates=org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api:3.0.1"],
+    visibility = ["//visibility:private"],
+    deps = [":reactive_streams"],
+)
+
+_java_import(
+    name = "org_eclipse_persistence_core",
+    jars = ["@org_eclipse_persistence_core//file"],
+    srcjar = "@org_eclipse_persistence_core__sources//file",
+    tags = ["maven_coordinates=org.eclipse.persistence:org.eclipse.persistence.core:5.0.0"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":asm",
+        ":asm_commons",
+        ":asm_tree",
+    ],
+)
+
+_java_import(
+    name = "org_eclipse_persistence_jpa",
+    jars = ["@org_eclipse_persistence_jpa//file"],
+    tags = ["maven_coordinates=org.eclipse.persistence:org.eclipse.persistence.jpa:5.0.0"],
+    deps = [
+        ":jakarta_enterprise_cdi_api",
+        ":jakarta_persistence_api",
+        ":org_eclipse_persistence_core",
+        ":org_eclipse_persistence_jpa_jpql",
+    ],
+)
+
+_java_import(
+    name = "org_eclipse_persistence_jpa_jpql",
+    jars = ["@org_eclipse_persistence_jpa_jpql//file"],
+    srcjar = "@org_eclipse_persistence_jpa_jpql__sources//file",
+    tags = ["maven_coordinates=org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:5.0.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "org_eclipse_persistence_json",
+    jars = ["@org_eclipse_persistence_json//file"],
+    srcjar = "@org_eclipse_persistence_json__sources//file",
+    tags = ["maven_coordinates=org.eclipse.persistence:org.eclipse.persistence.json:5.0.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "org_eclipse_persistence_moxy",
+    jars = ["@org_eclipse_persistence_moxy//file"],
+    srcjar = "@org_eclipse_persistence_moxy__sources//file",
+    tags = ["maven_coordinates=org.eclipse.persistence:org.eclipse.persistence.moxy:5.0.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "functionaljava",
+    jars = ["@functionaljava//file"],
+    srcjar = "@functionaljava__sources//file",
+    tags = ["maven_coordinates=org.functionaljava:functionaljava:5.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "hamcrest",
+    jars = ["@hamcrest//file"],
+    tags = ["maven_coordinates=org.hamcrest:hamcrest:3.0"],
+)
+
+_java_import(
+    name = "hamcrest_core",
+    jars = ["@hamcrest_core//file"],
+    srcjar = "@hamcrest_core__sources//file",
+    tags = ["maven_coordinates=org.hamcrest:hamcrest-core:1.3"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "protostream",
+    jars = ["@protostream//file"],
+    srcjar = "@protostream__sources//file",
+    tags = ["maven_coordinates=org.infinispan.protostream:protostream:6.0.7"],
+    visibility = ["//visibility:private"],
+    deps = [":jackson_core"],
+)
+
+_java_import(
+    name = "protostream_types",
+    jars = ["@protostream_types//file"],
+    srcjar = "@protostream_types__sources//file",
+    tags = ["maven_coordinates=org.infinispan.protostream:protostream-types:6.0.7"],
+    visibility = ["//visibility:private"],
+    deps = [":protostream"],
+)
+
+_java_import(
+    name = "infinispan_commons",
+    jars = ["@infinispan_commons//file"],
+    srcjar = "@infinispan_commons__sources//file",
+    tags = ["maven_coordinates=org.infinispan:infinispan-commons:16.1.4"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":caffeine",
+        ":protostream",
+        ":protostream_types",
+        ":rxjava",
+    ],
+)
+
+_java_import(
+    name = "infinispan_core",
+    jars = ["@infinispan_core//file"],
+    srcjar = "@infinispan_core__sources//file",
+    tags = ["maven_coordinates=org.infinispan:infinispan-core:16.1.4"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":caffeine",
+        ":infinispan_commons",
+        ":infinispan_counter_api",
+        ":jakarta_transaction_api",
+        ":jboss_threads",
+        ":jgroups",
+        ":protostream",
+        ":protostream_types",
+    ],
+)
+
+_java_import(
+    name = "infinispan_counter_api",
+    jars = ["@infinispan_counter_api//file"],
+    srcjar = "@infinispan_counter_api__sources//file",
+    tags = ["maven_coordinates=org.infinispan:infinispan-counter-api:16.1.4"],
+    visibility = ["//visibility:private"],
+    deps = [":infinispan_commons"],
+)
+
+_java_import(
+    name = "jboss_invocation",
+    jars = ["@jboss_invocation//file"],
+    srcjar = "@jboss_invocation__sources//file",
+    tags = ["maven_coordinates=org.jboss.invocation:jboss-invocation:2.0.1.Final"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jboss_logging",
+    jars = ["@jboss_logging//file"],
+    srcjar = "@jboss_logging__sources//file",
+    tags = ["maven_coordinates=org.jboss.logging:jboss-logging:3.6.0.Final"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jboss_marshalling",
+    jars = ["@jboss_marshalling//file"],
+    srcjar = "@jboss_marshalling__sources//file",
+    tags = ["maven_coordinates=org.jboss.marshalling:jboss-marshalling:2.2.3.Final"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "narayana_jta",
+    jars = ["@narayana_jta//file"],
+    tags = ["maven_coordinates=org.jboss.narayana.jta:narayana-jta:7.3.4.Final"],
+    deps = [
+        ":caffeine",
+        ":infinispan_commons",
+        ":infinispan_core",
+        ":infinispan_counter_api",
+        ":jackson_core",
+        ":jakarta_el_api",
+        ":jakarta_enterprise_cdi_api",
+        ":jakarta_enterprise_lang_model",
+        ":jakarta_inject_api",
+        ":jakarta_interceptor_api",
+        ":jakarta_resource_api",
+        ":jakarta_transaction_api",
+        ":jboss_invocation",
+        ":jboss_threads",
+        ":jboss_transaction_spi",
+        ":jgroups",
+        ":jspecify",
+        ":microprofile_reactive_streams_operators_api",
+        ":protostream",
+        ":protostream_types",
+        ":reactive_streams",
+        ":rxjava",
+        ":smallrye_common_annotation",
+        ":smallrye_common_constraint",
+        ":smallrye_common_cpu",
+        ":smallrye_common_expression",
+        ":smallrye_common_function",
+        ":smallrye_common_net",
+        ":smallrye_common_os",
+        ":smallrye_common_ref",
+        ":wildfly_common",
+    ],
+)
+
+_java_import(
+    name = "jboss_threads",
+    jars = ["@jboss_threads//file"],
+    srcjar = "@jboss_threads__sources//file",
+    tags = ["maven_coordinates=org.jboss.threads:jboss-threads:3.9.2"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":smallrye_common_annotation",
+        ":smallrye_common_constraint",
+        ":smallrye_common_cpu",
+        ":smallrye_common_function",
+        ":wildfly_common",
+    ],
+)
+
+_java_import(
+    name = "jboss_transaction_spi",
+    jars = ["@jboss_transaction_spi//file"],
+    srcjar = "@jboss_transaction_spi__sources//file",
+    tags = ["maven_coordinates=org.jboss:jboss-transaction-spi:8.0.0.Final"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":jakarta_resource_api",
+        ":jakarta_transaction_api",
+    ],
+)
+
+_java_import(
+    name = "jgroups",
+    jars = ["@jgroups//file"],
+    srcjar = "@jgroups__sources//file",
+    tags = ["maven_coordinates=org.jgroups:jgroups:5.5.2.Final"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jgroups_raft",
+    jars = ["@jgroups_raft//file"],
+    srcjar = "@jgroups_raft__sources//file",
+    tags = ["maven_coordinates=org.jgroups:jgroups-raft:1.1.4.Final"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jspecify",
+    jars = ["@jspecify//file"],
+    tags = ["maven_coordinates=org.jspecify:jspecify:1.0.0"],
+)
+
+_java_import(
+    name = "asm",
+    jars = ["@asm//file"],
+    srcjar = "@asm__sources//file",
+    tags = ["maven_coordinates=org.ow2.asm:asm:9.9.1"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "asm_commons",
+    jars = ["@asm_commons//file"],
+    srcjar = "@asm_commons__sources//file",
+    tags = ["maven_coordinates=org.ow2.asm:asm-commons:9.9.1"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":asm",
+        ":asm_tree",
+    ],
+)
+
+_java_import(
+    name = "asm_tree",
+    jars = ["@asm_tree//file"],
+    srcjar = "@asm_tree__sources//file",
+    tags = ["maven_coordinates=org.ow2.asm:asm-tree:9.9.1"],
+    visibility = ["//visibility:private"],
+    deps = [":asm"],
+)
+
+_java_import(
+    name = "reactive_streams",
+    jars = ["@reactive_streams//file"],
+    srcjar = "@reactive_streams__sources//file",
+    tags = ["maven_coordinates=org.reactivestreams:reactive-streams:1.0.4"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "bazel_depgen",
+    jars = ["@bazel_depgen//file"],
+    tags = ["maven_coordinates=org.realityforge.bazel.depgen:bazel-depgen:0.24"],
+)
+
+_java_import(
+    name = "javax_annotation",
+    jars = ["@javax_annotation//file"],
+    srcjar = "@javax_annotation__sources//file",
+    tags = ["maven_coordinates=org.realityforge.javax.annotation:javax.annotation:1.1.1"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "sting_core",
+    jars = ["@sting_core//file"],
+    tags = ["maven_coordinates=org.realityforge.sting:sting-core:0.39"],
+    deps = [":javax_annotation"],
+)
+
+_java_import(
+    name = "sting_processor__plugin_library",
+    jars = ["@sting_processor//file"],
+    tags = ["maven_coordinates=org.realityforge.sting:sting-processor:0.39"],
+)
+_java_plugin(
+    name = "sting_processor__sting_processor_stingprocessor__plugin",
+    processor_class = "sting.processor.StingProcessor",
+    generates_api = True,
+    visibility = ["//visibility:private"],
+    deps = [":sting_processor__plugin_library"],
+)
+_java_library(
+    name = "sting_processor",
+    exported_plugins = ["sting_processor__sting_processor_stingprocessor__plugin"],
+)
+
+_java_import(
+    name = "sting_server",
+    jars = ["@sting_server//file"],
+    tags = ["maven_coordinates=org.realityforge.sting:sting-server:0.39"],
+    deps = [
+        ":jakarta_transaction_api",
+        ":sting_core",
+    ],
+)
+
+_java_import(
+    name = "slf4j_api",
+    jars = ["@slf4j_api//file"],
+    srcjar = "@slf4j_api__sources//file",
+    tags = ["maven_coordinates=org.slf4j:slf4j-api:2.0.17"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "wildfly_common",
+    jars = ["@wildfly_common//file"],
+    srcjar = "@wildfly_common__sources//file",
+    tags = ["maven_coordinates=org.wildfly.common:wildfly-common:2.0.1"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":smallrye_common_cpu",
+        ":smallrye_common_expression",
+        ":smallrye_common_net",
+        ":smallrye_common_os",
+        ":smallrye_common_ref",
+    ],
+)
+
+# --- depgen-generated targets end ---
