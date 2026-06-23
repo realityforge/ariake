@@ -1,0 +1,17 @@
+load("//third_party/java:rules.bzl", "java_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+java_binary(
+    name = "server",
+    data = [
+        "application.properties",
+        "//examples/static/content:static_files",
+    ],
+    main_class = "org.ariake.examples.staticcontent.Main",
+    runtime_deps = [
+        "//examples/static/src/main/java/org/ariake/examples/staticcontent:static_lib",
+    ],
+)
+
+exports_files(["application.properties"])

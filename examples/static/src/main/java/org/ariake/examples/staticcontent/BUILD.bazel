@@ -1,0 +1,32 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "static_lib",
+    srcs = [
+        "CacheControlFilter.java",
+        "Main.java",
+        "PageView.java",
+        "PageViewService.java",
+        "PathOverrideHttpExchange.java",
+        "PreEncodedBrotliFilter.java",
+        "StaticContentApplication.java",
+        "StaticContentFragment.java",
+        "StaticContentRoot.java",
+        "StaticContentService.java",
+        "package-info.java",
+    ],
+    plugins = [
+        "//third_party/java:sting_processor_plugin",
+    ],
+    deps = [
+        "//examples/static/src/main/resources/META-INF:persistence_resources",
+        "//src/main/java/org/ariake",
+        "//third_party/java:h2",
+        "//third_party/java:jakarta_persistence_api",
+        "//third_party/java:javax_annotation_api",
+        "//third_party/java:sting_core",
+        "//third_party/java:sting_server",
+    ],
+)

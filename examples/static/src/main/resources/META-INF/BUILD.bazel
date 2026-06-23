@@ -1,0 +1,9 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "persistence_resources",
+    resource_strip_prefix = "examples/static/src/main/resources",
+    resources = ["persistence.xml"],
+)

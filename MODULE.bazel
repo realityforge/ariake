@@ -188,6 +188,13 @@ _http_file(
 )
 
 _http_file(
+    name = "h2",
+    downloaded_file_path = "com/h2database/h2/2.4.240/h2-2.4.240.jar",
+    sha256 = "29b70e427cc1c40cdc376283adbb0cc62853073797bb5fe5761f81fe73d57ce0",
+    urls = ["https://repo.maven.apache.org/maven2/com/h2database/h2/2.4.240/h2-2.4.240.jar"],
+)
+
+_http_file(
     name = "palantir_java_format",
     downloaded_file_path = "com/palantir/javaformat/palantir-java-format/2.93.0/palantir-java-format-2.93.0.jar",
     sha256 = "04e5a7e2cb86acefc448443cce4a2729f929b3bc50eeaa9c5ce33eedaf388b1f",

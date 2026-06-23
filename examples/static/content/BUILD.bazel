@@ -1,0 +1,27 @@
+package(default_visibility = ["//visibility:public"])
+
+genrule(
+    name = "app_cache_js_br",
+    srcs = ["app.cache.js"],
+    outs = ["app.cache.js.br"],
+    cmd = "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$$PATH brotli -f -q 11 -o $@ $(location app.cache.js)",
+)
+
+genrule(
+    name = "styles_cache_css_br",
+    srcs = ["styles.cache.css"],
+    outs = ["styles.cache.css.br"],
+    cmd = "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$$PATH brotli -f -q 11 -o $@ $(location styles.cache.css)",
+)
+
+filegroup(
+    name = "static_files",
+    srcs = [
+        "app.cache.js",
+        "index.nocache.html",
+        "notes.txt",
+        "styles.cache.css",
+        ":app_cache_js_br",
+        ":styles_cache_css_br",
+    ],
+)

@@ -26,6 +26,8 @@ artifacts:
     includeSource: false
   - coord: jakarta.persistence:jakarta.persistence-api:3.2.0
     includeSource: false
+  - coord: com.h2database:h2:2.4.240
+    includeSource: false
   - coord: jakarta.transaction:jakarta.transaction-api:2.0.1
     includeSource: false
   - coord: junit:junit:4.13.2

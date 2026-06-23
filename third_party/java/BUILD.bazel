@@ -63,7 +63,7 @@ _java_plugin(
 load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_library = "java_library", _java_plugin = "java_plugin", _java_test = "java_test")
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "3756B837D8987E6339A3E16B79E309734B70D4836B40A226E5F33DD9BF4A00E3"
+_CONFIG_SHA256 = "088F3D3EF250D47EDDD5C6785C9C71AD46817FC411065B65A0340D4753EE2FC4"
 
 exports_files(["dependencies.yml"])
 
@@ -251,6 +251,7 @@ exports_files(["dependencies.yml"])
 # |     +- io.prometheus:prometheus-metrics-model:jar:1.8.0 [compile]
 # |     \- io.prometheus:prometheus-metrics-config:jar:1.8.0 [compile]
 # +- jakarta.persistence:jakarta.persistence-api:jar:3.2.0 [compile]
+# +- com.h2database:h2:jar:2.4.240 [compile]
 # +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
 # +- junit:junit:jar:4.13.2 [compile]
 # |  \- org.hamcrest:hamcrest-core:jar:1.3 [compile]
@@ -561,6 +562,12 @@ _java_import(
     srcjar = "@j2objc_annotations__sources//file",
     tags = ["maven_coordinates=com.google.j2objc:j2objc-annotations:3.1"],
     visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "h2",
+    jars = ["@h2//file"],
+    tags = ["maven_coordinates=com.h2database:h2:2.4.240"],
 )
 
 _java_import(
