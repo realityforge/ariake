@@ -4,7 +4,16 @@ package(default_visibility = ["//visibility:public"])
 
 java_library(
     name = "hello_lib",
-    srcs = glob(["src/main/java/**/*.java"]),
+    srcs = [
+        "src/main/java/org/ariake/examples/hello/EchoWebSocketService.java",
+        "src/main/java/org/ariake/examples/hello/HealthResponder.java",
+        "src/main/java/org/ariake/examples/hello/HealthResponderImpl.java",
+        "src/main/java/org/ariake/examples/hello/HealthService.java",
+        "src/main/java/org/ariake/examples/hello/HelloApplication.java",
+        "src/main/java/org/ariake/examples/hello/HelloFragment.java",
+        "src/main/java/org/ariake/examples/hello/Main.java",
+        "src/main/java/org/ariake/examples/hello/package-info.java",
+    ],
     plugins = [
         "//third_party/java:sting_processor_plugin",
     ],

@@ -4,22 +4,45 @@ package(default_visibility = ["//visibility:public"])
 
 java_library(
     name = "config",
-    srcs = glob(["config/*.java"]),
+    srcs = [
+        "config/AriakeConfig.java",
+        "config/package-info.java",
+    ],
 )
 
 java_library(
     name = "http",
-    srcs = glob(["http/*.java"]),
+    srcs = [
+        "http/AriakeHttpService.java",
+        "http/HttpEndpoint.java",
+        "http/HttpExchange.java",
+        "http/HttpHandler.java",
+        "http/HttpMethod.java",
+        "http/HttpRoutes.java",
+        "http/package-info.java",
+    ],
 )
 
 java_library(
     name = "websocket",
-    srcs = glob(["websocket/*.java"]),
+    srcs = [
+        "websocket/AriakeWebSocketService.java",
+        "websocket/WebSocketEndpoint.java",
+        "websocket/WebSocketListener.java",
+        "websocket/WebSocketRoutes.java",
+        "websocket/WebSocketSession.java",
+        "websocket/package-info.java",
+    ],
 )
 
 java_library(
     name = "metrics_api",
-    srcs = glob(["metrics/*.java"]),
+    srcs = [
+        "metrics/Counter.java",
+        "metrics/Metrics.java",
+        "metrics/MetricsHttpService.java",
+        "metrics/package-info.java",
+    ],
     deps = [
         ":http",
     ],
@@ -27,7 +50,10 @@ java_library(
 
 java_library(
     name = "prometheus_metrics",
-    srcs = glob(["metrics/prometheus/*.java"]),
+    srcs = [
+        "metrics/prometheus/PrometheusMetrics.java",
+        "metrics/prometheus/package-info.java",
+    ],
     deps = [
         ":metrics_api",
         "//third_party/java:prometheus_metrics_core",
@@ -38,12 +64,19 @@ java_library(
 
 java_library(
     name = "server",
-    srcs = glob(["server/*.java"]),
+    srcs = [
+        "server/AriakeServer.java",
+        "server/package-info.java",
+    ],
 )
 
 java_library(
     name = "helidon_server",
-    srcs = glob(["server/helidon/*.java"]),
+    srcs = [
+        "server/helidon/HelidonAriakeServer.java",
+        "server/helidon/HelidonWebSocketListener.java",
+        "server/helidon/package-info.java",
+    ],
     deps = [
         ":config",
         ":http",
@@ -60,7 +93,10 @@ java_library(
 
 java_library(
     name = "narayana_tx",
-    srcs = glob(["tx/narayana/*.java"]),
+    srcs = [
+        "tx/narayana/NarayanaTransactions.java",
+        "tx/narayana/package-info.java",
+    ],
     deps = [
         "//third_party/java:jakarta_transaction_api",
         "//third_party/java:jboss_logging_api",
@@ -70,7 +106,10 @@ java_library(
 
 java_library(
     name = "jpa",
-    srcs = glob(["jpa/*.java"]),
+    srcs = [
+        "jpa/EntityManagerProvider.java",
+        "jpa/package-info.java",
+    ],
     deps = [
         "//third_party/java:jakarta_persistence_api",
     ],
@@ -78,7 +117,10 @@ java_library(
 
 java_library(
     name = "eclipselink_jpa",
-    srcs = glob(["jpa/eclipselink/*.java"]),
+    srcs = [
+        "jpa/eclipselink/EclipseLinkEntityManagerProvider.java",
+        "jpa/eclipselink/package-info.java",
+    ],
     deps = [
         ":jpa",
         "//third_party/java:jakarta_persistence_api",
