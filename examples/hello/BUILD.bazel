@@ -1,0 +1,28 @@
+load("//third_party/java:rules.bzl", "java_binary", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "hello_lib",
+    srcs = glob(["src/main/java/**/*.java"]),
+    plugins = [
+        "//third_party/java:sting_processor_plugin",
+    ],
+    deps = [
+        "//src/main/java/org/ariake",
+        "//third_party/java:jakarta_transaction_api",
+        "//third_party/java:javax_annotation_api",
+        "//third_party/java:sting_core",
+        "//third_party/java:sting_server",
+    ],
+)
+
+java_binary(
+    name = "server",
+    main_class = "org.ariake.examples.hello.Main",
+    runtime_deps = [
+        ":hello_lib",
+    ],
+)
+
+exports_files(["application.properties"])
