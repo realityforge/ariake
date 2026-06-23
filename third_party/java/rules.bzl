@@ -4,7 +4,7 @@ _JAVA_RELEASE = "25"
 _JSPECIFY = "//third_party/java:jspecify"
 _NULLAWAY_PLUGIN = "//third_party/java:nullaway_plugin"
 
-_ROSE_ERROR_PRONE_JAVACOPTS = [
+_ERROR_PRONE_JAVACOPTS = [
     "-XepExcludedPaths:(.*/" + "external/.*|.*/_javac/.*/.*_sources/.*)",
     "-Xep:AlmostJavadoc:ERROR",
     "-Xep:AlreadyChecked:ERROR",
@@ -86,9 +86,6 @@ _ROSE_ERROR_PRONE_JAVACOPTS = [
     "-Xep:UseCorrectAssertInTests:ERROR",
     "-Xep:UsingJsr305CheckReturnValue:ERROR",
     "-Xep:VoidMissingNullable:ERROR",
-]
-
-_ROSE_STRICT_ERROR_PRONE_JAVACOPTS = [
     "-Xep:BanClassLoader:ERROR",
     "-Xep:BanSerializableRead:ERROR",
     "-Xep:FieldCanBeFinal:ERROR",
@@ -112,9 +109,7 @@ _JAVA_JAVACOPTS = [
     "-Xep:RequireExplicitNullMarking:ERROR",
     "-XepOpt:NullAway:OnlyNullMarked=true",
     "-Xlint:all,-processing,-serial,-path,-options,-classfile,-this-escape",
-] + _ROSE_ERROR_PRONE_JAVACOPTS
-
-_STRICT_JAVA_JAVACOPTS = _JAVA_JAVACOPTS + _ROSE_STRICT_ERROR_PRONE_JAVACOPTS
+] + _ERROR_PRONE_JAVACOPTS
 
 _JAVA_TEST_JVM_FLAGS = [
     "-ea",
@@ -135,7 +130,7 @@ def java_library(name, srcs = [], javacopts = [], deps = [], plugins = [], **kwa
         name = name,
         srcs = srcs,
         deps = _with_jspecify(deps) if nullaway_enabled else deps,
-        javacopts = _STRICT_JAVA_JAVACOPTS + javacopts,
+        javacopts = _JAVA_JAVACOPTS + javacopts,
         plugins = _with_nullaway(plugins) if nullaway_enabled else plugins,
         **kwargs
     )
@@ -146,7 +141,7 @@ def java_binary(name, srcs = [], javacopts = [], deps = [], plugins = [], **kwar
         name = name,
         srcs = srcs,
         deps = _with_jspecify(deps) if nullaway_enabled else deps,
-        javacopts = _STRICT_JAVA_JAVACOPTS + javacopts,
+        javacopts = _JAVA_JAVACOPTS + javacopts,
         plugins = _with_nullaway(plugins) if nullaway_enabled else plugins,
         **kwargs
     )
@@ -157,7 +152,7 @@ def java_test(name, srcs = [], javacopts = [], deps = [], plugins = [], jvm_flag
         name = name,
         srcs = srcs,
         deps = _with_jspecify(deps) if nullaway_enabled else deps,
-        javacopts = _STRICT_JAVA_JAVACOPTS + _ROSE_TEST_ERROR_PRONE_JAVACOPTS + javacopts,
+        javacopts = _JAVA_JAVACOPTS + _ROSE_TEST_ERROR_PRONE_JAVACOPTS + javacopts,
         plugins = _with_nullaway(plugins) if nullaway_enabled else plugins,
         jvm_flags = _JAVA_TEST_JVM_FLAGS + jvm_flags,
         **kwargs
