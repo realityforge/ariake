@@ -26,6 +26,8 @@ Create Ariake, a lightly coupled Java server-side framework for fast-starting HT
   - Database migrations.
   - Production TLS certificate management.
   - HTTP/2 protocol conformance tests beyond ensuring the dependency/build/runtime support is present.
+  - Servlet API compatibility or servlet filter adapters.
+  - Static resource serving APIs beyond the request/response hooks needed by future resource filters.
 
 ## Locked Decisions
 
@@ -61,6 +63,8 @@ Create Ariake, a lightly coupled Java server-side framework for fast-starting HT
 ## Behavior Expectations
 
 - Framework consumers should implement small Ariake service interfaces rather than depending directly on Helidon.
+- HTTP services may register framework-owned request filters that run before matching route handlers, are ordered deterministically, may target servlet-style prefix patterns such as `/rose/*`, and may short-circuit by sending a response.
+- `HttpExchange` should expose only request/response data currently needed by framework filters: method, routed path, request URI, request headers, status/headers/date headers, error responses, send state, body reads, and response sends.
 - Runtime adapters may depend on Helidon, Narayana, Prometheus, and EclipseLink.
 - Configuration is immutable after loading.
 - Application transaction boundaries should use Sting server `@Transactional` service-interface proxies.
@@ -127,3 +131,18 @@ Create Ariake, a lightly coupled Java server-side framework for fast-starting HT
 ## Open Questions Register
 
 No blocking open questions. Defaults above are derived from the user's stack requirements, current upstream metadata, and the verified local toolchain.
+
+## HTTP Filter Pipeline Slice
+
+### Rose-Derived Behaviors
+
+- Cache-control behavior needs path-pattern targeting, request URI inspection, response string headers, response date headers, and always-continue filter behavior.
+- Pre-encoded Brotli behavior needs request header lookup, response headers, and the ability for a future static resource filter to short-circuit the chain after serving alternate content.
+- API auth behavior needs ordered path-pattern filters, config-driven bypass logic in application code, provider delegation before continuing, post-auth guards that can short-circuit with `403`, and no servlet session API exposure.
+
+### Locked Slice Decisions
+
+- Ariake will add a framework-owned HTTP filter chain rather than exposing servlet `Filter` or Helidon `Filter` types.
+- Ariake filters will be registered through `HttpRoutes` so existing `AriakeHttpService` implementations remain the registration boundary.
+- Path patterns in this slice support exact paths, `/*` global prefix, and prefix wildcard patterns ending in `/*`; unsupported patterns fail fast.
+- Static resource lookup and MIME resolution remain a separate future abstraction. They are not added to `HttpExchange`.

@@ -179,3 +179,30 @@ Date: 2026-06-24
 - `rg -n '"[^"]*/.*\\.java"' src examples --glob 'BUILD.bazel'` reported no matches.
 - A source-directory scan verified every directory containing Java source under `src/main/java`, `src/test/java`, and the hello example has a local `BUILD.bazel`.
 - `tools/check.sh` passed with dependency generation verification, Buildifier check, Palantir Java Format check, `bazel build //...`, and 6/6 tests.
+
+## Report 7 - Rose HTTP Filter Requirements
+
+Date: 2026-06-24
+
+### Rose Behavior Evidence
+
+- `CacheControlFilter` is scoped to `/rose/*`, reads `HttpServletRequest.getRequestURI()`, sets `Date`, `Last-Modified`, `Expires`, `Pragma`, and `Cache-control`, then always continues the servlet chain.
+- `PreEncodedBrotliFilter` is scoped to `/rose/*`, reads `Accept-Encoding`, checks normal and `.br` static resources, sets `Content-Encoding` and original `Content-Type`, includes the encoded resource, and short-circuits when it serves content.
+- `RoseApiClientKeycloakFilter` has ordered URL patterns for API paths, supports config-driven bypass, delegates to Keycloak before chain continuation, and lets `RoseApiClientKeycloakUrlFilterImpl` short-circuit with `403` after checking the authenticated user.
+- `RoseApiClientKeycloakUrlFilterImpl` invalidates a servlet session on post-auth failure, but Ariake should not expose servlet sessions in the core API; Ariake auth integrations should model stateless security context instead.
+
+### Ariake API Direction
+
+- Add Ariake-owned `HttpFilter` and `HttpFilterChain` interfaces plus immutable filter registrations on `HttpRoutes`.
+- Extend `HttpExchange` with method, request URI, request header lookup, date headers, error sends, and send-state inspection.
+- Keep static resource lookup as a later `HttpResources`-style abstraction rather than adding resource operations to `HttpExchange`.
+- Keep all Helidon types isolated in `org.ariake.server.helidon`; public `org.ariake.http` APIs must remain implementation-free.
+
+### Implementation Verification
+
+- `bazel test //src/test/java/org/ariake/http:http_test`: passed with coverage for filter ordering, path matching, unsupported patterns, short-circuiting, and exchange helper usage.
+- `bazel build //src/main/java/org/ariake/server/helidon:helidon_server //examples/hello:server`: passed, confirming the Helidon adapter and example compile against the extended exchange/filter API.
+- `tools/java_format.sh check`: passed after formatting the Java changes.
+- `rg -n "glob\\(" . --glob 'BUILD.bazel' --glob '*.bzl'`: no matches.
+- `rg -n '"[^"]*/.*\\.java"' src examples --glob 'BUILD.bazel'`: no matches.
+- `tools/check.sh`: passed with dependency verification, Buildifier, Palantir Java Format, `bazel build //...`, and 6/6 tests.

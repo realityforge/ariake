@@ -329,6 +329,41 @@ tasks:
       hash: not_required
       message: not_required
 
+  - id: T12
+    title: Ariake HTTP filter pipeline and exchange metadata
+    status: completed
+    priority: high
+    depends_on:
+      - T11
+    acceptance_criteria:
+      - "HTTP filters can be registered through `HttpRoutes` with deterministic ordering and path-pattern targeting."
+      - Matching filters run before route handlers and can continue or short-circuit the chain.
+      - "`HttpExchange` exposes method, request URI, request header lookup, date headers, error sends, and send-state inspection."
+      - "Helidon-specific filter and request/response APIs remain isolated in `org.ariake.server.helidon`."
+      - Focused tests cover filter ordering, path matching, short-circuiting, and exchange helper behavior.
+      - "Bazel source ownership checks and `tools/check.sh` pass."
+    files_touched:
+      - src/main/java/org/ariake/http/**
+      - src/main/java/org/ariake/server/helidon/**
+      - src/test/java/org/ariake/http/**
+      - plans/ariake-framework/**
+    evidence:
+      - command: bazel test //src/test/java/org/ariake/http:http_test
+        result: "pass: filter registration, ordering, path matching, short-circuiting, and exchange helper tests passed"
+      - command: bazel build //src/main/java/org/ariake/server/helidon:helidon_server //examples/hello:server
+        result: "pass: Helidon adapter and example server compile against the extended HttpExchange/filter API"
+      - command: tools/java_format.sh check
+        result: "pass: Palantir Java Format check reported no drift after formatting"
+      - command: rg -n "glob\\(" . --glob 'BUILD.bazel' --glob '*.bzl'
+        result: "pass: no glob usage in Bazel files"
+      - command: rg -n '"[^"]*/.*\\.java"' src examples --glob 'BUILD.bazel'
+        result: "pass: no BUILD source list references Java files in another directory"
+      - command: tools/check.sh
+        result: "pass: dependency verification, Buildifier, Palantir Java Format, build, and 6/6 tests"
+    commit:
+      hash: not_required
+      message: not_required
+
 history:
   - timestamp: 2026-06-23
     task: T01
@@ -378,3 +413,11 @@ history:
     task: T11
     commit: not_required
     note: "Completed Bazel package split; structural scans and tools/check.sh passed."
+  - timestamp: 2026-06-24
+    task: T12
+    commit: not_required
+    note: "Started Ariake-owned HTTP filter pipeline and HttpExchange metadata slice derived from Rose servlet filter behavior."
+  - timestamp: 2026-06-24
+    task: T12
+    commit: not_required
+    note: "Completed HTTP filter pipeline slice; targeted HTTP tests, structural Bazel scans, and tools/check.sh passed."

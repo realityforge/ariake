@@ -28,6 +28,11 @@ Working implementation plan. It is intentionally concrete enough to execute imme
 6. Verification and report
    - Run dependency generation, build, tests, and example startup smoke checks where possible.
    - Update task board evidence and research report.
+7. HTTP filter pipeline slice
+   - Add framework-owned filter and chain APIs in `org.ariake.http`.
+   - Extend `HttpExchange` with request metadata, request header lookup, date headers, error sends, and send-state inspection.
+   - Wire Helidon route dispatch through the Ariake filter chain while keeping Helidon types in the adapter package.
+   - Add focused unit tests for filter registration, ordering, matching, and short-circuit semantics.
 
 ## Delivery Approach
 
@@ -37,6 +42,7 @@ Working implementation plan. It is intentionally concrete enough to execute imme
 - Keep GraalVM support as an opt-in target/script because local `native-image` is unavailable.
 - Update planning artifacts whenever dependency versions, package boundaries, or gates change.
 - Keep Bazel package ownership local to each Java source directory; parent packages aggregate labels only.
+- Keep HTTP filter APIs servlet-free and Helidon-free; use framework-owned interfaces and records only.
 
 ## High-Risk Areas
 
@@ -67,6 +73,9 @@ Working implementation plan. It is intentionally concrete enough to execute imme
 - Cross-directory Bazel source references.
   - Impact: parent BUILD files can silently own child-package source files, weakening package boundaries.
   - Mitigation: place a `BUILD.bazel` in every Java source directory and keep parent targets source-less or label-only.
+- HTTP filter chain semantics.
+  - Impact: ambiguous ordering or path matching would make auth/cache/static-resource behavior unreliable.
+  - Mitigation: define small ordered registration records, fail fast on unsupported path patterns, and cover proceed/short-circuit behavior with unit tests before relying on the Helidon adapter.
 
 ## Required Full Gates
 
@@ -89,6 +98,7 @@ Working implementation plan. It is intentionally concrete enough to execute imme
 - D-13: Use `org.realityforge.sting:sting-server:0.39` for transactional service-interface proxies because the published POM depends on `jakarta.transaction-api:2.0.1`.
 - D-14: Remove the low-level `TransactionRunner` API after adopting Sting server `@Transactional`; Ariake now exposes only the Narayana `TransactionManager` provider needed by Sting server interceptors.
 - D-15: Split Java BUILD ownership by source directory so source-bearing targets can only list files from their own Bazel package; parent BUILD files aggregate child labels only.
+- D-16: Add Ariake-owned HTTP filters through `HttpRoutes` and keep static resource lookup out of `HttpExchange`; this covers cache and auth filter control flow now while leaving resource resolution as a dedicated future API.
 
 ## Completion Criteria
 

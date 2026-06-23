@@ -7,7 +7,11 @@ import io.helidon.webserver.http.HttpRouting;
 import io.helidon.webserver.http.ServerRequest;
 import io.helidon.webserver.http.ServerResponse;
 import io.helidon.webserver.websocket.WsRouting;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import org.ariake.config.AriakeConfig;
 import org.ariake.http.AriakeHttpService;
 import org.ariake.http.HttpEndpoint;
@@ -41,12 +45,12 @@ public final class HelidonAriakeServer implements AriakeServer {
 
     private static void registerHttpServices(
             final HttpRouting.Builder routing, final List<? extends AriakeHttpService> services) {
+        final HttpRoutes routes = new HttpRoutes();
         for (AriakeHttpService service : services) {
-            final HttpRoutes routes = new HttpRoutes();
             service.routes(routes);
-            for (HttpEndpoint endpoint : routes.endpoints()) {
-                registerHttpEndpoint(routing, endpoint);
-            }
+        }
+        for (HttpEndpoint endpoint : routes.endpoints()) {
+            registerHttpEndpoint(routing, routes, endpoint);
         }
     }
 
@@ -60,16 +64,23 @@ public final class HelidonAriakeServer implements AriakeServer {
         return routing;
     }
 
-    private static void registerHttpEndpoint(final HttpRouting.Builder routing, final HttpEndpoint endpoint) {
+    private static void registerHttpEndpoint(
+            final HttpRouting.Builder routing, final HttpRoutes routes, final HttpEndpoint endpoint) {
         switch (endpoint.method()) {
-            case GET -> routing.get(endpoint.path(), (request, response) -> handle(endpoint, request, response));
-            case POST -> routing.post(endpoint.path(), (request, response) -> handle(endpoint, request, response));
-            case PUT -> routing.put(endpoint.path(), (request, response) -> handle(endpoint, request, response));
-            case DELETE -> routing.delete(endpoint.path(), (request, response) -> handle(endpoint, request, response));
-            case PATCH -> routing.patch(endpoint.path(), (request, response) -> handle(endpoint, request, response));
+            case GET ->
+                routing.get(endpoint.path(), (request, response) -> handle(routes, endpoint, request, response));
+            case POST ->
+                routing.post(endpoint.path(), (request, response) -> handle(routes, endpoint, request, response));
+            case PUT ->
+                routing.put(endpoint.path(), (request, response) -> handle(routes, endpoint, request, response));
+            case DELETE ->
+                routing.delete(endpoint.path(), (request, response) -> handle(routes, endpoint, request, response));
+            case PATCH ->
+                routing.patch(endpoint.path(), (request, response) -> handle(routes, endpoint, request, response));
             case OPTIONS ->
-                routing.options(endpoint.path(), (request, response) -> handle(endpoint, request, response));
-            case HEAD -> routing.head(endpoint.path(), (request, response) -> handle(endpoint, request, response));
+                routing.options(endpoint.path(), (request, response) -> handle(routes, endpoint, request, response));
+            case HEAD ->
+                routing.head(endpoint.path(), (request, response) -> handle(routes, endpoint, request, response));
         }
     }
 
@@ -86,13 +97,16 @@ public final class HelidonAriakeServer implements AriakeServer {
     }
 
     private static void handle(
-            final HttpEndpoint endpoint, final ServerRequest request, final ServerResponse response) {
+            final HttpRoutes routes,
+            final HttpEndpoint endpoint,
+            final ServerRequest request,
+            final ServerResponse response) {
         if (!request.prologue().method().equals(helidonMethod(endpoint.method()))) {
             response.status(Status.METHOD_NOT_ALLOWED_405).send();
             return;
         }
         try {
-            endpoint.handler().handle(new HelidonHttpExchange(request, response));
+            routes.handle(new HelidonHttpExchange(endpoint.method(), request, response), endpoint.handler());
         } catch (Exception e) {
             if (!response.isSent()) {
                 response.status(Status.INTERNAL_SERVER_ERROR_500).send("Internal Server Error");
@@ -122,10 +136,28 @@ public final class HelidonAriakeServer implements AriakeServer {
         return webServer.isRunning();
     }
 
-    private record HelidonHttpExchange(ServerRequest request, ServerResponse response) implements HttpExchange {
+    private record HelidonHttpExchange(HttpMethod method, ServerRequest request, ServerResponse response)
+            implements HttpExchange {
+        @Override
+        public HttpMethod method() {
+            return method;
+        }
+
         @Override
         public String path() {
             return request.path().path();
+        }
+
+        @Override
+        public String requestUri() {
+            final String path = request.prologue().uriPath().rawPath();
+            final String query = request.prologue().query().rawValue();
+            return query.isEmpty() ? path : path + "?" + query;
+        }
+
+        @Override
+        public Optional<String> requestHeader(final String name) {
+            return request.headers().first(io.helidon.http.HeaderNames.create(name));
         }
 
         @Override
@@ -144,6 +176,11 @@ public final class HelidonAriakeServer implements AriakeServer {
         }
 
         @Override
+        public void dateHeader(final String name, final Instant value) {
+            response.header(name, DateTimeFormatter.RFC_1123_DATE_TIME.format(value.atZone(ZoneOffset.UTC)));
+        }
+
+        @Override
         public void send() {
             response.send();
         }
@@ -157,6 +194,16 @@ public final class HelidonAriakeServer implements AriakeServer {
         public void send(final byte[] body, final String contentType) {
             response.header("Content-Type", contentType);
             response.send(body);
+        }
+
+        @Override
+        public void sendError(final int status, final String message) {
+            response.status(status).send(message);
+        }
+
+        @Override
+        public boolean isSent() {
+            return response.isSent();
         }
     }
 }
