@@ -1,6 +1,6 @@
 meta:
   project: ariake
-  last_updated: 2026-06-23
+  last_updated: 2026-06-24
   required_full_gates:
     - tools/check.sh
   statuses:
@@ -299,6 +299,36 @@ tasks:
       hash: not_required
       message: not_required
 
+  - id: T11
+    title: Split Bazel packages by Java source directory
+    status: completed
+    priority: high
+    depends_on:
+      - T10
+    acceptance_criteria:
+      - Every Java source directory has a local `BUILD.bazel`.
+      - Source-bearing Bazel targets list only local Java filenames.
+      - Parent BUILD files aggregate child labels without listing nested source paths.
+      - "`tools/check.sh` passes."
+    files_touched:
+      - AGENTS.md
+      - src/main/java/org/ariake/**
+      - src/test/java/org/ariake/**
+      - examples/hello/**
+      - plans/ariake-framework/**
+    evidence:
+      - command: rg -n "glob\\(" . --glob 'BUILD.bazel' --glob '*.bzl'
+        result: "pass: no glob usage in Bazel files"
+      - command: rg -n '"[^"]*/.*\\.java"' src examples --glob 'BUILD.bazel'
+        result: "pass: no BUILD source list references Java files in another directory"
+      - command: find src/main/java src/test/java examples/hello/src/main/java -name '*.java' -exec dirname '{}' ';' | sort -u
+        result: "pass: every listed Java source directory has a local BUILD.bazel"
+      - command: tools/check.sh
+        result: "pass: dependency generation verification, Buildifier check, Palantir Java Format check, build, and 6/6 tests"
+    commit:
+      hash: not_required
+      message: not_required
+
 history:
   - timestamp: 2026-06-23
     task: T01
@@ -340,3 +370,11 @@ history:
     task: T10
     commit: not_required
     note: "Removed the unused programmatic TransactionRunner API; Narayana integration now exposes only the transaction manager provider."
+  - timestamp: 2026-06-24
+    task: T11
+    commit: not_required
+    note: "Started Bazel package split so Java sources are owned by local source-directory BUILD files."
+  - timestamp: 2026-06-24
+    task: T11
+    commit: not_required
+    note: "Completed Bazel package split; structural scans and tools/check.sh passed."

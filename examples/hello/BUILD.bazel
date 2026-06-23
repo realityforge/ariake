@@ -1,36 +1,12 @@
-load("//third_party/java:rules.bzl", "java_binary", "java_library")
+load("//third_party/java:rules.bzl", "java_binary")
 
 package(default_visibility = ["//visibility:public"])
-
-java_library(
-    name = "hello_lib",
-    srcs = [
-        "src/main/java/org/ariake/examples/hello/EchoWebSocketService.java",
-        "src/main/java/org/ariake/examples/hello/HealthResponder.java",
-        "src/main/java/org/ariake/examples/hello/HealthResponderImpl.java",
-        "src/main/java/org/ariake/examples/hello/HealthService.java",
-        "src/main/java/org/ariake/examples/hello/HelloApplication.java",
-        "src/main/java/org/ariake/examples/hello/HelloFragment.java",
-        "src/main/java/org/ariake/examples/hello/Main.java",
-        "src/main/java/org/ariake/examples/hello/package-info.java",
-    ],
-    plugins = [
-        "//third_party/java:sting_processor_plugin",
-    ],
-    deps = [
-        "//src/main/java/org/ariake",
-        "//third_party/java:jakarta_transaction_api",
-        "//third_party/java:javax_annotation_api",
-        "//third_party/java:sting_core",
-        "//third_party/java:sting_server",
-    ],
-)
 
 java_binary(
     name = "server",
     main_class = "org.ariake.examples.hello.Main",
     runtime_deps = [
-        ":hello_lib",
+        "//examples/hello/src/main/java/org/ariake/examples/hello:hello_lib",
     ],
 )
 

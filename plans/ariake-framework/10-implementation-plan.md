@@ -36,6 +36,7 @@ Working implementation plan. It is intentionally concrete enough to execute imme
 - Use Sting compile-time injection for the example app and framework runtime composition.
 - Keep GraalVM support as an opt-in target/script because local `native-image` is unavailable.
 - Update planning artifacts whenever dependency versions, package boundaries, or gates change.
+- Keep Bazel package ownership local to each Java source directory; parent packages aggregate labels only.
 
 ## High-Risk Areas
 
@@ -63,6 +64,9 @@ Working implementation plan. It is intentionally concrete enough to execute imme
 - NullAway as a default Java wrapper behavior.
   - Impact: source-less aggregate Java targets cannot accept implicit deps/plugins, and unmarked packages fail compilation.
   - Mitigation: apply NullAway/JSpecify only to source-bearing targets and add `@NullMarked` package-info files to all source/test packages.
+- Cross-directory Bazel source references.
+  - Impact: parent BUILD files can silently own child-package source files, weakening package boundaries.
+  - Mitigation: place a `BUILD.bazel` in every Java source directory and keep parent targets source-less or label-only.
 
 ## Required Full Gates
 
@@ -84,6 +88,7 @@ Working implementation plan. It is intentionally concrete enough to execute imme
 - D-12: Add JSpecify as an automatic direct dependency for source-bearing Java wrapper targets so `package-info.java` markings are compatible with strict Java deps.
 - D-13: Use `org.realityforge.sting:sting-server:0.39` for transactional service-interface proxies because the published POM depends on `jakarta.transaction-api:2.0.1`.
 - D-14: Remove the low-level `TransactionRunner` API after adopting Sting server `@Transactional`; Ariake now exposes only the Narayana `TransactionManager` provider needed by Sting server interceptors.
+- D-15: Split Java BUILD ownership by source directory so source-bearing targets can only list files from their own Bazel package; parent BUILD files aggregate child labels only.
 
 ## Completion Criteria
 

@@ -1,0 +1,16 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "http",
+    srcs = [
+        "AriakeHttpService.java",
+        "HttpEndpoint.java",
+        "HttpExchange.java",
+        "HttpHandler.java",
+        "HttpMethod.java",
+        "HttpRoutes.java",
+        "package-info.java",
+    ],
+)

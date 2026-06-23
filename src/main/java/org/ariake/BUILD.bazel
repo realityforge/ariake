@@ -3,143 +3,17 @@ load("//third_party/java:rules.bzl", "java_library")
 package(default_visibility = ["//visibility:public"])
 
 java_library(
-    name = "config",
-    srcs = [
-        "config/AriakeConfig.java",
-        "config/package-info.java",
-    ],
-)
-
-java_library(
-    name = "http",
-    srcs = [
-        "http/AriakeHttpService.java",
-        "http/HttpEndpoint.java",
-        "http/HttpExchange.java",
-        "http/HttpHandler.java",
-        "http/HttpMethod.java",
-        "http/HttpRoutes.java",
-        "http/package-info.java",
-    ],
-)
-
-java_library(
-    name = "websocket",
-    srcs = [
-        "websocket/AriakeWebSocketService.java",
-        "websocket/WebSocketEndpoint.java",
-        "websocket/WebSocketListener.java",
-        "websocket/WebSocketRoutes.java",
-        "websocket/WebSocketSession.java",
-        "websocket/package-info.java",
-    ],
-)
-
-java_library(
-    name = "metrics_api",
-    srcs = [
-        "metrics/Counter.java",
-        "metrics/Metrics.java",
-        "metrics/MetricsHttpService.java",
-        "metrics/package-info.java",
-    ],
-    deps = [
-        ":http",
-    ],
-)
-
-java_library(
-    name = "prometheus_metrics",
-    srcs = [
-        "metrics/prometheus/PrometheusMetrics.java",
-        "metrics/prometheus/package-info.java",
-    ],
-    deps = [
-        ":metrics_api",
-        "//third_party/java:prometheus_metrics_core",
-        "//third_party/java:prometheus_metrics_exposition_textformats_api",
-        "//third_party/java:prometheus_metrics_model_api",
-    ],
-)
-
-java_library(
-    name = "server",
-    srcs = [
-        "server/AriakeServer.java",
-        "server/package-info.java",
-    ],
-)
-
-java_library(
-    name = "helidon_server",
-    srcs = [
-        "server/helidon/HelidonAriakeServer.java",
-        "server/helidon/HelidonWebSocketListener.java",
-        "server/helidon/package-info.java",
-    ],
-    deps = [
-        ":config",
-        ":http",
-        ":server",
-        ":websocket",
-        "//third_party/java:helidon_http_api",
-        "//third_party/java:helidon_service_metadata",
-        "//third_party/java:helidon_webserver",
-        "//third_party/java:helidon_webserver_http2",
-        "//third_party/java:helidon_webserver_websocket",
-        "//third_party/java:helidon_websocket_api",
-    ],
-)
-
-java_library(
-    name = "narayana_tx",
-    srcs = [
-        "tx/narayana/NarayanaTransactions.java",
-        "tx/narayana/package-info.java",
-    ],
-    deps = [
-        "//third_party/java:jakarta_transaction_api",
-        "//third_party/java:jboss_logging_api",
-        "//third_party/java:narayana_jta",
-    ],
-)
-
-java_library(
-    name = "jpa",
-    srcs = [
-        "jpa/EntityManagerProvider.java",
-        "jpa/package-info.java",
-    ],
-    deps = [
-        "//third_party/java:jakarta_persistence_api",
-    ],
-)
-
-java_library(
-    name = "eclipselink_jpa",
-    srcs = [
-        "jpa/eclipselink/EclipseLinkEntityManagerProvider.java",
-        "jpa/eclipselink/package-info.java",
-    ],
-    deps = [
-        ":jpa",
-        "//third_party/java:jakarta_persistence_api",
-        "//third_party/java:org_eclipse_persistence_jpa",
-    ],
-)
-
-java_library(
     name = "ariake",
     exports = [
-        ":config",
-        ":eclipselink_jpa",
-        ":helidon_server",
-        ":http",
-        ":jpa",
-        ":metrics_api",
-        ":narayana_tx",
-        ":prometheus_metrics",
-        ":server",
-        ":websocket",
+        "//src/main/java/org/ariake/config",
+        "//src/main/java/org/ariake/http",
+        "//src/main/java/org/ariake/jpa",
+        "//src/main/java/org/ariake/jpa/eclipselink:eclipselink_jpa",
+        "//src/main/java/org/ariake/metrics:metrics_api",
+        "//src/main/java/org/ariake/metrics/prometheus:prometheus_metrics",
+        "//src/main/java/org/ariake/server",
+        "//src/main/java/org/ariake/server/helidon:helidon_server",
+        "//src/main/java/org/ariake/tx/narayana:narayana_tx",
+        "//src/main/java/org/ariake/websocket",
     ],
 )

@@ -56,6 +56,7 @@ Create Ariake, a lightly coupled Java server-side framework for fast-starting HT
 - `tools/java_format.sh write`: format all repository Java source files with Palantir Java Format.
 - `tools/java_format.sh check`: fail if any repository Java source file is not Palantir Java Format compliant.
 - `tools/native-image.sh`: optional GraalVM native-image build hook; fails with a clear message when `native-image` is not installed.
+- Java source directories each own a local `BUILD.bazel`; source-bearing Bazel targets may list only source files from their own package directory.
 
 ## Behavior Expectations
 
@@ -81,6 +82,7 @@ Create Ariake, a lightly coupled Java server-side framework for fast-starting HT
 - NullAway warnings must fail compilation as errors.
 - Every source-bearing Java package must be explicitly `@NullMarked` or `@NullUnmarked`; Ariake code uses `@NullMarked` by default.
 - `bazel-depgen` generation must be reproducible from `third_party/java/dependencies.yml`.
+- Bazel Java source targets must not reference source files from child, sibling, or parent directories.
 - Architecture tests must enforce:
   - Public framework APIs do not import Helidon, Narayana, EclipseLink, or Prometheus implementation classes except in adapter packages.
   - Example code may depend on Ariake APIs but core framework code must not depend on example packages.

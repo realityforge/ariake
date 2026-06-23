@@ -1,0 +1,27 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "hello_lib",
+    srcs = [
+        "EchoWebSocketService.java",
+        "HealthResponder.java",
+        "HealthResponderImpl.java",
+        "HealthService.java",
+        "HelloApplication.java",
+        "HelloFragment.java",
+        "Main.java",
+        "package-info.java",
+    ],
+    plugins = [
+        "//third_party/java:sting_processor_plugin",
+    ],
+    deps = [
+        "//src/main/java/org/ariake",
+        "//third_party/java:jakarta_transaction_api",
+        "//third_party/java:javax_annotation_api",
+        "//third_party/java:sting_core",
+        "//third_party/java:sting_server",
+    ],
+)

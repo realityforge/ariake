@@ -1,0 +1,17 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test(
+    name = "narayana_tx_test",
+    srcs = [
+        "NarayanaTransactionsTest.java",
+        "package-info.java",
+    ],
+    test_class = "org.ariake.tx.narayana.NarayanaTransactionsTest",
+    deps = [
+        "//src/main/java/org/ariake/tx/narayana:narayana_tx",
+        "//third_party/java:jakarta_transaction_api",
+        "//third_party/java:junit",
+    ],
+)

@@ -1,0 +1,17 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test(
+    name = "prometheus_metrics_test",
+    srcs = [
+        "PrometheusMetricsTest.java",
+        "package-info.java",
+    ],
+    test_class = "org.ariake.metrics.prometheus.PrometheusMetricsTest",
+    deps = [
+        "//src/main/java/org/ariake/metrics:metrics_api",
+        "//src/main/java/org/ariake/metrics/prometheus:prometheus_metrics",
+        "//third_party/java:junit",
+    ],
+)

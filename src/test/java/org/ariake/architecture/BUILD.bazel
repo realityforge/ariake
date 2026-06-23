@@ -1,0 +1,17 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test(
+    name = "architecture_test",
+    srcs = [
+        "ArchitectureTest.java",
+        "package-info.java",
+    ],
+    test_class = "org.ariake.architecture.ArchitectureTest",
+    deps = [
+        "//src/main/java/org/ariake",
+        "//third_party/java:archunit_api",
+        "//third_party/java:junit",
+    ],
+)

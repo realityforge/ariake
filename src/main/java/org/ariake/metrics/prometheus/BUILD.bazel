@@ -1,0 +1,17 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "prometheus_metrics",
+    srcs = [
+        "PrometheusMetrics.java",
+        "package-info.java",
+    ],
+    deps = [
+        "//src/main/java/org/ariake/metrics:metrics_api",
+        "//third_party/java:prometheus_metrics_core",
+        "//third_party/java:prometheus_metrics_exposition_textformats_api",
+        "//third_party/java:prometheus_metrics_model_api",
+    ],
+)

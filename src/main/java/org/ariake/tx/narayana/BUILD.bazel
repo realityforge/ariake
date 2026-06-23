@@ -1,0 +1,16 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "narayana_tx",
+    srcs = [
+        "NarayanaTransactions.java",
+        "package-info.java",
+    ],
+    deps = [
+        "//third_party/java:jakarta_transaction_api",
+        "//third_party/java:jboss_logging_api",
+        "//third_party/java:narayana_jta",
+    ],
+)

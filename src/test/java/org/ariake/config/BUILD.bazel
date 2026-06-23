@@ -1,0 +1,16 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test(
+    name = "config_test",
+    srcs = [
+        "AriakeConfigTest.java",
+        "package-info.java",
+    ],
+    test_class = "org.ariake.config.AriakeConfigTest",
+    deps = [
+        "//src/main/java/org/ariake/config",
+        "//third_party/java:junit",
+    ],
+)

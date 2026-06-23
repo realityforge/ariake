@@ -162,3 +162,20 @@ Date: 2026-06-23
 
 - `rg -n "TransactionRunner|TransactionalWork|TransactionalRunnable" src examples` reports no production, example, or test references.
 - `NarayanaTransactionsTest` verifies the remaining Narayana transaction manager provider can start an active transaction.
+
+## Report 6 - Bazel Source Directory Ownership
+
+Date: 2026-06-24
+
+### Finding
+
+- Existing `src/main/java/org/ariake/BUILD.bazel`, `src/test/java/org/ariake/BUILD.bazel`, and `examples/hello/BUILD.bazel` listed Java files from nested source directories.
+- Bazel package boundaries prevent a parent package from owning files below a child directory once that child directory has its own `BUILD.bazel`.
+- The clean enforcement mechanism is therefore to add a `BUILD.bazel` to each Java source directory and leave parent packages as source-less aggregators.
+
+### Verification Evidence
+
+- `rg -n "glob\\(" . --glob 'BUILD.bazel' --glob '*.bzl'` reported no matches.
+- `rg -n '"[^"]*/.*\\.java"' src examples --glob 'BUILD.bazel'` reported no matches.
+- A source-directory scan verified every directory containing Java source under `src/main/java`, `src/test/java`, and the hello example has a local `BUILD.bazel`.
+- `tools/check.sh` passed with dependency generation verification, Buildifier check, Palantir Java Format check, `bazel build //...`, and 6/6 tests.
