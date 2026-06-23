@@ -29,7 +29,7 @@ final class PreEncodedBrotliFilter implements HttpFilter {
             return;
         }
 
-        final Path encodedFile = Path.of(file.toString() + EXTENSION);
+        final var encodedFile = Path.of(file.toString() + EXTENSION);
         if (!Files.isRegularFile(encodedFile)) {
             chain.proceed(exchange);
             return;

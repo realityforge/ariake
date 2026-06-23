@@ -23,7 +23,7 @@ public final class AriakeConfig {
     }
 
     public static AriakeConfig load(final Path path) throws IOException {
-        final Properties properties = new Properties();
+        final var properties = new Properties();
         try (InputStream input = Files.newInputStream(path)) {
             properties.load(input);
         }

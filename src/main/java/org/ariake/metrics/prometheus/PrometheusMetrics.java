@@ -36,7 +36,7 @@ public final class PrometheusMetrics implements Metrics {
 
     @Override
     public String scrape() {
-        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        final var output = new ByteArrayOutputStream();
         try {
             writer.write(output, registry.scrape());
         } catch (IOException e) {

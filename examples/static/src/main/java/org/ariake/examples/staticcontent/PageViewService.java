@@ -1,7 +1,5 @@
 package org.ariake.examples.staticcontent;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import java.time.Instant;
 import org.ariake.http.AriakeHttpService;
 import org.ariake.http.HttpRoutes;
@@ -22,8 +20,8 @@ public final class PageViewService implements AriakeHttpService {
     }
 
     void record(final String path) {
-        final EntityManager entityManager = entityManagerProvider.createEntityManager();
-        final EntityTransaction transaction = entityManager.getTransaction();
+        final var entityManager = entityManagerProvider.createEntityManager();
+        final var transaction = entityManager.getTransaction();
         try {
             transaction.begin();
             entityManager.persist(new PageView(path, Instant.now()));

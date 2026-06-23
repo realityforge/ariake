@@ -34,7 +34,7 @@ public final class HelidonAriakeServer implements AriakeServer {
             final List<? extends AriakeHttpService> httpServices,
             final List<? extends AriakeWebSocketService> webSocketServices) {
         final int port = config.getInt("ariake.server.port", 8080);
-        final WebServer server = WebServer.builder()
+        final var server = WebServer.builder()
                 .port(port)
                 .routing(routing -> registerHttpServices(routing, httpServices))
                 .addRouting(webSocketRouting(webSocketServices))
@@ -45,7 +45,7 @@ public final class HelidonAriakeServer implements AriakeServer {
 
     private static void registerHttpServices(
             final HttpRouting.Builder routing, final List<? extends AriakeHttpService> services) {
-        final HttpRoutes routes = new HttpRoutes();
+        final var routes = new HttpRoutes();
         for (AriakeHttpService service : services) {
             service.routes(routes);
         }

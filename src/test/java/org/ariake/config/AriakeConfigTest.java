@@ -11,7 +11,7 @@ import org.junit.Test;
 public final class AriakeConfigTest {
     @Test
     public void readsTypedValues() {
-        final AriakeConfig config = AriakeConfig.of(Map.of(
+        final var config = AriakeConfig.of(Map.of(
                 "name", "ariake",
                 "port", "9090",
                 "enabled", "true",
@@ -27,8 +27,7 @@ public final class AriakeConfigTest {
     public void reportsMissingRequiredValues() {
         final AriakeConfig config = AriakeConfig.empty();
 
-        final IllegalArgumentException error =
-                assertThrows(IllegalArgumentException.class, () -> config.require("missing"));
+        final var error = assertThrows(IllegalArgumentException.class, () -> config.require("missing"));
         assertEquals("Missing required config property: missing", error.getMessage());
     }
 }

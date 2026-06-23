@@ -32,7 +32,7 @@ final class StaticContentRoot {
     private static Path defaultRoot() {
         final String runfilesDir = System.getenv("RUNFILES_DIR");
         if (null != runfilesDir) {
-            final Path runfilesRoot = Path.of(runfilesDir, RUNFILES_WORKSPACE, "examples/static/content");
+            final var runfilesRoot = Path.of(runfilesDir, RUNFILES_WORKSPACE, "examples/static/content");
             if (runfilesRoot.toFile().isDirectory()) {
                 return runfilesRoot;
             }
@@ -40,7 +40,7 @@ final class StaticContentRoot {
 
         final String javaRunfiles = System.getenv("JAVA_RUNFILES");
         if (null != javaRunfiles) {
-            final Path runfilesRoot = Path.of(javaRunfiles, RUNFILES_WORKSPACE, "examples/static/content");
+            final var runfilesRoot = Path.of(javaRunfiles, RUNFILES_WORKSPACE, "examples/static/content");
             if (runfilesRoot.toFile().isDirectory()) {
                 return runfilesRoot;
             }

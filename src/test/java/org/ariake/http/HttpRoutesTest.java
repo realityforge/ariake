@@ -17,7 +17,7 @@ import org.junit.Test;
 public final class HttpRoutesTest {
     @Test
     public void registersEndpointsInOrder() {
-        final HttpRoutes routes = new HttpRoutes();
+        final var routes = new HttpRoutes();
 
         routes.get("/health", exchange -> exchange.send("OK"));
         routes.post("/items", exchange -> exchange.status(201));
@@ -33,7 +33,7 @@ public final class HttpRoutesTest {
 
     @Test
     public void returnsMatchingFiltersInOrder() {
-        final HttpRoutes routes = new HttpRoutes();
+        final var routes = new HttpRoutes();
 
         routes.filter(20, "/api/*", (exchange, chain) -> chain.proceed(exchange));
         routes.filter(10, "/api/items", (exchange, chain) -> chain.proceed(exchange));
@@ -49,7 +49,7 @@ public final class HttpRoutesTest {
 
     @Test
     public void rejectsUnsupportedFilterPatterns() {
-        final HttpRoutes routes = new HttpRoutes();
+        final var routes = new HttpRoutes();
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -61,9 +61,9 @@ public final class HttpRoutesTest {
 
     @Test
     public void dispatchesThroughMatchingFiltersAroundHandler() throws Exception {
-        final HttpRoutes routes = new HttpRoutes();
+        final var routes = new HttpRoutes();
         final ArrayList<String> events = new ArrayList<>();
-        final RecordingHttpExchange exchange = new RecordingHttpExchange(HttpMethod.GET, "/api/items");
+        final var exchange = new RecordingHttpExchange(HttpMethod.GET, "/api/items");
 
         routes.filter(20, "/api/*", (httpExchange, chain) -> {
             events.add("filter-20-before");
@@ -90,9 +90,9 @@ public final class HttpRoutesTest {
 
     @Test
     public void shortCircuitsWhenFilterSendsResponse() throws Exception {
-        final HttpRoutes routes = new HttpRoutes();
+        final var routes = new HttpRoutes();
         final ArrayList<String> events = new ArrayList<>();
-        final RecordingHttpExchange exchange = new RecordingHttpExchange(HttpMethod.GET, "/api/session");
+        final var exchange = new RecordingHttpExchange(HttpMethod.GET, "/api/session");
 
         routes.filter(0, "/api/*", (httpExchange, chain) -> {
             events.add("guard");
@@ -110,8 +110,8 @@ public final class HttpRoutesTest {
 
     @Test
     public void exchangeHelpersExposeRequestAndResponseState() throws Exception {
-        final HttpRoutes routes = new HttpRoutes();
-        final RecordingHttpExchange exchange = new RecordingHttpExchange(HttpMethod.POST, "/rose/react.js");
+        final var routes = new HttpRoutes();
+        final var exchange = new RecordingHttpExchange(HttpMethod.POST, "/rose/react.js");
         exchange.requestHeader("Accept-Encoding", "gzip, br");
 
         routes.filter(0, "/rose/*", (httpExchange, chain) -> {
