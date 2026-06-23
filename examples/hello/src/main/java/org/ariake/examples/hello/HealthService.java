@@ -14,8 +14,6 @@ public final class HealthService implements AriakeHttpService {
 
     @Override
     public void routes(final HttpRoutes routes) {
-        routes.get("/health", exchange -> {
-            exchange.send(responder.health());
-        });
+        routes.get("/health", exchange -> exchange.send( responder.health()) );
     }
 }
