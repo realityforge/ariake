@@ -1,0 +1,69 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+java_test(
+    name = "config_test",
+    srcs = [
+        "config/AriakeConfigTest.java",
+        "config/package-info.java",
+    ],
+    test_class = "org.ariake.config.AriakeConfigTest",
+    deps = [
+        "//src/main/java/org/ariake:config",
+        "//third_party/java:junit",
+    ],
+)
+
+java_test(
+    name = "http_test",
+    srcs = [
+        "http/HttpRoutesTest.java",
+        "http/package-info.java",
+    ],
+    test_class = "org.ariake.http.HttpRoutesTest",
+    deps = [
+        "//src/main/java/org/ariake:http",
+        "//third_party/java:junit",
+    ],
+)
+
+java_test(
+    name = "prometheus_metrics_test",
+    srcs = [
+        "metrics/prometheus/PrometheusMetricsTest.java",
+        "metrics/prometheus/package-info.java",
+    ],
+    test_class = "org.ariake.metrics.prometheus.PrometheusMetricsTest",
+    deps = [
+        "//src/main/java/org/ariake:metrics_api",
+        "//src/main/java/org/ariake:prometheus_metrics",
+        "//third_party/java:junit",
+    ],
+)
+
+java_test(
+    name = "narayana_tx_test",
+    srcs = [
+        "tx/narayana/NarayanaTransactionsTest.java",
+        "tx/narayana/package-info.java",
+    ],
+    test_class = "org.ariake.tx.narayana.NarayanaTransactionsTest",
+    deps = [
+        "//src/main/java/org/ariake:narayana_tx",
+        "//third_party/java:jakarta_transaction_api",
+        "//third_party/java:junit",
+    ],
+)
+
+java_test(
+    name = "architecture_test",
+    srcs = [
+        "architecture/ArchitectureTest.java",
+        "architecture/package-info.java",
+    ],
+    test_class = "org.ariake.architecture.ArchitectureTest",
+    deps = [
+        "//src/main/java/org/ariake",
+        "//third_party/java:archunit_api",
+        "//third_party/java:junit",
+    ],
+)
