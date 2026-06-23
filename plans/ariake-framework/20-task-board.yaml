@@ -1,0 +1,342 @@
+meta:
+  project: ariake
+  last_updated: 2026-06-23
+  required_full_gates:
+    - tools/check.sh
+  statuses:
+    - pending
+    - in_progress
+    - completed
+    - cancelled
+
+current_focus: complete
+
+tasks:
+  - id: T01
+    title: Planning and source-backed research
+    status: completed
+    priority: high
+    depends_on: []
+    acceptance_criteria:
+      - Requirements, implementation plan, task board, and research report exist.
+      - Current versions are backed by upstream metadata or local command output.
+    files_touched:
+      - plans/ariake-framework/**
+    evidence:
+      - command: bazel --version
+        result: "pass: bazel 9.1.1"
+      - command: curl Maven metadata for Helidon, Sting, Narayana, Prometheus, EclipseLink, bazel-depgen
+        result: "pass: metadata returned current versions"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T02
+    title: Bazel and bazel-depgen scaffold
+    status: completed
+    priority: high
+    depends_on:
+      - T01
+    acceptance_criteria:
+      - Bazel 9.1.1 is pinned.
+      - Bazel Java defaults use the newest verified remote JDK available from current `rules_java`.
+      - "`third_party/java/dependencies.yml` contains requested framework dependencies."
+      - "`tools/update_java_deps.sh` can generate dependency BUILD/repository rules."
+      - Root build files expose strict Java wrappers and quality targets.
+    files_touched:
+      - .bazelversion
+      - .bazelrc
+      - MODULE.bazel
+      - BUILD.bazel
+      - third_party/java/**
+      - tools/update_java_deps.sh
+    evidence:
+      - command: bazel --version
+        result: "pass: bazel 9.1.1"
+      - command: bazel query '@rules_java//toolchains:all'
+        result: "pass: rules_java 9.6.1 exposes remotejdk_25; no remotejdk_26 target"
+      - command: tools/update_java_deps.sh
+        result: "pass: generated MODULE.bazel repository rules and third_party/java/BUILD.bazel targets"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T03
+    title: Framework core modules
+    status: completed
+    priority: high
+    depends_on:
+      - T02
+    acceptance_criteria:
+      - Public Ariake APIs compile without leaking runtime adapter dependencies.
+      - Config, HTTP, WebSocket, metrics, transaction manager integration, JPA, and server runtime packages exist.
+      - Narayana and EclipseLink code is isolated behind framework-owned interfaces.
+    files_touched:
+      - src/main/java/org/ariake/**
+      - src/test/java/org/ariake/**
+    evidence:
+      - command: bazel build //...
+        result: "pass: included Ariake config, HTTP, WebSocket, metrics, server, transaction, and JPA modules"
+      - command: bazel test //src/test/java/org/ariake:architecture_test
+        result: "pass: architecture tests enforce public API and adapter boundaries"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T04
+    title: Sting-injected example app
+    status: completed
+    priority: high
+    depends_on:
+      - T03
+    acceptance_criteria:
+      - Example injector compiles through Sting.
+      - Example server exposes health, metrics, and WebSocket echo services.
+      - Example configuration is loaded from properties.
+    files_touched:
+      - examples/hello/**
+    evidence:
+      - command: bazel build //examples/hello:server
+        result: "pass: Sting generated HelloApplication injector and example server binary"
+      - command: curl -i http://127.0.0.1:<dynamic-port>/health
+        result: "pass: HTTP 200 with body OK"
+      - command: curl http://127.0.0.1:<dynamic-port>/metrics
+        result: "pass: Prometheus text exposition included ariake_health_requests_total"
+      - command: JShell java.net.http.WebSocket smoke against ws://127.0.0.1:<dynamic-port>/ws/echo
+        result: "pass: echo returned ariake"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T05
+    title: Quality and architecture checks
+    status: completed
+    priority: high
+    depends_on:
+      - T04
+    acceptance_criteria:
+      - Unit tests cover config parsing, transaction manager provider behavior, metrics exposition, and route registration.
+      - Architecture tests enforce package boundaries.
+      - "`tools/check.sh` runs dependency generation verification, formatting, build, and tests."
+    files_touched:
+      - src/test/java/org/ariake/**
+      - tools/check.sh
+      - BUILD.bazel
+    evidence:
+      - command: tools/check.sh
+        result: "pass: buildifier check, Palantir Java Format check, bazel build //..., and 6/6 Bazel tests"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T06
+    title: Final verification and report
+    status: completed
+    priority: high
+    depends_on:
+      - T05
+    acceptance_criteria:
+      - Full gate evidence is recorded.
+      - Final implementation report documents what was built and residual risks.
+      - Task board history is complete.
+    files_touched:
+      - plans/ariake-framework/**
+    evidence:
+      - command: tools/check.sh
+        result: "pass: full quality gate passed on 2026-06-23"
+      - command: tools/native-image.sh
+        result: "expected exit 2: native-image is not installed; optional hook reports clear remediation"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T07
+    title: Palantir Java Format automation
+    status: completed
+    priority: high
+    depends_on:
+      - T05
+    acceptance_criteria:
+      - "`com.palantir.javaformat:palantir-java-format` is dependency-managed by bazel-depgen."
+      - A Bazel formatter binary runs Palantir style with required JDK module exports.
+      - "`tools/java_format.sh write` formats all repository Java source files."
+      - "`tools/java_format.sh check` fails on formatting drift."
+      - "`tools/check.sh` runs the formatter check automatically."
+    files_touched:
+      - third_party/java/dependencies.yml
+      - MODULE.bazel
+      - third_party/java/BUILD.bazel
+      - tools/java-format/BUILD.bazel
+      - tools/java_format.sh
+      - tools/check.sh
+      - plans/ariake-framework/**
+    evidence:
+      - command: curl https://repo.maven.apache.org/maven2/com/palantir/javaformat/palantir-java-format/maven-metadata.xml
+        result: "pass: latest/release is 2.93.0"
+      - command: tools/update_java_deps.sh
+        result: "pass: generated Palantir formatter and transitive dependency targets"
+      - command: bazel run //tools/java-format:palantir_java_format -- --help
+        result: "pass: Palantir Java Format CLI reports version 2.93.0 and supports --replace, --dry-run, --set-exit-if-changed"
+      - command: tools/java_format.sh write
+        result: "pass: formatter completed with Palantir style"
+      - command: tools/java_format.sh check
+        result: "pass: no formatting drift"
+      - command: tools/check.sh
+        result: "pass: full gate includes Palantir Java Format check"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T08
+    title: NullAway nullness enforcement
+    status: completed
+    priority: high
+    depends_on:
+      - T05
+    acceptance_criteria:
+      - "`com.uber.nullaway:nullaway` is dependency-managed by bazel-depgen."
+      - "`org.jspecify:jspecify` is available as the nullness annotation dependency."
+      - NullAway findings are promoted to compile errors.
+      - "`RequireExplicitNullMarking` findings are promoted to compile errors."
+      - "Source-bearing Java packages are explicitly `@NullMarked`."
+      - Nullable/null-bearing APIs must use explicit nullable marking rather than non-null call sites being annotated.
+      - "`tools/check.sh` passes with NullAway enabled."
+    files_touched:
+      - third_party/java/dependencies.yml
+      - MODULE.bazel
+      - third_party/java/BUILD.bazel
+      - third_party/java/rules.bzl
+      - src/main/java/org/ariake/**
+      - src/test/java/org/ariake/**
+      - examples/hello/src/main/java/org/ariake/examples/hello/**
+      - plans/ariake-framework/**
+    evidence:
+      - command: curl https://repo.maven.apache.org/maven2/com/uber/nullaway/nullaway/maven-metadata.xml
+        result: "pass: latest/release is 0.13.7"
+      - command: curl https://repo.maven.apache.org/maven2/org/jspecify/jspecify/maven-metadata.xml
+        result: "pass: latest/release is 1.0.0"
+      - command: bazel build //src/main/java/org/ariake:config
+        result: "expected fail before package markers: RequireExplicitNullMarking rejected unmarked AriakeConfig"
+      - command: bazel build //...
+        result: "pass: NullAway and RequireExplicitNullMarking compile gate passed"
+      - command: bazel test //...
+        result: "pass: 6/6 tests passed"
+      - command: tools/check.sh
+        result: "pass: dependency generation, Buildifier, Palantir Java Format, NullAway-enabled build, and 6/6 tests"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T09
+    title: Sting 0.39 server transaction interceptors
+    status: completed
+    priority: high
+    depends_on:
+      - T08
+    acceptance_criteria:
+      - Sting core and processor are upgraded to 0.39.
+      - "`org.realityforge.sting:sting-server:0.39` is dependency-managed by bazel-depgen."
+      - The published server module is verified to depend on `jakarta.transaction-api`.
+      - The example app uses a Sting transactional service-interface boundary.
+      - Narayana supplies the `jakarta.transaction.TransactionManager` required by Sting server interceptors.
+      - "`tools/check.sh` passes."
+      - Runtime smoke verifies the transactional example path still serves HTTP metrics.
+    files_touched:
+      - third_party/java/dependencies.yml
+      - MODULE.bazel
+      - third_party/java/BUILD.bazel
+      - examples/hello/**
+      - plans/ariake-framework/**
+    evidence:
+      - command: curl https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-core/maven-metadata.xml
+        result: "pass: latest/release is 0.39"
+      - command: curl https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-server/maven-metadata.xml
+        result: "pass: sting-server 0.39 is published"
+      - command: curl https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-server/0.39/sting-server-0.39.pom
+        result: "pass: sting-server depends on jakarta.transaction-api 2.0.1"
+      - command: tools/update_java_deps.sh
+        result: "pass: generated Sting 0.39 core, processor, and server targets"
+      - command: bazel build //examples/hello:server
+        result: "pass: Sting generated injector and transaction proxy with sting-server 0.39"
+      - command: tools/check.sh
+        result: "pass: dependency generation, Buildifier, Palantir Java Format, NullAway-enabled build, and 6/6 tests"
+      - command: curl -i http://127.0.0.1:63779/health
+        result: "pass: HTTP 200 OK; transactional responder verified active JTA transaction"
+      - command: curl http://127.0.0.1:63779/metrics
+        result: "pass: ariake_health_requests_total incremented to 1.0"
+    commit:
+      hash: not_required
+      message: not_required
+
+  - id: T10
+    title: Remove programmatic TransactionRunner API
+    status: completed
+    priority: high
+    depends_on:
+      - T09
+    acceptance_criteria:
+      - Public `TransactionRunner`, `TransactionalWork`, and `TransactionalRunnable` APIs are removed.
+      - Narayana integration exposes only the transaction manager provider required by Sting server interceptors.
+      - The example app uses the narrowed Narayana provider.
+      - Tests cover the remaining Narayana transaction manager provider.
+      - "`tools/check.sh` passes."
+    files_touched:
+      - src/main/java/org/ariake/tx/**
+      - src/main/java/org/ariake/BUILD.bazel
+      - src/test/java/org/ariake/**
+      - examples/hello/src/main/java/org/ariake/examples/hello/HelloFragment.java
+      - plans/ariake-framework/**
+    evidence:
+      - command: rg -n "TransactionRunner|TransactionalWork|TransactionalRunnable" src examples
+        result: "pass: no production, example, or test references remain"
+      - command: bazel build //src/main/java/org/ariake:narayana_tx //examples/hello:server
+        result: "pass: narrowed Narayana provider and transactional example compile"
+      - command: bazel test //src/test/java/org/ariake:narayana_tx_test
+        result: "pass: NarayanaTransactionsTest verifies active transaction manager"
+      - command: tools/check.sh
+        result: "pass: dependency generation, Buildifier, Palantir Java Format, NullAway-enabled build, and 6/6 tests"
+    commit:
+      hash: not_required
+      message: not_required
+
+history:
+  - timestamp: 2026-06-23
+    task: T01
+    commit: not_required
+    note: "Planning artifacts created with source-backed dependency and tooling decisions."
+  - timestamp: 2026-06-23
+    task: T02
+    commit: not_required
+    note: "Bazel 9.1.1, Bazel Java toolchain defaults, strict wrappers, and bazel-depgen generation are in place."
+  - timestamp: 2026-06-23
+    task: T03
+    commit: not_required
+    note: "Framework-owned APIs and isolated adapters compile and pass architecture checks."
+  - timestamp: 2026-06-23
+    task: T04
+    commit: not_required
+    note: "Sting-injected example server builds and runtime smoke checks covered health, metrics, and WebSocket echo."
+  - timestamp: 2026-06-23
+    task: T05
+    commit: not_required
+    note: "Quality gate covers dependency generation, Buildifier, Palantir Java Format, build, tests, and architecture checks."
+  - timestamp: 2026-06-23
+    task: T06
+    commit: not_required
+    note: "Final report and verification evidence were recorded; optional native-image hook reports missing local GraalVM tooling."
+  - timestamp: 2026-06-23
+    task: T07
+    commit: not_required
+    note: "Palantir Java Format 2.93.0 is dependency-managed, runnable in write/check modes, and enforced by tools/check.sh."
+  - timestamp: 2026-06-23
+    task: T08
+    commit: not_required
+    note: "NullAway 0.13.7 and JSpecify 1.0.0 were added; tools/check.sh passed with NullAway enabled."
+  - timestamp: 2026-06-23
+    task: T09
+    commit: not_required
+    note: "Sting 0.39 server module works with Jakarta transactions; example health path uses a transactional Sting service-interface proxy."
+  - timestamp: 2026-06-23
+    task: T10
+    commit: not_required
+    note: "Removed the unused programmatic TransactionRunner API; Narayana integration now exposes only the transaction manager provider."
