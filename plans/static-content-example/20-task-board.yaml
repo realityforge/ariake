@@ -1,5 +1,5 @@
 initiative: static-content-example
-status: review_requested_implementation_in_progress
+status: completed
 required_full_gate: tools/check.sh
 tasks:
   - id: PLAN-01
@@ -37,8 +37,8 @@ tasks:
       - command: curl -H 'Accept-Encoding: br' http://127.0.0.1:8081/static/app.cache.js
         result: returned 200 OK with Content-Encoding: br and immutable cache headers
     commit:
-      hash: pending
-      message: pending
+      hash: 5f96715
+      message: "feat(example): add static content server"
   - id: JPA-01
     title: Add persisted JPA entity backed by H2
     status: completed
@@ -60,8 +60,8 @@ tasks:
       - command: bazel build //examples/static:server
         result: passed after adding H2 2.4.240 and EclipseLink persistence resources
     commit:
-      hash: pending
-      message: pending
+      hash: 5f96715
+      message: "feat(example): add static content server"
   - id: VERIFY-01
     title: Run required quality gate
     status: completed
@@ -77,8 +77,8 @@ tasks:
       - command: tools/check.sh
         result: passed; buildifier check, Java format check, bazel build //..., and bazel test //... completed successfully
     commit:
-      hash: pending
-      message: pending
+      hash: 5f96715
+      message: "feat(example): add static content server"
 history:
   - task: PLAN-01
     note: Plan review was requested in assistant commentary before implementation proceeded.
