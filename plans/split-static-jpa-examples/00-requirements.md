@@ -17,23 +17,22 @@ Add integration coverage that starts compiled example jars as external Java proc
 - Add a new `examples/jpa` app with its own Java source directory and `BUILD.bazel`.
 - Preserve explicit Bazel source lists; do not use `glob()`.
 - Preserve every Java source directory owning its own `BUILD.bazel`.
-- Keep the integration test under `src/test/java` and run it through `tools/check.sh`.
+- Keep each integration test under the example it validates and run both through `tools/check.sh`.
 
 ## Locked Decisions
 
 - Static example keeps `/static` endpoints and Brotli/cache behavior.
 - JPA example uses package `org.ariake.examples.jpa` and exposes `/page-views`.
 - JPA example continues to use H2 and `EclipseLinkEntityManagerProvider`.
-- Integration tests launch Bazel deploy jars with `java -jar`.
+- Each example integration test launches its own Bazel deploy jar with `java -jar`.
 - Integration tests use `ariake.server.port=0` and parse the actual port from stdout.
 
 ## Behavior Expectations
 
 - `//examples/static:server` serves static content without recording page views.
 - `//examples/jpa:server` persists `PageView` entities independently of static content.
-- The integration test verifies:
-  - static no-cache and cache/Brotli headers from the static jar;
-  - JPA count and create behavior from the JPA jar.
+- The static integration test verifies no-cache and cache/Brotli headers from the static jar.
+- The JPA integration test verifies count and create behavior from the JPA jar.
 
 ## Quality Gates
 

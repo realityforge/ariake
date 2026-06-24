@@ -1,7 +1,6 @@
-package org.ariake.examples;
+package org.ariake.examples.jpa;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
@@ -22,59 +21,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 
-public final class ExamplesIntegrationTest {
+public final class JpaIntegrationTest {
     private static final Duration STARTUP_TIMEOUT = Duration.ofSeconds(20);
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
     @Test
-    public void staticDeployJarServesConfiguredDirectory() throws IOException, InterruptedException {
-        final var tempDir = Files.createTempDirectory("ariake-static-example-test");
-        try {
-            final var staticRoot = tempDir.resolve("content");
-            Files.createDirectories(staticRoot);
-            Files.writeString(staticRoot.resolve("index.nocache.html"), "<!doctype html><p>static</p>");
-            Files.writeString(staticRoot.resolve("app.cache.js"), "globalThis.staticLoaded = true;");
-            Files.write(staticRoot.resolve("app.cache.js.br"), "encoded-js".getBytes(StandardCharsets.UTF_8));
-
-            final var config = tempDir.resolve("application.properties");
-            Files.writeString(
-                    config,
-                    "ariake.server.port=0\n"
-                            + "ariake.server.shutdownHook=false\n"
-                            + "static.example.staticRoot="
-                            + staticRoot
-                            + "\n");
-
-            try (var server = ServerProcess.start(runfile("examples/static/server_deploy.jar"), config)) {
-                final var index = get(server.uri("/static/index.nocache.html"));
-                assertEquals(200, index.statusCode());
-                assertEquals(
-                        "no-cache, must-revalidate, pre-check=0, post-check=0",
-                        index.headers().firstValue("Cache-Control").orElseThrow());
-
-                final var cached = get(server.uri("/static/app.cache.js"));
-                assertEquals(200, cached.statusCode());
-                assertEquals(
-                        "max-age=31536000, public, immutable",
-                        cached.headers().firstValue("Cache-Control").orElseThrow());
-                assertFalse(cached.headers().firstValue("Content-Encoding").isPresent());
-
-                final var brotli = get(server.uri("/static/app.cache.js"), "Accept-Encoding", "br");
-                assertEquals(200, brotli.statusCode());
-                assertEquals(
-                        "br", brotli.headers().firstValue("Content-Encoding").orElseThrow());
-                assertEquals("encoded-js", brotli.body());
-
-                final var jpaEndpoint = get(server.uri("/page-views"));
-                assertEquals(404, jpaEndpoint.statusCode());
-            }
-        } finally {
-            deleteDirectory(tempDir);
-        }
-    }
-
-    @Test
-    public void jpaDeployJarPersistsPageViews() throws IOException, InterruptedException {
+    public void deployJarPersistsPageViews() throws IOException, InterruptedException {
         final var tempDir = Files.createTempDirectory("ariake-jpa-example-test");
         try {
             final var config = tempDir.resolve("application.properties");
@@ -103,15 +55,6 @@ public final class ExamplesIntegrationTest {
 
     private static HttpResponse<String> get(final URI uri) throws IOException, InterruptedException {
         final var request = HttpRequest.newBuilder(uri).GET().build();
-        return HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
-    }
-
-    private static HttpResponse<String> get(final URI uri, final String headerName, final String headerValue)
-            throws IOException, InterruptedException {
-        final var request = HttpRequest.newBuilder(uri)
-                .header(headerName, headerValue)
-                .GET()
-                .build();
         return HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
     }
 

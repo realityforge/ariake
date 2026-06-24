@@ -1,0 +1,18 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test(
+    name = "jpa_integration_test",
+    srcs = [
+        "JpaIntegrationTest.java",
+        "package-info.java",
+    ],
+    data = [
+        "//examples/jpa:server_deploy.jar",
+    ],
+    test_class = "org.ariake.examples.jpa.JpaIntegrationTest",
+    deps = [
+        "//third_party/java:junit",
+    ],
+)

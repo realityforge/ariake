@@ -44,11 +44,15 @@ tasks:
       - SPLIT-01
     acceptance_criteria:
       - Test launches compiled deploy jars with `java -jar`.
-      - Test verifies static and JPA behavior over HTTP.
+      - Static and JPA tests are independently runnable from their example hierarchies.
+      - Tests verify static and JPA behavior over HTTP.
     files:
-      - src/test/java/org/ariake/examples/**
+      - examples/static/src/test/java/org/ariake/examples/staticcontent/**
+      - examples/jpa/src/test/java/org/ariake/examples/jpa/**
     evidence:
-      - command: bazel test //src/test/java/org/ariake/examples:examples_integration_test --test_output=errors
+      - command: bazel test //examples/static/src/test/java/org/ariake/examples/staticcontent:static_integration_test --test_output=errors
+        result: passed
+      - command: bazel test //examples/jpa/src/test/java/org/ariake/examples/jpa:jpa_integration_test --test_output=errors
         result: passed
     commit:
       hash: 2de1fbb

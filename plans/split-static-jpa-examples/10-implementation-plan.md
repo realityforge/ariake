@@ -7,7 +7,7 @@ Status: review requested; implementation proceeding.
 1. Record the split requirements and task board.
 2. Remove JPA concerns from `examples/static`.
 3. Add `examples/jpa` with its own entity, service, application bootstrap, resources, and binary.
-4. Add jar-launch integration tests for both examples.
+4. Add jar-launch integration tests under each example.
 5. Run targeted checks and the required `tools/check.sh` gate.
 
 ## Delivery Approach
@@ -15,7 +15,7 @@ Status: review requested; implementation proceeding.
 - Move behavior by copying JPA-specific code into a new package, then deleting JPA wiring from static.
 - Keep static content files and Brotli build actions in `examples/static/content`.
 - Use temporary directories in integration tests for static roots, JPA DB files, and config files.
-- Use deploy jars in test `data` and resolve them from Bazel runfiles.
+- Use each example's deploy jar in that example test's `data` and resolve it from Bazel runfiles.
 
 ## High-Risk Areas
 

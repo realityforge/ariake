@@ -3,16 +3,15 @@ load("//third_party/java:rules.bzl", "java_test")
 package(default_visibility = ["//visibility:public"])
 
 java_test(
-    name = "examples_integration_test",
+    name = "static_integration_test",
     srcs = [
-        "ExamplesIntegrationTest.java",
+        "StaticContentIntegrationTest.java",
         "package-info.java",
     ],
     data = [
-        "//examples/jpa:server_deploy.jar",
         "//examples/static:server_deploy.jar",
     ],
-    test_class = "org.ariake.examples.ExamplesIntegrationTest",
+    test_class = "org.ariake.examples.staticcontent.StaticContentIntegrationTest",
     deps = [
         "//third_party/java:junit",
     ],

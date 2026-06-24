@@ -3,9 +3,10 @@ package(default_visibility = ["//visibility:public"])
 test_suite(
     name = "all_tests",
     tests = [
+        "//examples/jpa/src/test/java/org/ariake/examples/jpa:jpa_integration_test",
+        "//examples/static/src/test/java/org/ariake/examples/staticcontent:static_integration_test",
         "//src/test/java/org/ariake/architecture:architecture_test",
         "//src/test/java/org/ariake/config:config_test",
-        "//src/test/java/org/ariake/examples:examples_integration_test",
         "//src/test/java/org/ariake/http:http_test",
         "//src/test/java/org/ariake/metrics/prometheus:prometheus_metrics_test",
         "//src/test/java/org/ariake/tx/narayana:narayana_tx_test",
