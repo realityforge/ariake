@@ -9,7 +9,6 @@ test_suite(
         "//examples/websocket/src/test/java/org/ariake/examples/websocket:websocket_integration_test",
         "//src/test/java/org/ariake/architecture:architecture_test",
         "//src/test/java/org/ariake/config:config_test",
-        "//src/test/java/org/ariake/http:http_test",
         "//src/test/java/org/ariake/metrics/prometheus:prometheus_metrics_test",
         "//src/test/java/org/ariake/tx/narayana:narayana_tx_test",
     ],

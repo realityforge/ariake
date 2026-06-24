@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import org.ariake.config.AriakeConfig;
-import org.ariake.http.AriakeHttpService;
 import org.ariake.metrics.Metrics;
 import org.ariake.metrics.MetricsHttpService;
 import org.ariake.metrics.prometheus.PrometheusMetrics;
 import org.ariake.server.AriakeServer;
-import org.ariake.server.helidon.HelidonAriakeServer;
-import org.ariake.websocket.AriakeWebSocketService;
+import org.ariake.server.HttpRoutingService;
 import sting.Fragment;
 
 @Fragment
@@ -33,9 +31,6 @@ public interface HealthFragment {
 
     default AriakeServer server(
             final AriakeConfig config, final HealthService healthService, final MetricsHttpService metricsHttpService) {
-        return HelidonAriakeServer.create(
-                config,
-                List.<AriakeHttpService>of(healthService, metricsHttpService),
-                List.<AriakeWebSocketService>of());
+        return AriakeServer.create(config, List.<HttpRoutingService>of(healthService, metricsHttpService));
     }
 }

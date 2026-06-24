@@ -1,13 +1,14 @@
 package org.ariake.examples.websocket;
 
+import io.helidon.webserver.http.HttpRouting;
+import io.helidon.webserver.http.ServerRequest;
+import io.helidon.webserver.http.ServerResponse;
 import java.nio.charset.StandardCharsets;
-import org.ariake.http.AriakeHttpService;
-import org.ariake.http.HttpExchange;
-import org.ariake.http.HttpRoutes;
+import org.ariake.server.HttpRoutingService;
 import sting.Injectable;
 
 @Injectable
-public final class WebSocketPageService implements AriakeHttpService {
+public final class WebSocketPageService implements HttpRoutingService {
     private static final String CONTENT_TYPE = "text/html; charset=utf-8";
     private static final String INDEX_HTML = """
         <!doctype html>
@@ -58,12 +59,13 @@ public final class WebSocketPageService implements AriakeHttpService {
         """;
 
     @Override
-    public void routes(final HttpRoutes routes) {
-        routes.get("/", this::serveIndex);
-        routes.get("/index.html", this::serveIndex);
+    public void routing(final HttpRouting.Builder routing) {
+        routing.get("/", this::serveIndex);
+        routing.get("/index.html", this::serveIndex);
     }
 
-    private void serveIndex(final HttpExchange exchange) {
-        exchange.send(INDEX_HTML.getBytes(StandardCharsets.UTF_8), CONTENT_TYPE);
+    private void serveIndex(final ServerRequest request, final ServerResponse response) {
+        response.header("Content-Type", CONTENT_TYPE);
+        response.send(INDEX_HTML.getBytes(StandardCharsets.UTF_8));
     }
 }

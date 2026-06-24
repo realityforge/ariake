@@ -14,11 +14,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import org.ariake.server.helidon.HelidonRoutingService;
+import org.ariake.server.HttpRoutingService;
 import sting.Injectable;
 
 @Injectable
-final class StaticContentRoutes implements HelidonRoutingService {
+final class StaticContentRoutes implements HttpRoutingService {
     private static final String STATIC_CONTEXT = "/static";
     private static final String BROTLI_EXTENSION = ".br";
     private static final String BROTLI_ENCODING = "br";

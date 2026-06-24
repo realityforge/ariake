@@ -7,12 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.ariake.config.AriakeConfig;
-import org.ariake.http.AriakeHttpService;
 import org.ariake.jpa.EntityManagerProvider;
 import org.ariake.jpa.eclipselink.EclipseLinkEntityManagerProvider;
 import org.ariake.server.AriakeServer;
-import org.ariake.server.helidon.HelidonAriakeServer;
-import org.ariake.websocket.AriakeWebSocketService;
+import org.ariake.server.HttpRoutingService;
 import sting.Fragment;
 
 @Fragment
@@ -49,7 +47,6 @@ interface JpaFragment {
     }
 
     default AriakeServer server(final AriakeConfig config, final PageViewService pageViewService) {
-        return HelidonAriakeServer.create(
-                config, List.<AriakeHttpService>of(pageViewService), List.<AriakeWebSocketService>of());
+        return AriakeServer.create(config, List.<HttpRoutingService>of(pageViewService));
     }
 }

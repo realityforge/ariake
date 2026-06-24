@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import org.ariake.config.AriakeConfig;
-import org.ariake.http.AriakeHttpService;
 import org.ariake.server.AriakeServer;
-import org.ariake.server.helidon.HelidonAriakeServer;
-import org.ariake.websocket.AriakeWebSocketService;
+import org.ariake.server.HttpRoutingService;
+import org.ariake.server.WebSocketRoutingService;
 import sting.Fragment;
 
 @Fragment
@@ -24,7 +23,9 @@ public interface WebSocketFragment {
             final AriakeConfig config,
             final WebSocketPageService pageService,
             final EchoWebSocketService echoWebSocketService) {
-        return HelidonAriakeServer.create(
-                config, List.<AriakeHttpService>of(pageService), List.<AriakeWebSocketService>of(echoWebSocketService));
+        return AriakeServer.create(
+                config,
+                List.<HttpRoutingService>of(pageService),
+                List.<WebSocketRoutingService>of(echoWebSocketService));
     }
 }

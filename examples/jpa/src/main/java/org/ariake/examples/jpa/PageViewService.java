@@ -1,13 +1,15 @@
 package org.ariake.examples.jpa;
 
+import io.helidon.webserver.http.HttpRouting;
+import io.helidon.webserver.http.ServerRequest;
+import io.helidon.webserver.http.ServerResponse;
 import java.time.Instant;
-import org.ariake.http.AriakeHttpService;
-import org.ariake.http.HttpRoutes;
 import org.ariake.jpa.EntityManagerProvider;
+import org.ariake.server.HttpRoutingService;
 import sting.Injectable;
 
 @Injectable
-public final class PageViewService implements AriakeHttpService {
+public final class PageViewService implements HttpRoutingService {
     private final EntityManagerProvider entityManagerProvider;
 
     PageViewService(final EntityManagerProvider entityManagerProvider) {
@@ -15,14 +17,20 @@ public final class PageViewService implements AriakeHttpService {
     }
 
     @Override
-    public void routes(final HttpRoutes routes) {
-        routes.get("/page-views", exchange -> exchange.send("{\"count\":" + count() + "}"));
-        routes.post("/page-views", exchange -> {
-            final var body = exchange.body();
-            record(body.isBlank() ? "/page-views" : body);
-            exchange.status(201);
-            exchange.send("{\"count\":" + count() + "}");
-        });
+    public void routing(final HttpRouting.Builder routing) {
+        routing.get("/page-views", this::countPageViews);
+        routing.post("/page-views", this::recordPageView);
+    }
+
+    private void countPageViews(final ServerRequest request, final ServerResponse response) {
+        response.send("{\"count\":" + count() + "}");
+    }
+
+    private void recordPageView(final ServerRequest request, final ServerResponse response) {
+        final var body = request.content().as(String.class);
+        record(body.isBlank() ? "/page-views" : body);
+        response.status(201);
+        response.send("{\"count\":" + count() + "}");
     }
 
     private void record(final String path) {

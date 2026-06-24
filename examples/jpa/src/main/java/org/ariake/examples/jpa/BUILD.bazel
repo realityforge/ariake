@@ -19,6 +19,7 @@ java_library(
         "//examples/jpa/src/main/resources/META-INF:persistence_resources",
         "//src/main/java/org/ariake",
         "//third_party/java:h2",
+        "//third_party/java:helidon_webserver",
         "//third_party/java:jakarta_persistence_api",
         "//third_party/java:javax_annotation_api",
         "//third_party/java:sting_core",

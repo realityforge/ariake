@@ -1,11 +1,11 @@
 package org.ariake.examples.health;
 
-import org.ariake.http.AriakeHttpService;
-import org.ariake.http.HttpRoutes;
+import io.helidon.webserver.http.HttpRouting;
+import org.ariake.server.HttpRoutingService;
 import sting.Injectable;
 
 @Injectable
-public final class HealthService implements AriakeHttpService {
+public final class HealthService implements HttpRoutingService {
     private final HealthResponder responder;
 
     HealthService(final HealthResponder responder) {
@@ -13,7 +13,7 @@ public final class HealthService implements AriakeHttpService {
     }
 
     @Override
-    public void routes(final HttpRoutes routes) {
-        routes.get("/health", exchange -> exchange.send(responder.health()));
+    public void routing(final HttpRouting.Builder routing) {
+        routing.get("/health", (request, response) -> response.send(responder.health()));
     }
 }

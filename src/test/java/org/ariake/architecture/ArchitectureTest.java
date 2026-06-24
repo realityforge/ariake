@@ -10,30 +10,35 @@ public final class ArchitectureTest {
     private final JavaClasses ariakeClasses = new ClassFileImporter().importPackages("org.ariake");
 
     @Test
-    public void publicApisDoNotDependOnRuntimeAdapters() {
+    public void prometheusDependenciesStayInPrometheusMetrics() {
         noClasses()
                 .that()
-                .resideInAnyPackage(
-                        "org.ariake.config",
-                        "org.ariake.http",
-                        "org.ariake.websocket",
-                        "org.ariake.metrics",
-                        "org.ariake.server",
-                        "org.ariake.tx")
+                .resideOutsideOfPackage("org.ariake.metrics.prometheus..")
                 .should()
                 .dependOnClassesThat()
-                .resideInAnyPackage("io.helidon..", "io.prometheus..", "com.arjuna..", "org.eclipse.persistence..")
+                .resideInAnyPackage("io.prometheus..")
                 .check(ariakeClasses);
     }
 
     @Test
-    public void helidonDependenciesStayInHelidonAdapter() {
+    public void narayanaDependenciesStayInNarayanaTransactions() {
         noClasses()
                 .that()
-                .resideOutsideOfPackage("org.ariake.server.helidon..")
+                .resideOutsideOfPackage("org.ariake.tx.narayana..")
                 .should()
                 .dependOnClassesThat()
-                .resideInAnyPackage("io.helidon..")
+                .resideInAnyPackage("com.arjuna..")
+                .check(ariakeClasses);
+    }
+
+    @Test
+    public void eclipseLinkDependenciesStayInEclipseLinkJpa() {
+        noClasses()
+                .that()
+                .resideOutsideOfPackage("org.ariake.jpa.eclipselink..")
+                .should()
+                .dependOnClassesThat()
+                .resideInAnyPackage("org.eclipse.persistence..")
                 .check(ariakeClasses);
     }
 

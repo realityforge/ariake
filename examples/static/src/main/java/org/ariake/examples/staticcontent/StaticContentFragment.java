@@ -5,9 +5,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.ariake.config.AriakeConfig;
 import org.ariake.server.AriakeServer;
-import org.ariake.server.helidon.HelidonAriakeServer;
-import org.ariake.server.helidon.HelidonRoutingService;
-import org.ariake.websocket.AriakeWebSocketService;
+import org.ariake.server.HttpRoutingService;
 import sting.Fragment;
 
 @Fragment
@@ -25,10 +23,6 @@ interface StaticContentFragment {
     }
 
     default AriakeServer server(final AriakeConfig config, final StaticContentRoutes staticContentRoutes) {
-        return HelidonAriakeServer.create(
-                config,
-                List.of(),
-                List.<HelidonRoutingService>of(staticContentRoutes),
-                List.<AriakeWebSocketService>of());
+        return AriakeServer.create(config, List.<HttpRoutingService>of(staticContentRoutes));
     }
 }

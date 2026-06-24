@@ -11,6 +11,7 @@ java_library(
         "package-info.java",
     ],
     deps = [
-        "//src/main/java/org/ariake/http",
+        "//src/main/java/org/ariake/server",
+        "//third_party/java:helidon_webserver",
     ],
 )
