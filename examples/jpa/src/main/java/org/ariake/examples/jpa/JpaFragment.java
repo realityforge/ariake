@@ -16,7 +16,7 @@ import org.ariake.websocket.AriakeWebSocketService;
 import sting.Fragment;
 
 @Fragment
-public interface JpaFragment {
+interface JpaFragment {
     default AriakeConfig config(final Path configPath) {
         try {
             return AriakeConfig.load(configPath);

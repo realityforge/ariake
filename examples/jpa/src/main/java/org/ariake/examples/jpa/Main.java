@@ -6,7 +6,7 @@ import org.ariake.server.AriakeServer;
 public final class Main {
     private Main() {}
 
-    public static void main(final String[] args) throws InterruptedException {
+    static void main( final String[] args ) throws InterruptedException {
         final Path configPath = parseConfigPath(args);
         final AriakeServer server = JpaApplication.create(configPath).server().start();
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
