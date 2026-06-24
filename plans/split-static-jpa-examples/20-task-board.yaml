@@ -16,8 +16,8 @@ tasks:
       - plans/split-static-jpa-examples/20-task-board.yaml
     evidence: []
     commit:
-      hash: 2de1fbb
-      message: "feat(example): split static and JPA demos"
+      hash: 0dfd8df
+      message: "test(example): split jar integration tests by example"
   - id: SPLIT-01
     title: Split JPA into its own example
     status: completed
@@ -34,8 +34,8 @@ tasks:
       - command: bazel build //examples/static:server //examples/jpa:server
         result: passed
     commit:
-      hash: 2de1fbb
-      message: "feat(example): split static and JPA demos"
+      hash: 0dfd8df
+      message: "test(example): split jar integration tests by example"
   - id: TEST-01
     title: Add jar-launch integration test
     status: completed
