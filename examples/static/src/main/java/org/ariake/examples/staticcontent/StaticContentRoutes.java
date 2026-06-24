@@ -18,7 +18,7 @@ import org.ariake.server.helidon.HelidonRoutingService;
 import sting.Injectable;
 
 @Injectable
-public final class StaticContentRoutes implements HelidonRoutingService {
+final class StaticContentRoutes implements HelidonRoutingService {
     private static final String STATIC_CONTEXT = "/static";
     private static final String BROTLI_EXTENSION = ".br";
     private static final String BROTLI_ENCODING = "br";
