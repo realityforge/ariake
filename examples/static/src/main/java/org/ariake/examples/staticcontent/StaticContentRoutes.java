@@ -70,7 +70,7 @@ final class StaticContentRoutes implements HelidonRoutingService {
             return;
         }
 
-        final var encodedFile = Path.of(file.toString() + BROTLI_EXTENSION);
+        final var encodedFile = Path.of( file + BROTLI_EXTENSION);
         if (!Files.isRegularFile(encodedFile)) {
             response.next();
             return;
