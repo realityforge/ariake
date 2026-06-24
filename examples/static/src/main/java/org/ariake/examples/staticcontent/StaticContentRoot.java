@@ -34,6 +34,10 @@ final class StaticContentRoot {
     }
 
     private static Path defaultRoot() {
+        if (SOURCE_ROOT.toFile().isDirectory()) {
+            return SOURCE_ROOT;
+        }
+
         final String runfilesDir = System.getenv("RUNFILES_DIR");
         if (null != runfilesDir) {
             final var runfilesRoot = Path.of(runfilesDir, RUNFILES_WORKSPACE, "examples/static/content");
