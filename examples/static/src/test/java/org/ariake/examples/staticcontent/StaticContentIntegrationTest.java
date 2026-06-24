@@ -46,6 +46,14 @@ public final class StaticContentIntegrationTest {
                             + "\n");
 
             try (var server = ServerProcess.start(runfile("examples/static/server_deploy.jar"), config)) {
+                final var rootResponse = get(server.uri("/static"));
+                assertEquals(200, rootResponse.statusCode());
+                assertEquals("<!doctype html><p>static</p>", rootResponse.body());
+
+                final var rootSlashResponse = get(server.uri("/static/"));
+                assertEquals(200, rootSlashResponse.statusCode());
+                assertEquals("<!doctype html><p>static</p>", rootSlashResponse.body());
+
                 final var index = get(server.uri("/static/index.nocache.html"));
                 assertEquals(200, index.statusCode());
                 assertEquals(

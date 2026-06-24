@@ -32,6 +32,8 @@ final class StaticContentRoutes implements HelidonRoutingService {
 
     @Override
     public void routing(final HttpRouting.Builder routing) {
+        routing.get(STATIC_CONTEXT, this::welcome);
+        routing.get(STATIC_CONTEXT + "/", this::welcome);
         routing.register(STATIC_CONTEXT, rules -> {
             rules.route(Method.predicate(Method.GET, Method.HEAD), PathMatchers.any(), this::cacheControl);
             rules.route(Method.predicate(Method.GET, Method.HEAD), PathMatchers.any(), this::preEncodedBrotli);
@@ -40,6 +42,10 @@ final class StaticContentRoutes implements HelidonRoutingService {
                     .welcome("index.nocache.html")
                     .build()));
         });
+    }
+
+    private void welcome(final ServerRequest request, final ServerResponse response) {
+        response.reroute(STATIC_CONTEXT + "/index.nocache.html");
     }
 
     private void cacheControl(final ServerRequest request, final ServerResponse response) {
