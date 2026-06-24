@@ -1,4 +1,4 @@
-package org.ariake.examples.staticcontent;
+package org.ariake.examples.health;
 
 import java.nio.file.Path;
 import org.ariake.server.AriakeServer;
@@ -6,12 +6,12 @@ import org.ariake.server.AriakeServer;
 public final class Main {
     private Main() {}
 
-    static void main(final String[] args) throws InterruptedException {
+    public static void main(final String[] args) throws InterruptedException {
         final Path configPath = parseConfigPath(args);
         final AriakeServer server =
-                StaticContentApplication.create(configPath).server().start();
+                HealthApplication.create(configPath).server().start();
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
-        System.out.println("Ariake static content server started on port " + server.port());
+        System.out.println("Ariake health server started on port " + server.port());
         Thread.currentThread().join();
     }
 
@@ -21,6 +21,6 @@ public final class Main {
                 return Path.of(arg.substring("--config=".length()));
             }
         }
-        return Path.of("examples/static/application.properties");
+        return Path.of("examples/health/application.properties");
     }
 }

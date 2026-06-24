@@ -1,4 +1,4 @@
-package org.ariake.examples.hello;
+package org.ariake.examples.health;
 
 import org.ariake.http.AriakeHttpService;
 import org.ariake.http.HttpRoutes;

@@ -1,0 +1,13 @@
+load("//third_party/java:rules.bzl", "java_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+java_binary(
+    name = "server",
+    main_class = "org.ariake.examples.websocket.Main",
+    runtime_deps = [
+        "//examples/websocket/src/main/java/org/ariake/examples/websocket:websocket_lib",
+    ],
+)
+
+exports_files(["application.properties"])

@@ -1,0 +1,18 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test(
+    name = "websocket_integration_test",
+    srcs = [
+        "WebSocketIntegrationTest.java",
+        "package-info.java",
+    ],
+    data = [
+        "//examples/websocket:server_deploy.jar",
+    ],
+    test_class = "org.ariake.examples.websocket.WebSocketIntegrationTest",
+    deps = [
+        "//third_party/java:junit",
+    ],
+)

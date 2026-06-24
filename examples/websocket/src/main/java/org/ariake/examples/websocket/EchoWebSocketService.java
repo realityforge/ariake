@@ -1,4 +1,4 @@
-package org.ariake.examples.hello;
+package org.ariake.examples.websocket;
 
 import java.util.List;
 import org.ariake.websocket.AriakeWebSocketService;

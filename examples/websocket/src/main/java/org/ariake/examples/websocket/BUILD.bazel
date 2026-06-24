@@ -1,0 +1,27 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "websocket_lib",
+    srcs = [
+        "EchoWebSocketService.java",
+        "Main.java",
+        "WebSocketApplication.java",
+        "WebSocketFragment.java",
+        "WebSocketPageService.java",
+        "package-info.java",
+    ],
+    plugins = [
+        "//third_party/java:sting_processor_plugin",
+    ],
+    deps = [
+        "//src/main/java/org/ariake/config",
+        "//src/main/java/org/ariake/http",
+        "//src/main/java/org/ariake/server",
+        "//src/main/java/org/ariake/server/helidon:helidon_server",
+        "//src/main/java/org/ariake/websocket",
+        "//third_party/java:javax_annotation_api",
+        "//third_party/java:sting_core",
+    ],
+)

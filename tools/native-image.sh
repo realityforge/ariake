@@ -9,7 +9,7 @@ if ! command -v native-image >/dev/null 2>&1; then
 fi
 
 cd "${ROOT}"
-bazel build //examples/hello:server_deploy.jar
+bazel build //examples/health:server_deploy.jar
 native-image \
-  -jar bazel-bin/examples/hello/server_deploy.jar \
-  ariake-hello
+  -jar bazel-bin/examples/health/server_deploy.jar \
+  ariake-health

@@ -4,9 +4,9 @@ package(default_visibility = ["//visibility:public"])
 
 java_binary(
     name = "server",
-    main_class = "org.ariake.examples.hello.Main",
+    main_class = "org.ariake.examples.health.Main",
     runtime_deps = [
-        "//examples/hello/src/main/java/org/ariake/examples/hello:hello_lib",
+        "//examples/health/src/main/java/org/ariake/examples/health:health_lib",
     ],
 )
 

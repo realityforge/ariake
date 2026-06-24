@@ -1,4 +1,4 @@
-package org.ariake.examples.hello;
+package org.ariake.examples.websocket;
 
 import java.nio.file.Path;
 import org.ariake.server.AriakeServer;
@@ -8,9 +8,10 @@ public final class Main {
 
     public static void main(final String[] args) throws InterruptedException {
         final Path configPath = parseConfigPath(args);
-        final AriakeServer server = HelloApplication.create(configPath).server().start();
+        final AriakeServer server =
+                WebSocketApplication.create(configPath).server().start();
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
-        System.out.println("Ariake server started on port " + server.port());
+        System.out.println("Ariake websocket server started on port " + server.port());
         Thread.currentThread().join();
     }
 
@@ -20,6 +21,6 @@ public final class Main {
                 return Path.of(arg.substring("--config=".length()));
             }
         }
-        return Path.of("examples/hello/application.properties");
+        return Path.of("examples/websocket/application.properties");
     }
 }
