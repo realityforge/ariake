@@ -12,6 +12,9 @@ public final class Main {
                 StaticContentApplication.create(configPath).server().start();
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
         System.out.println("Ariake static content server started on port " + server.port());
+        System.out.println("Visit http://127.0.0.1:" + server.port() + "/static and expect the static HTML page.");
+        System.out.println("Fetch http://127.0.0.1:" + server.port()
+                + "/static/app.cache.js with Accept-Encoding: br to receive the Brotli sidecar.");
         Thread.currentThread().join();
     }
 

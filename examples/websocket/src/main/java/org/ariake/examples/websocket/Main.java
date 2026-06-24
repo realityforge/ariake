@@ -12,6 +12,8 @@ public final class Main {
                 WebSocketApplication.create(configPath).server().start();
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
         System.out.println("Ariake websocket server started on port " + server.port());
+        System.out.println("Visit http://127.0.0.1:" + server.port() + "/ and expect a WebSocket echo page.");
+        System.out.println("Text entered in the page is sent to /ws/echo and appended when echoed back.");
         Thread.currentThread().join();
     }
 

@@ -11,6 +11,9 @@ public final class Main {
         final AriakeServer server = JpaApplication.create(configPath).server().start();
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
         System.out.println("Ariake JPA server started on port " + server.port());
+        System.out.println("Visit http://127.0.0.1:" + server.port() + "/page-views and expect a JSON count.");
+        System.out.println(
+                "POST a path to http://127.0.0.1:" + server.port() + "/page-views to persist and increment the count.");
         Thread.currentThread().join();
     }
 

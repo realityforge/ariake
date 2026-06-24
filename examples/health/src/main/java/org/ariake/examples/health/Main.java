@@ -12,6 +12,8 @@ public final class Main {
                 HealthApplication.create(configPath).server().start();
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
         System.out.println("Ariake health server started on port " + server.port());
+        System.out.println("Visit http://127.0.0.1:" + server.port() + "/health and expect an OK response.");
+        System.out.println("Visit http://127.0.0.1:" + server.port() + "/metrics to see Prometheus metrics.");
         Thread.currentThread().join();
     }
 
