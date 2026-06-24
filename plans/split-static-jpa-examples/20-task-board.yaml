@@ -16,8 +16,8 @@ tasks:
       - plans/split-static-jpa-examples/20-task-board.yaml
     evidence: []
     commit:
-      hash: not_required
-      message: not_required
+      hash: 2de1fbb
+      message: "feat(example): split static and JPA demos"
   - id: SPLIT-01
     title: Split JPA into its own example
     status: completed
@@ -34,8 +34,8 @@ tasks:
       - command: bazel build //examples/static:server //examples/jpa:server
         result: passed
     commit:
-      hash: not_required
-      message: not_required
+      hash: 2de1fbb
+      message: "feat(example): split static and JPA demos"
   - id: TEST-01
     title: Add jar-launch integration test
     status: completed
@@ -51,8 +51,8 @@ tasks:
       - command: bazel test //src/test/java/org/ariake/examples:examples_integration_test --test_output=errors
         result: passed
     commit:
-      hash: not_required
-      message: not_required
+      hash: 2de1fbb
+      message: "feat(example): split static and JPA demos"
   - id: VERIFY-01
     title: Run required checks
     status: completed
@@ -67,5 +67,5 @@ tasks:
       - command: tools/check.sh
         result: passed; buildifier check, Java format check, bazel build //..., and bazel test //... completed successfully
     commit:
-      hash: not_required
-      message: not_required
+      hash: 2de1fbb
+      message: "feat(example): split static and JPA demos"
