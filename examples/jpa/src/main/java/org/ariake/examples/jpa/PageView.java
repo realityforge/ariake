@@ -1,4 +1,4 @@
-package org.ariake.examples.staticcontent;
+package org.ariake.examples.jpa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

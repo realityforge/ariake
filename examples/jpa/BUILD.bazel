@@ -1,0 +1,14 @@
+load("//third_party/java:rules.bzl", "java_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+java_binary(
+    name = "server",
+    data = ["application.properties"],
+    main_class = "org.ariake.examples.jpa.Main",
+    runtime_deps = [
+        "//examples/jpa/src/main/java/org/ariake/examples/jpa:jpa_lib",
+    ],
+)
+
+exports_files(["application.properties"])

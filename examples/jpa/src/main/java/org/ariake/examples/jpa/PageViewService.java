@@ -1,4 +1,4 @@
-package org.ariake.examples.staticcontent;
+package org.ariake.examples.jpa;
 
 import java.time.Instant;
 import org.ariake.http.AriakeHttpService;
@@ -16,10 +16,16 @@ public final class PageViewService implements AriakeHttpService {
 
     @Override
     public void routes(final HttpRoutes routes) {
-        routes.get("/views", exchange -> exchange.send("{\"count\":" + count() + "}"));
+        routes.get("/page-views", exchange -> exchange.send("{\"count\":" + count() + "}"));
+        routes.post("/page-views", exchange -> {
+            final var body = exchange.body();
+            record(body.isBlank() ? "/page-views" : body);
+            exchange.status(201);
+            exchange.send("{\"count\":" + count() + "}");
+        });
     }
 
-    void record(final String path) {
+    private void record(final String path) {
         final var entityManager = entityManagerProvider.createEntityManager();
         final var transaction = entityManager.getTransaction();
         try {

@@ -1,0 +1,71 @@
+initiative: split-static-jpa-examples
+status: completed
+required_full_gate: tools/check.sh
+tasks:
+  - id: PLAN-01
+    title: Record split-example plan
+    status: completed
+    priority: high
+    depends_on: []
+    acceptance_criteria:
+      - Requirements, implementation plan, and task board exist.
+      - No open questions remain.
+    files:
+      - plans/split-static-jpa-examples/00-requirements.md
+      - plans/split-static-jpa-examples/10-implementation-plan.md
+      - plans/split-static-jpa-examples/20-task-board.yaml
+    evidence: []
+    commit:
+      hash: not_required
+      message: not_required
+  - id: SPLIT-01
+    title: Split JPA into its own example
+    status: completed
+    priority: high
+    depends_on:
+      - PLAN-01
+    acceptance_criteria:
+      - Static example no longer depends on JPA, H2, or persistence resources.
+      - New JPA example builds and persists a `PageView` entity.
+    files:
+      - examples/static/**
+      - examples/jpa/**
+    evidence:
+      - command: bazel build //examples/static:server //examples/jpa:server
+        result: passed
+    commit:
+      hash: not_required
+      message: not_required
+  - id: TEST-01
+    title: Add jar-launch integration test
+    status: completed
+    priority: high
+    depends_on:
+      - SPLIT-01
+    acceptance_criteria:
+      - Test launches compiled deploy jars with `java -jar`.
+      - Test verifies static and JPA behavior over HTTP.
+    files:
+      - src/test/java/org/ariake/examples/**
+    evidence:
+      - command: bazel test //src/test/java/org/ariake/examples:examples_integration_test --test_output=errors
+        result: passed
+    commit:
+      hash: not_required
+      message: not_required
+  - id: VERIFY-01
+    title: Run required checks
+    status: completed
+    priority: high
+    depends_on:
+      - TEST-01
+    acceptance_criteria:
+      - `tools/check.sh` passes.
+    files:
+      - plans/split-static-jpa-examples/20-task-board.yaml
+    evidence:
+      - command: tools/check.sh
+        result: passed; buildifier check, Java format check, bazel build //..., and bazel test //... completed successfully
+    commit:
+      hash: not_required
+      message: not_required

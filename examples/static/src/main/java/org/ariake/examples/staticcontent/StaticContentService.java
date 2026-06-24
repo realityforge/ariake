@@ -11,11 +11,9 @@ import sting.Injectable;
 @Injectable
 public final class StaticContentService implements AriakeHttpService {
     private final StaticContentRoot root;
-    private final PageViewService pageViews;
 
-    StaticContentService(final StaticContentRoot root, final PageViewService pageViews) {
+    StaticContentService(final StaticContentRoot root) {
         this.root = root;
-        this.pageViews = pageViews;
     }
 
     @Override
@@ -33,12 +31,7 @@ public final class StaticContentService implements AriakeHttpService {
             return;
         }
 
-        pageViews.record(servedPath(exchange.path()));
         exchange.send(Files.readAllBytes(file), contentType(exchange.path()));
-    }
-
-    private static String servedPath(final String path) {
-        return path.endsWith(".br") ? path.substring(0, path.length() - 3) : path;
     }
 
     static String contentType(final String path) {
