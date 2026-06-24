@@ -6,6 +6,7 @@ java_library(
     name = "helidon_server",
     srcs = [
         "HelidonAriakeServer.java",
+        "HelidonRoutingService.java",
         "HelidonWebSocketListener.java",
         "package-info.java",
     ],

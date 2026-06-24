@@ -16,6 +16,8 @@ artifacts:
     includeSource: false
   - coord: io.helidon.webserver:helidon-webserver-http2:4.5.0
     includeSource: false
+  - coord: io.helidon.webserver:helidon-webserver-static-content:4.5.0
+    includeSource: false
   - coord: io.helidon.webserver:helidon-webserver-websocket:4.5.0
     includeSource: false
   - coord: io.helidon.service:helidon-service-metadata:4.5.0

@@ -727,6 +727,13 @@ _http_file(
 )
 
 _http_file(
+    name = "helidon_webserver_static_content",
+    downloaded_file_path = "io/helidon/webserver/helidon-webserver-static-content/4.5.0/helidon-webserver-static-content-4.5.0.jar",
+    sha256 = "472709fac96b4bef39b56bf9e91fcf764cdee8d9b2f7e304857fd2c0eb205e45",
+    urls = ["https://repo.maven.apache.org/maven2/io/helidon/webserver/helidon-webserver-static-content/4.5.0/helidon-webserver-static-content-4.5.0.jar"],
+)
+
+_http_file(
     name = "helidon_webserver_websocket",
     downloaded_file_path = "io/helidon/webserver/helidon-webserver-websocket/4.5.0/helidon-webserver-websocket-4.5.0.jar",
     sha256 = "3db5822d9a787d41fa08d27a3cab25c862c755721891d83ce18ee255fd69ef25",

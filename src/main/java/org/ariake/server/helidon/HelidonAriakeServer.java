@@ -33,10 +33,18 @@ public final class HelidonAriakeServer implements AriakeServer {
             final AriakeConfig config,
             final List<? extends AriakeHttpService> httpServices,
             final List<? extends AriakeWebSocketService> webSocketServices) {
+        return create(config, httpServices, List.of(), webSocketServices);
+    }
+
+    public static HelidonAriakeServer create(
+            final AriakeConfig config,
+            final List<? extends AriakeHttpService> httpServices,
+            final List<? extends HelidonRoutingService> helidonRoutingServices,
+            final List<? extends AriakeWebSocketService> webSocketServices) {
         final int port = config.getInt("ariake.server.port", 8080);
         final var server = WebServer.builder()
                 .port(port)
-                .routing(routing -> registerHttpServices(routing, httpServices))
+                .routing(routing -> registerHttpServices(routing, httpServices, helidonRoutingServices))
                 .addRouting(webSocketRouting(webSocketServices))
                 .shutdownHook(config.getBoolean("ariake.server.shutdownHook", true))
                 .build();
@@ -44,13 +52,18 @@ public final class HelidonAriakeServer implements AriakeServer {
     }
 
     private static void registerHttpServices(
-            final HttpRouting.Builder routing, final List<? extends AriakeHttpService> services) {
+            final HttpRouting.Builder routing,
+            final List<? extends AriakeHttpService> services,
+            final List<? extends HelidonRoutingService> helidonRoutingServices) {
         final var routes = new HttpRoutes();
         for (AriakeHttpService service : services) {
             service.routes(routes);
         }
         for (HttpEndpoint endpoint : routes.endpoints()) {
             registerHttpEndpoint(routing, routes, endpoint);
+        }
+        for (HelidonRoutingService service : helidonRoutingServices) {
+            service.routing(routing);
         }
     }
 

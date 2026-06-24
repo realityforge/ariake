@@ -22,6 +22,10 @@ final class StaticContentRoot {
                 config.find("static.example.staticRoot").map(Path::of).orElseGet(StaticContentRoot::defaultRoot));
     }
 
+    Path path() {
+        return path;
+    }
+
     @Nullable
     Path resolveRequestPath(final String requestPath) {
         final String relativePath = relativePath(requestPath);
@@ -50,8 +54,17 @@ final class StaticContentRoot {
     }
 
     private static String relativePath(final String requestPath) {
-        final String path = requestPath.equals(STATIC_PREFIX) ? "/index.nocache.html" : requestPath;
-        final String suffix = path.startsWith(STATIC_PREFIX + "/") ? path.substring(STATIC_PREFIX.length() + 1) : "";
+        final String path = requestPath.equals(STATIC_PREFIX) || requestPath.isEmpty() || "/".equals(requestPath)
+                ? "/index.nocache.html"
+                : requestPath;
+        final String suffix;
+        if (path.startsWith(STATIC_PREFIX + "/")) {
+            suffix = path.substring(STATIC_PREFIX.length() + 1);
+        } else if (path.startsWith("/")) {
+            suffix = path.substring(1);
+        } else {
+            suffix = path;
+        }
         final String decoded = URLDecoder.decode(suffix, StandardCharsets.UTF_8);
         return decoded.isEmpty() ? "index.nocache.html" : decoded;
     }

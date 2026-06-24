@@ -63,6 +63,9 @@ public final class StaticContentIntegrationTest {
                 assertEquals(200, brotli.statusCode());
                 assertEquals(
                         "br", brotli.headers().firstValue("Content-Encoding").orElseThrow());
+                assertEquals(
+                        "text/javascript; charset=utf-8",
+                        brotli.headers().firstValue("Content-Type").orElseThrow());
                 assertEquals("encoded-js", brotli.body());
 
                 final var jpaEndpoint = get(server.uri("/page-views"));

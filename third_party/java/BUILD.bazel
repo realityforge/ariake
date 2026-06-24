@@ -63,7 +63,7 @@ _java_plugin(
 load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_library = "java_library", _java_plugin = "java_plugin", _java_test = "java_test")
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "088F3D3EF250D47EDDD5C6785C9C71AD46817FC411065B65A0340D4753EE2FC4"
+_CONFIG_SHA256 = "D4AD872D69A56D026E84186906AE36DB7B510188075739B3C2FC9C0EDD153045"
 
 exports_files(["dependencies.yml"])
 
@@ -209,6 +209,11 @@ exports_files(["dependencies.yml"])
 # |  +- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile, optional]
 # |  +- io.helidon.common.concurrency:helidon-common-concurrency-limits:jar:4.5.0 [compile]
 # |  \- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile]
+# +- io.helidon.webserver:helidon-webserver-static-content:jar:4.5.0 [compile]
+# |  +- io.helidon.webserver:helidon-webserver:jar:4.5.0 [compile]
+# |  +- io.helidon.common.features:helidon-common-features-api:jar:4.5.0 [compile, optional]
+# |  +- io.helidon.config:helidon-config:jar:4.5.0 [compile]
+# |  \- io.helidon.config.metadata:helidon-config-metadata:jar:4.5.0 [compile]
 # +- io.helidon.webserver:helidon-webserver-websocket:jar:4.5.0 [compile]
 # |  +- io.helidon.websocket:helidon-websocket:jar:4.5.0 [compile]
 # |  |  +- io.helidon.common:helidon-common-buffers:jar:4.5.0 [compile]
@@ -1090,6 +1095,17 @@ _java_import(
         ":helidon_common_features_api",
         ":helidon_config",
         ":helidon_http_http2",
+        ":helidon_webserver",
+    ],
+)
+
+_java_import(
+    name = "helidon_webserver_static_content",
+    jars = ["@helidon_webserver_static_content//file"],
+    tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver-static-content:4.5.0"],
+    deps = [
+        ":helidon_config",
+        ":helidon_config_metadata",
         ":helidon_webserver",
     ],
 )

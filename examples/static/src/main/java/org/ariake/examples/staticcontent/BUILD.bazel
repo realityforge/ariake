@@ -5,14 +5,11 @@ package(default_visibility = ["//visibility:public"])
 java_library(
     name = "static_lib",
     srcs = [
-        "CacheControlFilter.java",
         "Main.java",
-        "PathOverrideHttpExchange.java",
-        "PreEncodedBrotliFilter.java",
         "StaticContentApplication.java",
         "StaticContentFragment.java",
         "StaticContentRoot.java",
-        "StaticContentService.java",
+        "StaticContentRoutes.java",
         "package-info.java",
     ],
     plugins = [
@@ -20,6 +17,9 @@ java_library(
     ],
     deps = [
         "//src/main/java/org/ariake",
+        "//third_party/java:helidon_http_api",
+        "//third_party/java:helidon_webserver",
+        "//third_party/java:helidon_webserver_static_content",
         "//third_party/java:javax_annotation_api",
         "//third_party/java:sting_core",
         "//third_party/java:sting_server",
