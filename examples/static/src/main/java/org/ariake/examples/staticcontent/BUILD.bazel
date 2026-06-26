@@ -12,16 +12,14 @@ java_library(
         "StaticContentRoutes.java",
         "package-info.java",
     ],
-    plugins = [
-        "//third_party/java:sting_processor_plugin",
-    ],
     deps = [
         "//src/main/java/org/ariake",
-        "//third_party/java:helidon_http_api",
+        "//third_party/java:helidon_http",
         "//third_party/java:helidon_webserver",
         "//third_party/java:helidon_webserver_static_content",
-        "//third_party/java:javax_annotation_api",
+        "//third_party/java:javax_annotation",
         "//third_party/java:sting_core",
+        "//third_party/java:sting_processor",
         "//third_party/java:sting_server",
     ],
 )

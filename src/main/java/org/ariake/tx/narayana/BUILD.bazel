@@ -10,7 +10,7 @@ java_library(
     ],
     deps = [
         "//third_party/java:jakarta_transaction_api",
-        "//third_party/java:jboss_logging_api",
+        "//third_party/java:jboss_logging",
         "//third_party/java:narayana_jta",
     ],
 )

@@ -12,11 +12,11 @@ java_library(
     ],
     deps = [
         "//src/main/java/org/ariake/config",
-        "//third_party/java:helidon_http_api",
+        "//third_party/java:helidon_http",
         "//third_party/java:helidon_service_metadata",
         "//third_party/java:helidon_webserver",
         "//third_party/java:helidon_webserver_http2",
         "//third_party/java:helidon_webserver_websocket",
-        "//third_party/java:helidon_websocket_api",
+        "//third_party/java:helidon_websocket",
     ],
 )

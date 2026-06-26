@@ -3,52 +3,9 @@ load("//third_party/java:rules.bzl", "java_library")
 
 package(default_visibility = ["//visibility:public"])
 
-java_library(
-    name = "sting",
-    exports = [
-        ":sting_core",
-        ":sting_processor",
-    ],
-)
-
-alias(
-    name = "sting_processor_plugin",
-    actual = ":sting_processor__sting_processor_stingprocessor__plugin",
-)
-
-alias(
-    name = "prometheus_metrics_exposition_textformats_api",
-    actual = ":prometheus_metrics_exposition_textformats",
-)
-
-alias(
-    name = "prometheus_metrics_model_api",
-    actual = ":prometheus_metrics_model",
-)
-
-alias(
-    name = "helidon_http_api",
-    actual = ":helidon_http",
-)
-
-alias(
-    name = "helidon_websocket_api",
-    actual = ":helidon_websocket",
-)
-
-alias(
-    name = "javax_annotation_api",
-    actual = ":javax_annotation",
-)
-
 alias(
     name = "archunit_api",
     actual = ":archunit",
-)
-
-alias(
-    name = "jboss_logging_api",
-    actual = ":jboss_logging",
 )
 
 _java_plugin(
@@ -61,7 +18,7 @@ _java_plugin(
 # DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.25
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "29A5125AC64D5D0D2B89622765EB7872948D44E2ACF251F9114814C828A5C2F1"
+_CONFIG_SHA256 = "E81F2990AF5D26D801A9B699DA356BE73F0633EB71EC620F8BC97E64F122B33C"
 
 exports_files(["dependencies.yml"])
 
@@ -616,6 +573,7 @@ _java_import(
 _java_import(
     name = "archunit_junit4",
     jars = ["@archunit_junit4//file"],
+    srcjar = "@archunit_junit4__sources//file",
     tags = ["maven_coordinates=com.tngtech.archunit:archunit-junit4:1.4.2"],
     deps = [
         ":archunit",
@@ -709,7 +667,6 @@ _java_import(
     jars = ["@helidon_common_buffers//file"],
     srcjar = "@helidon_common_buffers__sources//file",
     tags = ["maven_coordinates=io.helidon.common:helidon-common-buffers:4.5.0"],
-    visibility = ["//visibility:private"],
 )
 
 _java_import(
@@ -945,7 +902,6 @@ _java_import(
     jars = ["@helidon_http//file"],
     srcjar = "@helidon_http__sources//file",
     tags = ["maven_coordinates=io.helidon.http:helidon-http:4.5.0"],
-    visibility = ["//visibility:private"],
     deps = [
         ":helidon_builder_api",
         ":helidon_common",
@@ -1041,6 +997,7 @@ _java_import(
 _java_import(
     name = "helidon_service_metadata",
     jars = ["@helidon_service_metadata//file"],
+    srcjar = "@helidon_service_metadata__sources//file",
     tags = ["maven_coordinates=io.helidon.service:helidon-service-metadata:4.5.0"],
     deps = [
         ":helidon_common",
@@ -1061,6 +1018,7 @@ _java_import(
 _java_import(
     name = "helidon_webserver",
     jars = ["@helidon_webserver//file"],
+    srcjar = "@helidon_webserver__sources//file",
     tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver:4.5.0"],
     deps = [
         ":helidon",
@@ -1086,6 +1044,7 @@ _java_import(
 _java_import(
     name = "helidon_webserver_http2",
     jars = ["@helidon_webserver_http2//file"],
+    srcjar = "@helidon_webserver_http2__sources//file",
     tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver-http2:4.5.0"],
     deps = [
         ":helidon_builder_api",
@@ -1100,6 +1059,7 @@ _java_import(
 _java_import(
     name = "helidon_webserver_static_content",
     jars = ["@helidon_webserver_static_content//file"],
+    srcjar = "@helidon_webserver_static_content__sources//file",
     tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver-static-content:4.5.0"],
     deps = [
         ":helidon_config",
@@ -1111,6 +1071,7 @@ _java_import(
 _java_import(
     name = "helidon_webserver_websocket",
     jars = ["@helidon_webserver_websocket//file"],
+    srcjar = "@helidon_webserver_websocket__sources//file",
     tags = ["maven_coordinates=io.helidon.webserver:helidon-webserver-websocket:4.5.0"],
     deps = [
         ":helidon_builder_api",
@@ -1127,7 +1088,6 @@ _java_import(
     jars = ["@helidon_websocket//file"],
     srcjar = "@helidon_websocket__sources//file",
     tags = ["maven_coordinates=io.helidon.websocket:helidon-websocket:4.5.0"],
-    visibility = ["//visibility:private"],
     deps = [
         ":helidon_common_buffers",
         ":helidon_common_socket",
@@ -1198,6 +1158,7 @@ _java_import(
 _java_import(
     name = "prometheus_metrics_core",
     jars = ["@prometheus_metrics_core//file"],
+    srcjar = "@prometheus_metrics_core__sources//file",
     tags = ["maven_coordinates=io.prometheus:prometheus-metrics-core:1.8.0"],
     deps = [
         ":prometheus_metrics_config",
@@ -1209,6 +1170,7 @@ _java_import(
 _java_import(
     name = "prometheus_metrics_exposition_formats",
     jars = ["@prometheus_metrics_exposition_formats//file"],
+    srcjar = "@prometheus_metrics_exposition_formats__sources//file",
     tags = ["maven_coordinates=io.prometheus:prometheus-metrics-exposition-formats:1.8.0"],
     deps = [":prometheus_metrics_exposition_textformats"],
 )
@@ -1218,7 +1180,6 @@ _java_import(
     jars = ["@prometheus_metrics_exposition_textformats//file"],
     srcjar = "@prometheus_metrics_exposition_textformats__sources//file",
     tags = ["maven_coordinates=io.prometheus:prometheus-metrics-exposition-textformats:1.8.0"],
-    visibility = ["//visibility:private"],
     deps = [
         ":prometheus_metrics_config",
         ":prometheus_metrics_model",
@@ -1230,7 +1191,6 @@ _java_import(
     jars = ["@prometheus_metrics_model//file"],
     srcjar = "@prometheus_metrics_model__sources//file",
     tags = ["maven_coordinates=io.prometheus:prometheus-metrics-model:1.8.0"],
-    visibility = ["//visibility:private"],
     deps = [":prometheus_metrics_config"],
 )
 
@@ -1401,6 +1361,7 @@ _java_import(
 _java_import(
     name = "jakarta_persistence_api",
     jars = ["@jakarta_persistence_api//file"],
+    srcjar = "@jakarta_persistence_api__sources//file",
     tags = ["maven_coordinates=jakarta.persistence:jakarta.persistence-api:3.2.0"],
 )
 
@@ -1416,6 +1377,7 @@ _java_import(
 _java_import(
     name = "jakarta_transaction_api",
     jars = ["@jakarta_transaction_api//file"],
+    srcjar = "@jakarta_transaction_api__sources//file",
     tags = ["maven_coordinates=jakarta.transaction:jakarta.transaction-api:2.0.1"],
 )
 
@@ -1430,6 +1392,7 @@ _java_import(
 _java_import(
     name = "junit",
     jars = ["@junit//file"],
+    srcjar = "@junit__sources//file",
     tags = ["maven_coordinates=junit:junit:4.13.2"],
     deps = [":hamcrest_core"],
 )
@@ -1484,6 +1447,7 @@ _java_import(
 _java_import(
     name = "org_eclipse_persistence_jpa",
     jars = ["@org_eclipse_persistence_jpa//file"],
+    srcjar = "@org_eclipse_persistence_jpa__sources//file",
     tags = ["maven_coordinates=org.eclipse.persistence:org.eclipse.persistence.jpa:5.0.0"],
     deps = [
         ":jakarta_enterprise_cdi_api",
@@ -1528,6 +1492,7 @@ _java_import(
 _java_import(
     name = "hamcrest",
     jars = ["@hamcrest//file"],
+    srcjar = "@hamcrest__sources//file",
     tags = ["maven_coordinates=org.hamcrest:hamcrest:3.0"],
 )
 
@@ -1611,7 +1576,6 @@ _java_import(
     jars = ["@jboss_logging//file"],
     srcjar = "@jboss_logging__sources//file",
     tags = ["maven_coordinates=org.jboss.logging:jboss-logging:3.6.0.Final"],
-    visibility = ["//visibility:private"],
 )
 
 _java_import(
@@ -1625,6 +1589,7 @@ _java_import(
 _java_import(
     name = "narayana_jta",
     jars = ["@narayana_jta//file"],
+    srcjar = "@narayana_jta__sources//file",
     tags = ["maven_coordinates=org.jboss.narayana.jta:narayana-jta:7.3.4.Final"],
     deps = [
         ":caffeine",
@@ -1758,12 +1723,12 @@ _java_import(
     jars = ["@javax_annotation//file"],
     srcjar = "@javax_annotation__sources//file",
     tags = ["maven_coordinates=org.realityforge.javax.annotation:javax.annotation:1.1.1"],
-    visibility = ["//visibility:private"],
 )
 
 _java_import(
     name = "sting_core",
     jars = ["@sting_core//file"],
+    srcjar = "@sting_core__sources//file",
     tags = ["maven_coordinates=org.realityforge.sting:sting-core:0.39"],
     deps = [":javax_annotation"],
 )
@@ -1771,6 +1736,7 @@ _java_import(
 _java_import(
     name = "sting_processor__plugin_library",
     jars = ["@sting_processor//file"],
+    srcjar = "@sting_processor__sources//file",
     tags = ["maven_coordinates=org.realityforge.sting:sting-processor:0.39"],
 )
 
@@ -1790,6 +1756,7 @@ _java_library(
 _java_import(
     name = "sting_server",
     jars = ["@sting_server//file"],
+    srcjar = "@sting_server__sources//file",
     tags = ["maven_coordinates=org.realityforge.sting:sting-server:0.39"],
     deps = [
         ":jakarta_transaction_api",

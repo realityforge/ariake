@@ -13,31 +13,25 @@ options:
 
 artifacts:
   - coord: io.helidon.webserver:helidon-webserver:4.5.0
-    includeSource: false
   - coord: io.helidon.webserver:helidon-webserver-http2:4.5.0
-    includeSource: false
   - coord: io.helidon.webserver:helidon-webserver-static-content:4.5.0
-    includeSource: false
   - coord: io.helidon.webserver:helidon-webserver-websocket:4.5.0
-    includeSource: false
   - coord: io.helidon.service:helidon-service-metadata:4.5.0
-    includeSource: false
+  - coord: io.helidon.common:helidon-common-buffers
+  - coord: io.helidon.websocket:helidon-websocket
+  - coord: io.helidon.http:helidon-http
   - coord: io.prometheus:prometheus-metrics-core:1.8.0
-    includeSource: false
+  - coord: io.prometheus:prometheus-metrics-model
   - coord: io.prometheus:prometheus-metrics-exposition-formats:1.8.0
-    includeSource: false
+  - coord: io.prometheus:prometheus-metrics-exposition-textformats
   - coord: jakarta.persistence:jakarta.persistence-api:3.2.0
-    includeSource: false
+  - coord: org.realityforge.javax.annotation:javax.annotation
   - coord: com.h2database:h2:2.4.240
     includeSource: false
   - coord: jakarta.transaction:jakarta.transaction-api:2.0.1
-    includeSource: false
   - coord: junit:junit:4.13.2
-    includeSource: false
   - coord: org.hamcrest:hamcrest:3.0
-    includeSource: false
   - coord: com.tngtech.archunit:archunit-junit4:1.4.2
-    includeSource: false
   - coord: com.palantir.javaformat:palantir-java-format:2.93.0
     includeSource: false
     excludes:
@@ -53,12 +47,8 @@ artifacts:
     excludes:
       - '*:*'
   - coord: org.eclipse.persistence:org.eclipse.persistence.jpa:5.0.0
-    includeSource: false
   - coord: org.jboss.narayana.jta:narayana-jta:7.3.4.Final
-    includeSource: false
+  - coord: org.jboss.logging:jboss-logging
   - coord: org.realityforge.sting:sting-core:0.39
-    includeSource: false
   - coord: org.realityforge.sting:sting-processor:0.39
-    includeSource: false
   - coord: org.realityforge.sting:sting-server:0.39
-    includeSource: false

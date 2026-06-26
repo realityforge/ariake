@@ -11,7 +11,7 @@ java_library(
     deps = [
         "//src/main/java/org/ariake/metrics:metrics_api",
         "//third_party/java:prometheus_metrics_core",
-        "//third_party/java:prometheus_metrics_exposition_textformats_api",
-        "//third_party/java:prometheus_metrics_model_api",
+        "//third_party/java:prometheus_metrics_exposition_textformats",
+        "//third_party/java:prometheus_metrics_model",
     ],
 )
