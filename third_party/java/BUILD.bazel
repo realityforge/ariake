@@ -60,8 +60,6 @@ _java_plugin(
 
 # DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.24
 
-load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_library = "java_library", _java_plugin = "java_plugin", _java_test = "java_test")
-
 # SHA256 of the configuration content that generated this content
 _CONFIG_SHA256 = "D4AD872D69A56D026E84186906AE36DB7B510188075739B3C2FC9C0EDD153045"
 
@@ -405,9 +403,6 @@ exports_files(["dependencies.yml"])
 _java_test(
     name = "verify_config_sha256",
     size = "small",
-    runtime_deps = [":bazel_depgen"],
-    main_class = "org.realityforge.bazel.depgen.Main",
-    use_testrunner = False,
     args = [
         "--config-file",
         "$(rootpath //third_party/java:dependencies.yml)",
@@ -417,19 +412,22 @@ _java_test(
         _CONFIG_SHA256,
     ],
     data = ["//third_party/java:dependencies.yml"],
+    main_class = "org.realityforge.bazel.depgen.Main",
+    use_testrunner = False,
     visibility = ["//visibility:private"],
+    runtime_deps = [":bazel_depgen"],
 )
 
 _java_binary(
     name = "update_depgen_generated_outputs",
-    runtime_deps = [":bazel_depgen"],
-    main_class = "org.realityforge.bazel.depgen.Main",
     args = [
         "--config-file",
         "$(rootpath //third_party/java:dependencies.yml)",
         "--verbose",
         "generate",
     ],
+    data = ["//third_party/java:dependencies.yml"],
+    main_class = "org.realityforge.bazel.depgen.Main",
     tags = [
         "local",
         "manual",
@@ -437,8 +435,8 @@ _java_binary(
         "no-remote",
         "no-sandbox",
     ],
-    data = ["//third_party/java:dependencies.yml"],
     visibility = ["//visibility:private"],
+    runtime_deps = [":bazel_depgen"],
 )
 
 _java_import(
@@ -579,17 +577,17 @@ _java_import(
     name = "palantir_java_format",
     jars = ["@palantir_java_format//file"],
     tags = ["maven_coordinates=com.palantir.javaformat:palantir-java-format:2.93.0"],
-    deps = [
-        ":guava",
-        ":jackson_core",
-        ":jackson_databind",
-        ":palantir_java_format_spi",
-    ],
     runtime_deps = [
         ":functionaljava",
         ":jackson_datatype_jdk8",
         ":jackson_module_parameter_names",
         ":jsr305",
+    ],
+    deps = [
+        ":guava",
+        ":jackson_core",
+        ":jackson_databind",
+        ":palantir_java_format_spi",
     ],
 )
 
@@ -629,11 +627,11 @@ _java_import(
     name = "nullaway",
     jars = ["@nullaway//file"],
     tags = ["maven_coordinates=com.uber.nullaway:nullaway:0.13.7"],
-    deps = [":jspecify"],
     runtime_deps = [
         ":dataflow_nullaway",
         ":guava",
     ],
+    deps = [":jspecify"],
 )
 
 _java_import(
@@ -1775,13 +1773,15 @@ _java_import(
     jars = ["@sting_processor//file"],
     tags = ["maven_coordinates=org.realityforge.sting:sting-processor:0.39"],
 )
+
 _java_plugin(
     name = "sting_processor__sting_processor_stingprocessor__plugin",
-    processor_class = "sting.processor.StingProcessor",
     generates_api = True,
+    processor_class = "sting.processor.StingProcessor",
     visibility = ["//visibility:private"],
     deps = [":sting_processor__plugin_library"],
 )
+
 _java_library(
     name = "sting_processor",
     exported_plugins = ["sting_processor__sting_processor_stingprocessor__plugin"],
