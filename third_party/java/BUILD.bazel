@@ -1,5 +1,4 @@
-load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_library = "java_library", _java_plugin = "java_plugin", _java_test = "java_test")
-load("//third_party/java:rules.bzl", "java_library")
+load("@rules_java//java:defs.bzl", "java_plugin", _java_binary = "java_binary", _java_import = "java_import", _java_library = "java_library", _java_plugin = "java_plugin", _java_test = "java_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -8,7 +7,7 @@ alias(
     actual = ":archunit",
 )
 
-_java_plugin(
+java_plugin(
     name = "nullaway_plugin",
     deps = [":nullaway"],
 )
