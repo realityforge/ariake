@@ -23,3 +23,4 @@ java -jar "${JAR}" \
   --config-file third_party/java/dependencies.yml \
   --cache-directory "${CACHE_DIR}" \
   generate
+bazel run //:buildifier -- third_party/java/BUILD.bazel
