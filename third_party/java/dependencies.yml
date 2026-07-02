@@ -32,10 +32,6 @@ artifacts:
   - coord: junit:junit:4.13.2
   - coord: org.hamcrest:hamcrest:3.0
   - coord: com.tngtech.archunit:archunit-junit4:1.4.2
-  - coord: com.palantir.javaformat:palantir-java-format:2.93.0
-    includeSource: false
-    excludes:
-      - com.palantir.javaformat:palantir-java-format-parent
   - coord: com.uber.nullaway:nullaway:0.13.7
     includeSource: false
   - coord: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
