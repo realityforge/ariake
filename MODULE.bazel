@@ -1553,6 +1553,13 @@ _http_file(
 )
 
 _http_file(
+    name = "jspecify__sources",
+    downloaded_file_path = "org/jspecify/jspecify/1.0.0/jspecify-1.0.0-sources.jar",
+    sha256 = "adf0898191d55937fb3192ba971826f4f294292c4a960740f3c27310e7b70296",
+    urls = ["https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0-sources.jar"],
+)
+
+_http_file(
     name = "asm",
     downloaded_file_path = "org/ow2/asm/asm/9.9.1/asm-9.9.1.jar",
     sha256 = "6f3828a215c920059a5efa2fb55c233d6c54ec5cadca99ce1b1bdd10077c7ddd",
