@@ -48,3 +48,7 @@ artifacts:
   - coord: org.realityforge.sting:sting-core:0.39
   - coord: org.realityforge.sting:sting-processor:0.39
   - coord: org.realityforge.sting:sting-server:0.39
+  # The following artifacts where made public for downstream consumers.
+  - coord: com.fasterxml.jackson.core:jackson-annotations
+  - coord: com.fasterxml.jackson.core:jackson-core
+  - coord: com.fasterxml.jackson.core:jackson-databind
