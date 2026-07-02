@@ -36,8 +36,6 @@ artifacts:
     includeSource: false
   - coord: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
     includeSource: false
-    excludes:
-      - '*:*'
   - coord: org.jspecify:jspecify:1.0.0
   - coord: org.eclipse.persistence:org.eclipse.persistence.jpa:5.0.0
   - coord: org.jboss.narayana.jta:narayana-jta:7.3.4.Final
