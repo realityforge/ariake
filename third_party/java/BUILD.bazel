@@ -14,10 +14,10 @@ java_plugin(
 
 # --- depgen-generated targets start ---
 
-# DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.25
+# DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.26
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "C7E17E136DFFA43E2205F5C022B92AB532B399BDBAEE2ED95FE1E93F01A653A0"
+_CONFIG_SHA256 = "A55FCC7B4D05771C6E9DF81765B293BA2CFA0E5D53CA704D5465602ABA0E6589"
 
 exports_files(["dependencies.yml"])
 
@@ -1605,7 +1605,7 @@ _java_import(
 _java_import(
     name = "bazel_depgen",
     jars = ["@bazel_depgen//file"],
-    tags = ["maven_coordinates=org.realityforge.bazel.depgen:bazel-depgen:0.25"],
+    tags = ["maven_coordinates=org.realityforge.bazel.depgen:bazel-depgen:0.26"],
 )
 
 _java_import(
