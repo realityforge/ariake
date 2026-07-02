@@ -17,7 +17,7 @@ java_plugin(
 # DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.26
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "171989AFB3570FA29F8E3CC38F2F09951D198F98098616A524CE6AA249C15057"
+_CONFIG_SHA256 = "D9B8DDEF36A54CB97E219E978DDB7FE2A65B4DA0BA0FD5CBA8840C7ED1D3D043"
 
 exports_files(["dependencies.yml"])
 
@@ -1560,6 +1560,7 @@ _java_import(
 _java_import(
     name = "jspecify",
     jars = ["@jspecify//file"],
+    srcjar = "@jspecify__sources//file",
     tags = ["maven_coordinates=org.jspecify:jspecify:1.0.0"],
 )
 
