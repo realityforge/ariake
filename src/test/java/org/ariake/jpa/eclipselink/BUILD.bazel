@@ -1,0 +1,20 @@
+load("//third_party/java:rules.bzl", "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test(
+    name = "eclipselink_jpa_test",
+    srcs = [
+        "EclipseLinkEntityManagerProviderTest.java",
+        "SampleEntity.java",
+        "package-info.java",
+    ],
+    test_class = "org.ariake.jpa.eclipselink.EclipseLinkEntityManagerProviderTest",
+    deps = [
+        "//src/main/java/org/ariake/jpa/eclipselink:eclipselink_jpa",
+        "//src/test/java/org/ariake/jpa/eclipselink/META-INF:persistence_resources",
+        "//third_party/java:h2",
+        "//third_party/java:jakarta_persistence_api",
+        "//third_party/java:junit",
+    ],
+)

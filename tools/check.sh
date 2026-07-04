@@ -12,5 +12,5 @@ bazel run //:buildifier_check
 tools/java_format.sh check
 bazel build //...
 bazel test //...
-bazel coverage //src/test/java/org/ariake:all_tests --combined_report=lcov --instrumentation_filter="${COVERAGE_FILTER}"
+bazel coverage //src/test/java/org/ariake:coverage_tests --combined_report=lcov --instrumentation_filter="${COVERAGE_FILTER}"
 tools/check_coverage.py "${COVERAGE_REPORT}" 0.85 0.85
