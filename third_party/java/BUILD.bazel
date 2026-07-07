@@ -17,7 +17,7 @@ java_plugin(
 # DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.26
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "D9B8DDEF36A54CB97E219E978DDB7FE2A65B4DA0BA0FD5CBA8840C7ED1D3D043"
+_CONFIG_SHA256 = "98EA22F2C3FEEAA56D29C369DA37622910F9FE71B4D8E70F26CF4603A8EF01B8"
 
 exports_files(["dependencies.yml"])
 
@@ -328,11 +328,11 @@ exports_files(["dependencies.yml"])
 # |  +- org.jboss.invocation:jboss-invocation:jar:2.0.1.Final [compile]
 # |  \- org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api:jar:3.0.1 [compile]
 # |     \- org.reactivestreams:reactive-streams:jar:1.0.3 [compile] (conflicts with 1.0.4)
-# +- org.realityforge.sting:sting-core:jar:0.39 [compile]
+# +- org.realityforge.sting:sting-core:jar:0.40 [compile]
 # |  \- org.realityforge.javax.annotation:javax.annotation:jar:1.1.1 [compile]
-# +- org.realityforge.sting:sting-processor:jar:0.39 [compile]
-# \- org.realityforge.sting:sting-server:jar:0.39 [compile]
-#    +- org.realityforge.sting:sting-core:jar:0.39 [compile]
+# +- org.realityforge.sting:sting-processor:jar:0.40 [compile]
+# \- org.realityforge.sting:sting-server:jar:0.40 [compile]
+#    +- org.realityforge.sting:sting-core:jar:0.40 [compile]
 #    \- jakarta.transaction:jakarta.transaction-api:jar:2.0.1 [compile]
 
 _java_test(
@@ -1618,7 +1618,7 @@ _java_import(
     name = "sting_core",
     jars = ["@sting_core//file"],
     srcjar = "@sting_core__sources//file",
-    tags = ["maven_coordinates=org.realityforge.sting:sting-core:0.39"],
+    tags = ["maven_coordinates=org.realityforge.sting:sting-core:0.40"],
     deps = [":javax_annotation"],
 )
 
@@ -1626,7 +1626,7 @@ _java_import(
     name = "sting_processor__plugin_library",
     jars = ["@sting_processor//file"],
     srcjar = "@sting_processor__sources//file",
-    tags = ["maven_coordinates=org.realityforge.sting:sting-processor:0.39"],
+    tags = ["maven_coordinates=org.realityforge.sting:sting-processor:0.40"],
 )
 
 _java_plugin(
@@ -1646,7 +1646,7 @@ _java_import(
     name = "sting_server",
     jars = ["@sting_server//file"],
     srcjar = "@sting_server__sources//file",
-    tags = ["maven_coordinates=org.realityforge.sting:sting-server:0.39"],
+    tags = ["maven_coordinates=org.realityforge.sting:sting-server:0.40"],
     deps = [
         ":jakarta_transaction_api",
         ":sting_core",

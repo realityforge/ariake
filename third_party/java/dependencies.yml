@@ -40,9 +40,9 @@ artifacts:
   - coord: org.eclipse.persistence:org.eclipse.persistence.jpa:5.0.0
   - coord: org.jboss.narayana.jta:narayana-jta:7.3.4.Final
   - coord: org.jboss.logging:jboss-logging
-  - coord: org.realityforge.sting:sting-core:0.39
-  - coord: org.realityforge.sting:sting-processor:0.39
-  - coord: org.realityforge.sting:sting-server:0.39
+  - coord: org.realityforge.sting:sting-core:0.40
+  - coord: org.realityforge.sting:sting-processor:0.40
+  - coord: org.realityforge.sting:sting-server:0.40
   # The following artifacts where made public for downstream consumers.
   - coord: com.fasterxml.jackson.core:jackson-annotations
   - coord: com.fasterxml.jackson.core:jackson-core

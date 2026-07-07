@@ -1638,44 +1638,44 @@ _http_file(
 
 _http_file(
     name = "sting_core",
-    downloaded_file_path = "org/realityforge/sting/sting-core/0.39/sting-core-0.39.jar",
-    sha256 = "ebafe67a6700360687c90bf26ffb5bde1390b8052881711054446b9d841a61e6",
-    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-core/0.39/sting-core-0.39.jar"],
+    downloaded_file_path = "org/realityforge/sting/sting-core/0.40/sting-core-0.40.jar",
+    sha256 = "de9094eb49ff3fd0df982c32cbf937182dbe96a32ba182820b9a3dbf37c169da",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-core/0.40/sting-core-0.40.jar"],
 )
 
 _http_file(
     name = "sting_core__sources",
-    downloaded_file_path = "org/realityforge/sting/sting-core/0.39/sting-core-0.39-sources.jar",
-    sha256 = "48f3f4f0e9c53ba4a672979c80c446179cc5f4d827e8eaa5cc8fd35512636496",
-    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-core/0.39/sting-core-0.39-sources.jar"],
+    downloaded_file_path = "org/realityforge/sting/sting-core/0.40/sting-core-0.40-sources.jar",
+    sha256 = "623b70c05d4791e9543172fe5c612b47221462f8b3e74f14b1b019c8a0951859",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-core/0.40/sting-core-0.40-sources.jar"],
 )
 
 _http_file(
     name = "sting_processor",
-    downloaded_file_path = "org/realityforge/sting/sting-processor/0.39/sting-processor-0.39.jar",
-    sha256 = "fd96f0444286d27a2c902b9960843058adb11d4ac93b9859a3d45b62d30d4eab",
-    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-processor/0.39/sting-processor-0.39.jar"],
+    downloaded_file_path = "org/realityforge/sting/sting-processor/0.40/sting-processor-0.40.jar",
+    sha256 = "42e147578ac7f72987b99fef114043846ec94b68ba061c0cd4c8b28ed112aa1f",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-processor/0.40/sting-processor-0.40.jar"],
 )
 
 _http_file(
     name = "sting_processor__sources",
-    downloaded_file_path = "org/realityforge/sting/sting-processor/0.39/sting-processor-0.39-sources.jar",
-    sha256 = "f0ae4ec9fd4cdfb96057d0cd295ca10bc8b1c19e80525d5d6b63e520ed867da2",
-    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-processor/0.39/sting-processor-0.39-sources.jar"],
+    downloaded_file_path = "org/realityforge/sting/sting-processor/0.40/sting-processor-0.40-sources.jar",
+    sha256 = "743b03fc1e8d4768f30884b2bfe5c28c44e0fd9eefa0c7dfb65c68f4e0f10a11",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-processor/0.40/sting-processor-0.40-sources.jar"],
 )
 
 _http_file(
     name = "sting_server",
-    downloaded_file_path = "org/realityforge/sting/sting-server/0.39/sting-server-0.39.jar",
-    sha256 = "25d85a677e939cf5688832eead648b45a9017f8561e25e063063c5f27557e161",
-    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-server/0.39/sting-server-0.39.jar"],
+    downloaded_file_path = "org/realityforge/sting/sting-server/0.40/sting-server-0.40.jar",
+    sha256 = "63a4b838573c35c9cd534f331a80a4fc3192b3e9f119c2dc8ddabc58061c6bc9",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-server/0.40/sting-server-0.40.jar"],
 )
 
 _http_file(
     name = "sting_server__sources",
-    downloaded_file_path = "org/realityforge/sting/sting-server/0.39/sting-server-0.39-sources.jar",
-    sha256 = "3c297ea33a80e2606062f29146b398f0cc89b550aba3539ed9e1fa0d0625bd05",
-    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-server/0.39/sting-server-0.39-sources.jar"],
+    downloaded_file_path = "org/realityforge/sting/sting-server/0.40/sting-server-0.40-sources.jar",
+    sha256 = "4421e8cd8d75722d26b84745db4d486ae5fa0a4a2d20a53ccd19456b2da3459f",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/sting/sting-server/0.40/sting-server-0.40-sources.jar"],
 )
 
 _http_file(
