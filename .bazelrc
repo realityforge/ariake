@@ -5,6 +5,8 @@ common --tool_java_runtime_version=remotejdk_25
 
 build --nojava_header_compilation
 build --experimental_strict_java_deps=error
+build --strategy=PalantirJavaFormat=worker,local
+build --worker_max_instances=PalantirJavaFormat=1
 test --explicit_java_test_deps
 
 # Generate the symlink tree as a peer directory
