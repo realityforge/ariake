@@ -26,7 +26,7 @@ Adopt @rules_palantir_java_format; remove obsolete formatter binary/dependency g
 - R2 / AC2: root testonly format target covers graph-owned current Java sources, including example code and architecture tests; audit action inputs and reject an intentionally unformatted owned source without modifying it or the index. Failure gives tools/java_format.sh write; remediation restores a passing check.
 - R3 / AC3: write/check/watch wrappers use public tools and existing roots; invalid mode returns 2. Remove obsolete local formatter and depgen references; regenerate MODULE lock and confirm dependency generation is stable.
 - R4 / AC4: existing CI retains tools/check.sh gate; full gate passes, buildifier passes, final diff has no unrelated upgrades/churn. If environmental issues arise, investigate and resolve safely before claiming completion.
-- R5 / AC5: committed plan, implementation/evidence and closeout deletion; planning and fresh implementation read-only reviewers pass. Publish/attach PR, assign realityforge and enable allowed auto-merge; report any settings blocker accurately.
+- R5 / AC5: committed plan, implementation/evidence and closeout deletion; planning and fresh implementation read-only reviewers pass. Publish/attach PR, assign realityforge and enable allowed auto-merge; report any settings blocker accurately. Later user authorization permits gh pr merge --auto --merge --match-head-commit once all actual CI on the exact head passes and no blocking review remains, even if an unprotected branch merges immediately; preserve audit commits and do not change protection/settings. R5 is owned by the workflow-managed review and closeout steps in TASKMAP rather than a pre-review task-completion gate.
 
 ## Significant decisions
 
