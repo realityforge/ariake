@@ -1,11 +1,11 @@
 # Task Map
 
 - Spec: [SPEC.md](../SPEC.md)
-- Status: implementation-review
-- Current frontier: none; implementation review
+- Status: reviewed; closeout ready
+- Current frontier: none; closeout
 - Planning reviewer: /root/planning_review (2/3 rounds), Findings: none; delivery ownership/merge authority confirmed
 - Plan checkpoint: automatic; completed evidence-based grill tree, explicit user gate exception and passing planning review
-- Implementation reviewer: pending (0/5 rounds)
+- Implementation reviewer: /root/implementation_review (1/5 rounds), Findings: none
 - Authority: completed evidence-based design tree and explicit user gate exception.
 
 ## Full-scope validation
