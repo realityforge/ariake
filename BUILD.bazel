@@ -1,4 +1,5 @@
 load("@buildifier_prebuilt//:rules.bzl", "buildifier")
+load("@rules_palantir_java_format//:defs.bzl", "java_format_check")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -28,4 +29,23 @@ buildifier(
     lint_mode = "warn",
     lint_warnings = WARNINGS,
     mode = "diff",
+)
+
+java_format_check(
+    name = "java_format_check",
+    testonly = True,
+    remediation = "tools/java_format.sh write",
+    targets = [
+        "//examples/health:server",
+        "//examples/health/src/test/java/org/ariake/examples/health:health_integration_test",
+        "//examples/jpa:server",
+        "//examples/jpa/src/test/java/org/ariake/examples/jpa:jpa_integration_test",
+        "//examples/static:server",
+        "//examples/static/src/test/java/org/ariake/examples/staticcontent:static_integration_test",
+        "//examples/websocket:server",
+        "//examples/websocket/src/test/java/org/ariake/examples/websocket:websocket_integration_test",
+        "//src/main/java/org/ariake",
+        "//src/test/java/org/ariake:coverage_tests",
+        "//src/test/java/org/ariake/architecture:architecture_test",
+    ],
 )
