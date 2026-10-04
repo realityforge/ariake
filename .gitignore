@@ -1,6 +1,7 @@
 /.cache/
 /.bazelbsp/
 /.ijwb/
+/bazel-*
 *.swp
 *.tmp
 
