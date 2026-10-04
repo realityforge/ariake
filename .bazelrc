@@ -8,7 +8,3 @@ build --experimental_strict_java_deps=error
 build --strategy=PalantirJavaFormat=worker,local
 build --worker_max_instances=PalantirJavaFormat=1
 test --explicit_java_test_deps
-
-# Generate the symlink tree as a peer directory
-# If we generate in the current directory, IDEA can start scanning an ultimately get locked up or crash
-common --symlink_prefix=../.bazel/ariake/
